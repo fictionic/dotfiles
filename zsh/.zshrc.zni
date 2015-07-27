@@ -1,0 +1,10 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' prompt 'Suggestions:'
+zstyle :compinstall filename '/home/dylan/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall

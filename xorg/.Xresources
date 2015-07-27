@@ -1,0 +1,71 @@
+!-- TERMINAL COLORS --!
+! black
+*color0:	rgb:00/00/00
+*color8:	rgb:55/57/53
+! red
+*color1:	rgb:ff/74/74
+*color9:	rgb:ff/00/ff
+! green
+*color2:	rgb:76/b6/74
+*color10:	rgb:4d/d2/3d
+! yellow
+*color3:	rgb:c4/a0/00
+*color11:	rgb:fc/e1/4f
+! blue
+*color4:	rgb:5d/ba/ff
+*color12:	rgb:62/9b/ff
+! magenta
+*color5:	rgb:a0/bb/a0
+*color13:	rgb:d0/6f/d0
+! cyan
+*color6:	rgb:9f/c9/d2
+*color14:	rgb:7f/e2/f7
+! white
+*color7:	rgb:c4/c4/c4
+*color15:	rgb:ee/ee/ec
+!-- XFT stuff --!
+Xft.autohint:	0
+Xft.lcdfilter:	lcddefault
+Xft.hintstyle:	hintfull
+Xft.hinting:	1
+Xft.antialias:	1
+Xft.rgba:	rgb
+!-- URxvt stuff --!
+URxvt*termName:	rxvt-unicode
+URxvt*perl-lib:	/usr/lib/urxvy/perl
+URxvt*perl-ext-common:	unichr
+! font
+!URxvt*font:	xft:Inconsolata:size=14
+!^this one is nice, but Cousine has a dot in the zero rather than a slash...
+URxvt*font:	xft:Cousine:size=14
+! misc
+URxvt.scrollBar:	false
+URxvt*cursorBlink:	true
+! colors
+URxvt*cursorColor:	rgb:00/aa/00
+URxvt*foreground:	rgb:d6/e6/eb
+URxvt*background:	rgb:44/57/68
+! colored man pages
+URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
+URxvt.colorUL:      #87afd7
+! > get clipboard stuff to work
+URxvt.iso14755:	False
+URxvt.keysym.Shift-Control-C:	perl:clipboard:copy
+URxvt.keysym.Shift-Control-V:	perl:clipboard:paste
+URxvt.clipboard.copycmd:	xsel -ib
+URxvt.clipboard.pastecmd:	xsel -ob
+! [control+]backspace/delete
+URxvt.keysym.C-BackSpace:	\010
+URxvt.keysym.BackSpace:	\177
+! >>> make Ctrl+N spawn new terminal (in same directory!)
+URxvt.keysym.C-N: urxvt
+
+! XTerm Stuff !
+XTerm*faceName:	DejaVu Sans Mono
+xterm*faceSize:	11
+xterm*termName:	xterm-color
+xterm*loginShell:	true
+xterm*utf8:	2
+! make Backspace send ^? and Ctrl+Backspace send ^H (swapped from default)
+xterm.*backarrowKey:	false

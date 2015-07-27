@@ -1,0 +1,86 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+update_interval 1.0
+music_player_interval 2.0
+total_run_times 0
+short_units yes
+if_up_strictness address
+use_spacer left
+override_utf8_locale no
+cpu_avg_samples 2
+
+TEXT
+[
+	{
+		"full_text" : "${if_mpd_playing}  $mpd_artist::$mpd_title $endif",
+		"short_text" : "${if_mpd_playing}  $mpd_title $endif",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "  ${fs_free /home} (${fs_free_perc /home}%) ",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "   CPU ${cpu cpu0}% ",
+		"min_width" : 110,
+		"align" : "center",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "   RAM ${mem} (${memperc}%) ",
+		"color" : ${if_match ${memperc}<90}"\#f2f0ec"${else}"\#f2777a"${endif}
+	},
+	{
+		"full_text" : "  ${execi 300 checkupdates | wc -l}/${execi 300 pacman -Q | wc -l} ",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "   ${exec cat /sys/class/backlight/intel_backlight/brightness} (${exec printf %.0f $(echo "scale=2;$(cat /sys/class/backlight/intel_backlight/brightness)/$(cat /sys/class/backlight/intel_backlight/max_brightness)*100;scale=0" | bc)}%)",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "${if_up wlp2s0} ${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})${else} no wifi${endif}",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "${if_up enp0s20u1}   eth ${endif}",
+		"color" : "\#f2f0ec"
+	},
+
+	{
+		"full_text" : "  ",
+		"separator" : false,
+		"color" :
+			${if_match ${exec cat /sys/class/power_supply/AC/online}==1} "\#4580ff"
+			${else} "\#fef0ec" ${endif}
+	},
+	{
+		"full_text" : "${battery_percent}% ",
+		"color" :
+			${if_match ${battery_percent}<10}	"\#f2f0ec"
+			${else} ${if_match ${battery_percent}<50}	"\#dddd33"
+			${else} 	"\#86eb86" ${endif}
+	},
+	{
+		"full_text" : " ",
+		"separator" : false,
+		"color" :
+			${if_match "${execi 1 amixer get Master | tail -1 | grep -o off}"== "off"}"\#cc6666"
+			${else}"\#f2f0ec"${endif}
+	},
+	{
+		 "full_text" : "${execi 1 amixer get Master | tail -1 | perl -pe 's/.*\[(.{2,3}%)\].*/$1/'} ",
+		 "color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "   ${time %d %B %Y} ",
+		"color" : "\#f2f0ec"
+	},
+	{
+		"full_text" : "   ${time %I:%M %P %Z} ",
+		"color" : "\#f2f0ec"
+	}
+],
