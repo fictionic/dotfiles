@@ -320,7 +320,13 @@ centered_cursor = no
 # Note: You can specify third character which will
 # be used to build 'empty' part of progressbar.
 #
-progressbar_look = =>—
+#progressbar_look = =>—
+progressbar_look = ▀▀▀ 
+#progressbar_look = █] 
+
+progressbar_color = "black"
+
+progressbar_elapsed_color = "blue"
 
 progressbar_boldness = yes
 
@@ -492,8 +498,6 @@ color1 = "blue"
 color2 = "green"
 
 main_window_highlight_color = "default"
-
-progressbar_color = "white"
 
 statusbar_color = "green"
 
