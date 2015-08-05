@@ -13,11 +13,11 @@
 set $mod Mod4
 
 exec --no-startup-id compton -CGb
+exec --no-startup-id urxvtd
 exec --no-startup-id redshift
 exec --no-startup-id dbus-launch deluge
-exec --no-startup-id i3-msg 'workspace 1; exec urxvt -e "ncmpcpp"'
+exec --no-startup-id i3-msg 'workspace 1; exec urxvtc -e "ncmpcpp"'
 exec --no-startup-id i3-msg 'workspace 2; exec chromium'
-exec --no-startup-id i3-msg 'workspace 3; exec hangouts; workspace 2'
 
 # Font for window titles. Will also be used by the bar unless a different font is used in the bar {} block below.
 font pango:Cousine 10
@@ -36,10 +36,12 @@ font pango:Cousine 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt -cd "`xcwd`"
+bindsym $mod+Return exec urxvtc -cd "`pwd`"
+#bindsym $mod+Return exec urxvt -cd "`xcwd`"
+bindsym Control+$mod+Return exec termite -d "`xcwd`"
 
 # launch ranger file manager in new terminal window
-bindsym $mod+Shift+Return exec urxvt -cd "`xcwd`" -e ranger
+bindsym $mod+Shift+Return exec urxvtc -cd "`pwd`" -e ranger
 
 # kill focused window
 bindsym $mod+Shift+q kill

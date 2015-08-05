@@ -42,7 +42,7 @@ TEXT
 		"color" : "\#f2f0ec"
 	},
 	{
-		"full_text" : "${if_up wlp2s0} ${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})${else} no wifi${endif}",
+		"full_text" : "${if_up wlp2s0} ${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})${else} no wifi ${endif}",
 		"color" : "\#f2f0ec"
 	},
 	{
@@ -60,9 +60,9 @@ TEXT
 	{
 		"full_text" : "${battery_percent}% ",
 		"color" :
-			${if_match ${battery_percent}<10}	"\#f2f0ec"
+			${if_match ${battery_percent}<10}	"\#ff4444"
 			${else} ${if_match ${battery_percent}<50}	"\#dddd33"
-			${else} 	"\#86eb86" ${endif}
+			${else}	"\#f2f0ec"${endif}${endif}
 	},
 	{
 		"full_text" : " ",
@@ -76,7 +76,7 @@ TEXT
 		 "color" : "\#f2f0ec"
 	},
 	{
-		"full_text" : "   ${time %d %B %Y} ",
+		"full_text" : "   ${time %d %b %Y} ",
 		"color" : "\#f2f0ec"
 	},
 	{

@@ -64,6 +64,9 @@ bindkey -v "^[[B" down-line-or-beginning-search # Down
 #     ALIASES     #
 #-----------------#
 
+# let sudo take aliases as arguments
+alias sudo='sudo '
+
 # make "help" work as expected
 autoload -U run-help
 autoload run-help-git
@@ -85,9 +88,12 @@ alias 'sudo vim'='sudo -e'
 alias xr='xrdb /home/dylan/.Xresources'
 alias restartCFHN='sudo netctl restart CFHN'
 alias pgrep='ps -e | grep'
+alias less=vimpager
 
 #------------------#
 #   MISCELANEOUS   #
 #------------------#
 # ls colors
 eval $(dircolors -b /home/dylan/.dircolors)
+# give info about where to install packages containing commands that aren't currently installed
+source /usr/share/doc/pkgfile/command-not-found.zsh
