@@ -15,7 +15,7 @@ filetype plugin indent on
 
 "--->>> non-plugin settings <<<---"
 syntax on
-colorscheme SlateDark
+colorscheme SlateDarkBlue
 set noswapfile
 set backspace=2
 set mouse=a

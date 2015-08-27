@@ -60,6 +60,14 @@ zle -N down-line-or-beginning-search
 bindkey -v "^[[A" up-line-or-beginning-search # Up
 bindkey -v "^[[B" down-line-or-beginning-search # Down
 
+#------------------#
+#   MISCELANEOUS   #
+#------------------#
+# ls colors
+eval $(dircolors -b /home/dylan/.dircolors)
+# give info about where to install packages containing commands that aren't currently installed
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
 #-----------------#
 #     ALIASES     #
 #-----------------#
@@ -70,7 +78,6 @@ alias sudo='sudo '
 # make "help" work as expected
 autoload -U run-help
 autoload run-help-git
-autoload run-help-svn
 autoload run-help-svn
 unalias run-help
 alias help=run-help
@@ -86,14 +93,18 @@ alias s='ls --color=auto'
 
 alias 'sudo vim'='sudo -e'
 alias xr='xrdb /home/dylan/.Xresources'
-alias restartCFHN='sudo netctl restart CFHN'
 alias pgrep='ps -e | grep'
-alias less=vimpager
-
-#------------------#
-#   MISCELANEOUS   #
-#------------------#
-# ls colors
-eval $(dircolors -b /home/dylan/.dircolors)
-# give info about where to install packages containing commands that aren't currently installed
-source /usr/share/doc/pkgfile/command-not-found.zsh
+#alias less=vimpager
+alias pingg='ping google.com'
+alias uplinux='yaourt -Syu --devel --aur'
+pacclean() {
+	toremove="$(yaourt -Qqdt)"
+	if [[ "$toremove" == '' ]]; then
+		echo "Package database clean."
+	else
+		yaourt -R $toremove
+	fi
+}
+restartnetctl() {
+	sudo netctl restart "$(sudo netctl list | grep \* | sed $'s/* //')"
+}

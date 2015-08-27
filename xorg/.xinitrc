@@ -20,18 +20,13 @@ done
 
 xmodmap -e "keycode 94 = backslash bar"
 xrdb -load /home/dylan/.Xresources
-#rm /home/dylan/.ncmpcpp/config
-#ln -s /home/dylan/.ncmpcpp/config_archlinux /home/dylan/.ncmpcpp/config
+rm /home/dylan/.ncmpcpp/config
+ln -s /home/dylan/.ncmpcpp/config_archlinux /home/dylan/.ncmpcpp/config
 
 # start up all them daemons
 xbindkeys
 mpd
 syndaemon -d -i .5 -t -K
-compton -b
-
-# turn off automatic screen power off
-xset -dpms; xset s off
-
 
 # launch the ol' wm
 exec i3
