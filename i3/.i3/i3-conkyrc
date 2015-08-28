@@ -14,11 +14,20 @@ cpu_avg_samples 2
 
 TEXT
 [
+	${if_mpd_playing}
 	{
-		"full_text" : "${if_mpd_playing}  $mpd_artist::$mpd_title $endif",
-		"short_text" : "${if_mpd_playing}  $mpd_title $endif",
+		"full_text" :
+			${if_match "${mpd_status}"== "Playing"}" "
+			${else}" "${endif},
+		"color" : "\#f2f0ec",
+		"separator" : false
+	},
+	{
+		"full_text" : "${mpd_artist}::${mpd_title} ",
+		"short_text" : "${mpd_title}",
 		"color" : "\#f2f0ec"
 	},
+	${endif}
 	{
 		"full_text" : " / ${fs_free /} (${fs_free_perc /}%) ",
 		"color" : "\#f2f0ec"
