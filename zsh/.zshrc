@@ -18,6 +18,48 @@ unsetopt autocd beep extendedglob notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+#-----------------#
+#  SET VARIABLES  #
+#-----------------#
+# first, add ~/scripts and ~/bin to PATH
+# If user ID is greater than or equal to 1000 & if ~/$dir exists and is a directory & if ~/$dir is not already in your $PATH
+# then export ~/$dir to your $PATH.
+# finally, manually add some other variables, like the default console text editor
+for dir in bin scripts; do
+	if [[ $UID -ge 1000 && -d $HOME/$dir && -z $(echo $PATH | grep -o $HOME/$dir) ]]
+	then
+		export PATH=$HOME/$dir:${PATH}
+	fi
+	export XDG_CONFIG_HOME=/home/dylan/.config
+	export XDG_DATA_HOME=/home/dylan/.local/share
+	export VISUAL=vim
+	export PAGER="less -R"
+	##: colors in less :##
+	#	blink
+	export LESS_TERMCAP_mb=$(tput blink)
+	#	bold		--> bold, white
+	export LESS_TERMCAP_md=$(tput bold; tput setaf 15)
+	#	stop bold, blink, underline
+	export LESS_TERMCAP_me=$(tput sgr0)
+	#	standout	--> bold, reverse colors
+	export LESS_TERMCAP_so=$(tput bold; tput rev)
+	#	stop standout, bold, blink, underline
+	export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+	#	underline	--> underline, light blue
+	export LESS_TERMCAP_us=$(tput smul; tput setaf 6)
+	#	stop underline	--> stop bold, blink, underline
+	export LESS_TERMCAP_ue=$(tput sgr0)
+	#	reverse fb/bg colors
+	export LESS_TERMCAP_mr=$(tput rev)
+	#	dim text
+	export LESS_TERMCAP_mh=$(tput dim)
+	#	(I don't know what these do)
+	export LESS_TERMCAP_ZN=$(tput ssubm)
+	export LESS_TERMCAP_ZV=$(tput rsubm)
+	export LESS_TERMCAP_ZO=$(tput ssupm)
+	export LESS_TERMCAP_ZW=$(tput rsupm)
+done
+
 #--------------#
 #  SET PROMPT  #
 #--------------#
@@ -97,12 +139,13 @@ alias pgrep='ps -e | grep'
 #alias less=vimpager
 alias pingg='ping google.com'
 alias uplinux='yaourt -Syu --devel --aur'
+alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
 pacclean() {
-	toremove="$(yaourt -Qqdt)"
-	if [[ "$toremove" == '' ]]; then
+	toremove=($(yaourt -Qqdt))
+	if [[ ${#toremove[@]} == 0 ]]; then
 		echo "Package database clean."
 	else
-		yaourt -R $toremove
+		yaourt -Rns "${toremove[@]}"
 	fi
 }
 restartnetctl() {

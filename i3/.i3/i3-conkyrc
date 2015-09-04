@@ -48,7 +48,7 @@ TEXT
 	},
 	{
 		"full_text" : "   ${exec cat /sys/class/backlight/intel_backlight/brightness} (${exec printf %.0f $(echo "scale=2;$(cat /sys/class/backlight/intel_backlight/brightness)/$(cat /sys/class/backlight/intel_backlight/max_brightness)*100;scale=0" | bc)}%)${exec dpms-toggle.sh conky}",
-		"color" : "\#cccc00"
+		"color" : "\#d8d800"
 	},
 	{
 		"full_text" : "${if_up wlp2s0} ${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})${else} no wifi ${endif}",

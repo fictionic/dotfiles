@@ -118,7 +118,7 @@ system_encoding = ""
 # Time of inactivity (in seconds) after playlist
 # highlighting will be disabled (0 = always on).
 #
-playlist_disable_highlight_delay = 5
+playlist_disable_highlight_delay = 1
 
 # Defines how long messages are supposed to be visible.
 #
@@ -342,7 +342,7 @@ data_fetching_delay = no
 
 # Available values: artist, album_artist, date, genre, composer, performer.
 #
-media_library_primary_tag = artist
+media_library_primary_tag = album_artist
 
 # Available values: wrapped, normal.
 #

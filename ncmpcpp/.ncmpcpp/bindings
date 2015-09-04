@@ -283,8 +283,8 @@ def_key "="
 def_key "@"
   show_server_info
 
-def_key "s"
-  stop
+#def_key "s"
+#  stop
 
 def_key "p"
   pause
@@ -388,7 +388,7 @@ def_key "?"
 def_key "?"
   find_item_backward
 
-def_key "."
+def_key ";"
   next_found_item
 
 def_key ","
@@ -424,8 +424,8 @@ def_key "I"
 def_key "g"
   jump_to_position_in_song
 
-#def_key "l"
-#  show_lyrics
+def_key "L"
+  show_lyrics
 
 def_key "V"
   reverse_selection
@@ -439,14 +439,14 @@ def_key "B"
 def_key "A"
   add_selected_items
 
-#def_key "c"
-#  clear_playlist
+def_key "c"
+  clear_playlist
 
 def_key "c"
   clear_main_playlist
 
-#def_key "C"
-#  crop_playlist
+def_key "C"
+  crop_playlist
 
 def_key "C"
   crop_main_playlist
@@ -505,8 +505,8 @@ def_key "\\"
 def_key "!"
   toggle_separators_between_albums
 
-def_key "L"
-  toggle_lyrics_fetcher
+#def_key "L"
+#  toggle_lyrics_fetcher
 
 def_key "F"
   toggle_fetching_lyrics_in_background
