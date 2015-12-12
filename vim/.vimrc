@@ -1,23 +1,29 @@
 set nocp "has to be first line
-filetype off
+
+"---VUNDLE STUFF---"
+filetype off "required by vundle
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+"accepted formats:
+"Plugin 'git-user/repo-name'
+"Plugin 'file:///path/to/git/repo'
+"Plugin 'git://url.to/git-repo.git
+
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
-" add more plugins here!!!
+Plugin 'lervag/vimtex'
 
 call vundle#end()
-filetype plugin indent on
-" (to ignore plugin indent changes, use
-"filetype plugin on
-" instead.)
+filetype plugin indent on "required by vundle
 
-"--->>> non-plugin settings <<<---"
+"---NON-VUNDLE STUFF---"
+"----------------------"
 syntax on
 colorscheme SlateDarkBlue
 set noswapfile
-set backspace=2
+set backspace=indent,eol,start
 set mouse=a
 set tabstop=4
 set noexpandtab
@@ -27,21 +33,21 @@ set cindent
 set smartindent
 set number
 set ruler
-"set hlsearch
-"^actually I don't like this
 set incsearch "moves cursor to first instance of matched pattern while typing pattern
+
+set timeoutlen=200
+
+"---MAPPINGS/ALIASES---"
+
+let localmapleader="\\"
+
 command! W w
 command! Q q
-command TEx Tex
+command! WQ wq
+command! Wq wq
 
-
-"---MAPPINGS---"
-let mapleader = ","
-nmap <leader>xp x"xp
-nnoremap <leader>m M
-nnoremap <leader>o o<C-C>
-nnoremap <leader>O O<C-C>
-set timeoutlen=200
+nnoremap ,o o<Esc>
+nnoremap ,O O<Esc>
 
 " make Y work like it should
 noremap Y y$
@@ -60,35 +66,29 @@ map!  <Nop>
 " under the cursor)
 noremap cb vbc
 noremap db vbd
-" give x and X its own buffer
-nnoremap x "xx
-nnoremap X "xd<BS>
 " make <Enter><Enter> split a line at the cursor
 nnoremap <CR><CR> i<CR><ESC>
-
-" map Shift+Tab to be used as hotkey for Esc
-" except instead of Esc we'll use Control+C
-map <S-Tab> <C-C>
-map! <S-Tab> <C-C>
-
-" make Control+C also get rid of any search highlighting that has taken place
-nnoremap <C-C> <C-C>:noh<CR>:<BS>
 
 " map  to backspace, like it is in the terminal
 noremap  
 noremap!  
 " make Ctrl+Backspace delete a word backwards in all modes
-map  db
-map!  <C-C>dba
+noremap  vbd
+noremap!  <Esc>vbc
 " make Ctrl+Delete delete a word forwards in all modes
 map [3;5~ dw
-map! [3;5~ <C-C>dwi
+map! [3;5~ <Esc>cw
 " make Ctrl+Left move one word backwards in all modes
-map Od b
-map! Od <C-C>bi
+" map Od b
+" map! Od <Esc>bi
 " make Ctrl+Right move one word forwards in all modes
-map Oc w
-map! Oc <C-C>lwi
+" map Oc w
+" map! Oc <Esc>lwi
+" ^^^ these make Alt+O have a pause when using in insert mode
+
+" tab stuff
+map <Tab> :tabnext<CR>
+map <S-Tab> :tabprevious<CR>
 
 " make HOME work as it should
 "map [H ^

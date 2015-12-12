@@ -16,11 +16,12 @@
 # mod key = Win (Mod1=Alt, for reference)
 set $mod Mod4
 
-exec --no-startup-id xautolock -locker screen-dimmer.sh -time 1 -corners +--- -cornerdelay 1 -cornerredelay 5 -detectsleep
+exec xautolock -locker screen-dimmer.sh -time 1 -corners +--- -cornerdelay 1 -cornerredelay 5 -detectsleep
 exec --no-startup-id compton -CGb
 exec --no-startup-id urxvtd
 exec --no-startup-id sh -c 'redshift-gtk || redshift'
 exec --no-startup-id dbus-launch deluge
+exec --no-startup-id kupfer
 exec --no-startup-id i3-msg 'workspace 1; exec termite -e ncmpcpp'
 exec --no-startup-id i3-msg 'workspace 3; exec chromium'
 
@@ -45,15 +46,11 @@ bindsym $mod+Return exec termite -d "`xcwd`"
 bindsym Control+$mod+Return exec urxvtc -cd "`pwd`"
 
 # launch ranger file manager in new terminal window
-bindsym $mod+Shift+Return exec termite -d "`xcwd`" -e ranger
+bindsym $mod+Shift+Return exec termite -d "`xcwd`" -e "sh -c 'ranger 2>/dev/null'"
 bindsym Control+$mod+Shift+Return exec urxvtc -cd "`pwd`" -e ranger
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start launcher
-#bindsym $mod+space exec dmenu_run
-bindsym $mod+space exec rofi -show run
 
 # change focus
 bindsym $mod+h focus left
@@ -179,5 +176,11 @@ bar {
 #--- misc ---#
 ##############
 
+# enable workspace back-and-forth
+workspace_auto_back_and_forth yes
+
 # force hangouts to run in workspace 2
-assign [class="Chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 2
+assign [class="chromium" instance="crx_knipolnnllmklapflnccelgolnpehhpl"] 2
+# force Mathematica splash screen to be floating (not sure what's going on here anymore, as I took this out and it still happened after reloading the config.)
+for_window [class="XMathematica" title="Welcome to Wolfram Mathematica"] floating enable
+for_window [class="Qt-subapplication" title="Mathematica"] floating enable

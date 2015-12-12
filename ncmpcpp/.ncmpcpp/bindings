@@ -51,8 +51,8 @@
 ##      picked by ncmpcpp upon next call to readKey function.
 ##      Accepted values: mouse, up, down, page_up, page_down,
 ##      home, end, space, enter, insert, delete, left, right,
-##      tab, shift_tab, ctrl_a, ctrl_b, ..., ctrl_z, f1, f2,
-##      ..., f12, backspace, backspace_2.
+##      tab, shift-tab, ctrl-a, ctrl-b, ..., ctrl-z, f1, f2,
+##      ..., f12, backspace, backspace.
 ##
 ##    - push_characters "string" - pushes given string into
 ##      input queue.
@@ -111,9 +111,9 @@
 ##    could be used. Then ncmpcpp will not wait for confirmation
 ##    (enter) and will execute the command the moment it sees it.
 ##
-## Note: Both 'backspace' and 'backspace_2' are used because some
+## Note: Both 'backspace' and 'backspace' are used because some
 ##       terminals interpret backspace using keycode of 'backspace'
-##       and some the one of 'backspace_2'. You can get away with
+##       and some the one of 'backspace'. You can get away with
 ##       binding once if all your terminal emulators use the same
 ##       value.
 ##
@@ -185,10 +185,11 @@ def_key "end"
   move_end
 
 def_key "space"
-  press_space
+  select_item
+  scroll_down
 
 def_key "enter"
-  press_enter
+  play_item
 
 def_key "d"
   delete_playlist_items
@@ -238,7 +239,7 @@ def_key ":"
 def_key "tab"
   next_screen
 
-def_key "shift_tab"
+def_key "shift-tab"
   previous_screen
 
 def_key "f1"
@@ -295,11 +296,15 @@ def_key ">"
 def_key "<"
   previous
 
-def_key "ctrl_h"
+def_key "ctrl-h"
   dummy
 #jump_to_parent_directory
 
-def_key "ctrl_h"
+def_key "ctrl-h"
+  dummy
+#jump_to_parent_directory
+
+def_key "backspace"
   dummy
 #jump_to_parent_directory
 
@@ -311,11 +316,7 @@ def_key "backspace"
   dummy
 #jump_to_parent_directory
 
-def_key "backspace_2"
-  dummy
-#jump_to_parent_directory
-
-def_key "backspace_2"
+def_key "backspace"
   dummy
 #jump_to_parent_directory
 
@@ -346,9 +347,6 @@ def_key "R"
 def_key "Y"
   toggle_replay_gain_mode
 
-def_key "t"
-  toggle_space_mode
-
 def_key "T"
   toggle_add_mode
 
@@ -370,10 +368,10 @@ def_key "X"
 def_key "u"
   update_database
 
-def_key "ctrl_v"
+def_key "ctrl-v"
   sort_playlist
 
-def_key "ctrl_r"
+def_key "ctrl-r"
   reverse_playlist
 
 def_key "/"
@@ -431,6 +429,9 @@ def_key "V"
   reverse_selection
 
 def_key "v"
+  remove_selection
+
+def_key "b"
   remove_selection
 
 def_key "B"
@@ -511,7 +512,7 @@ def_key "!"
 def_key "F"
   toggle_fetching_lyrics_in_background
 
-def_key "ctrl_l"
+def_key "ctrl-l"
   toggle_screen_lock
 
 def_key "`"
@@ -526,7 +527,7 @@ def_key "`"
 def_key "`"
   add_random_items
 
-def_key "ctrl_p"
+def_key "ctrl-p"
   set_selected_items_priority
 
 def_key "Q"

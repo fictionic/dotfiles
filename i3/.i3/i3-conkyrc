@@ -17,8 +17,11 @@ TEXT
 	${if_mpd_playing}
 	{
 		"full_text" :
-			${if_match "${mpd_status}"== "Playing"}" "
-			${else}" "${endif},
+			${if_match "${mpd_status}"== "Playing"}
+				" "
+			${else}
+				" "
+			${endif},
 		"color" : "\#f2f0ec",
 		"separator" : false
 	},
@@ -40,7 +43,12 @@ TEXT
 	},
 	{
 		"full_text" : "   RAM ${mem} (${memperc}%) ",
-		"color" : ${if_match ${memperc}<90}"\#f2f0ec"${else}"\#f2777a"${endif}
+		"color" :
+			${if_match ${memperc}<90}
+				"\#f2f0ec"
+			${else}
+				"\#f2777a"
+			${endif}
 	},
 	{
 		"full_text" : "   ${execi 300 checkupdates | wc -l}/${execi 300 pacman -Q | wc -l} ",
@@ -50,34 +58,60 @@ TEXT
 		"full_text" : "   ${exec cat /sys/class/backlight/intel_backlight/brightness} (${exec printf %.0f $(echo "scale=2;$(cat /sys/class/backlight/intel_backlight/brightness)/$(cat /sys/class/backlight/intel_backlight/max_brightness)*100;scale=0" | bc)}%)${exec dpms-toggle.sh conky}",
 		"color" : "\#d8d800"
 	},
-	{
-		"full_text" : "${if_up wlp2s0} ${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})${else} no wifi ${endif}",
-		"color" : "\#55eeee"
-	},
-	{
-		"full_text" : "${if_up enp0s20u1}   eth ${endif}",
-		"color" : "\#55eeee"
-	},
 
+	{
+		
+		"full_text" :
+			${if_match "${exec ip link | grep enp0s20u | sed 's/.*state \(..\).*/\1/'}"=="UP"}
+				${if_match "${exec netctl status ethernet | head -3 | tail -1 | sed 's/.*Active: \(.*\) since.*/\1/'}"=="active (exited)"}
+					"  eth ",
+				${else}
+					"  ... ",
+				${endif}
+			${else}
+				${if_up wlp2s0}
+					"${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})",
+				${else}
+					"no network",
+				${endif}
+			${endif}
+		"color" : "\#55eeee"
+	},
 	{
 		"full_text" : "  ",
 		"separator" : false,
 		"color" :
-			${if_match ${exec cat /sys/class/power_supply/AC/online}==1} "\#4580ff"
-			${else} "\#fef0ec" ${endif}
+			${if_match ${exec cat /sys/class/power_supply/AC/online}==1}
+				"\#4580ff"
+			${else}
+				"\#fef0ec"
+			${endif}
 	},
 	{
 		"full_text" : "${battery_percent}% ",
 		"color" :
-			${if_match ${battery_percent}<10}	"\#ff4444"
-			${else} ${if_match ${battery_percent}<50}	"\#dddd33"
-			${else}	"\#00dd00"${endif}${endif}
+			${if_match ${battery_percent}<10}
+				"\#ff4444"
+			${else}
+				${if_match ${battery_percent}<20}
+					"\#eeb030"
+				${else}
+					${if_match ${battery_percent}<50}
+						"\#dddd33"
+					${else}
+						"\#00dd00"
+					${endif}
+				${endif}
+			${endif}
 	},
 	{
 		"full_text" : "  ${execi 1 amixer get Master | tail -1 | perl -pe 's/.*\[(.{2,3}%)\].*/$1/'} ",
 		"color" :
-			${if_match "${execi 1 amixer get Master | tail -1 | grep -o off}"== "off"}"\#ff6060"
-			${else}"\#e890f8"${endif}
+			${if_match "${execi 1 amixer get Master | tail -1 | grep -o off}"== "off"}
+				"\#ff6060"
+			${else}
+				"\#e890f8"
+			${endif}
 	},
 	{
 		"full_text" : "   ${time %d %b %Y} ",

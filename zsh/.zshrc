@@ -30,35 +30,39 @@ for dir in bin scripts; do
 	then
 		export PATH=$HOME/$dir:${PATH}
 	fi
-	export XDG_CONFIG_HOME=/home/dylan/.config
-	export XDG_DATA_HOME=/home/dylan/.local/share
-	export VISUAL=vim
-	export PAGER="less -R"
-	##: colors in less :##
-	#	blink
-	export LESS_TERMCAP_mb=$(tput blink)
-	#	bold		--> bold, white
-	export LESS_TERMCAP_md=$(tput bold; tput setaf 15)
-	#	stop bold, blink, underline
-	export LESS_TERMCAP_me=$(tput sgr0)
-	#	standout	--> bold, reverse colors
-	export LESS_TERMCAP_so=$(tput bold; tput rev)
-	#	stop standout, bold, blink, underline
-	export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-	#	underline	--> underline, light blue
-	export LESS_TERMCAP_us=$(tput smul; tput setaf 6)
-	#	stop underline	--> stop bold, blink, underline
-	export LESS_TERMCAP_ue=$(tput sgr0)
-	#	reverse fb/bg colors
-	export LESS_TERMCAP_mr=$(tput rev)
-	#	dim text
-	export LESS_TERMCAP_mh=$(tput dim)
-	#	(I don't know what these do)
-	export LESS_TERMCAP_ZN=$(tput ssubm)
-	export LESS_TERMCAP_ZV=$(tput rsubm)
-	export LESS_TERMCAP_ZO=$(tput ssupm)
-	export LESS_TERMCAP_ZW=$(tput rsupm)
 done
+export XDG_CONFIG_HOME=/home/dylan/.config
+export XDG_DATA_HOME=/home/dylan/.local/share
+export SHELL=zsh
+export VISUAL=vim
+export EDITOR=vim
+export TERMCMD="termite"
+export PAGER="less -R"
+#
+##: colors in less :##
+#	blink
+export LESS_TERMCAP_mb=$(tput blink)
+#	bold		--> bold, white
+export LESS_TERMCAP_md=$(tput bold; tput setaf 15)
+#	stop bold, blink, underline
+export LESS_TERMCAP_me=$(tput sgr0)
+#	standout	--> bold, reverse colors
+export LESS_TERMCAP_so=$(tput bold; tput rev)
+#	stop standout, bold, blink, underline
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+#	underline	--> underline, light blue
+export LESS_TERMCAP_us=$(tput smul; tput setaf 6)
+#	stop underline	--> stop bold, blink, underline
+export LESS_TERMCAP_ue=$(tput sgr0)
+#	reverse fb/bg colors
+export LESS_TERMCAP_mr=$(tput rev)
+#	dim text
+export LESS_TERMCAP_mh=$(tput dim)
+#	(I don't know what these do)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
 
 #--------------#
 #  SET PROMPT  #
@@ -102,14 +106,6 @@ zle -N down-line-or-beginning-search
 bindkey -v "^[[A" up-line-or-beginning-search # Up
 bindkey -v "^[[B" down-line-or-beginning-search # Down
 
-#------------------#
-#   MISCELANEOUS   #
-#------------------#
-# ls colors
-eval $(dircolors -b /home/dylan/.dircolors)
-# give info about where to install packages containing commands that aren't currently installed
-source /usr/share/doc/pkgfile/command-not-found.zsh
-
 #-----------------#
 #     ALIASES     #
 #-----------------#
@@ -135,19 +131,29 @@ alias s='ls --color=auto'
 
 alias 'sudo vim'='sudo -e'
 alias xr='xrdb /home/dylan/.Xresources'
-alias pgrep='ps -e | grep'
-#alias less=vimpager
+alias pgrep='ps -ef | head -1; ps -ef | grep'
+alias ranger='ranger 2>/dev/null'
 alias pingg='ping google.com'
-alias uplinux='yaourt -Syu --devel --aur'
+alias upd='yaourt -Syu --devel --aur'
 alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
+alias info='info --vi-keys '
 pacclean() {
 	toremove=($(yaourt -Qqdt))
 	if [[ ${#toremove[@]} == 0 ]]; then
 		echo "Package database clean."
 	else
-		yaourt -Rns "${toremove[@]}"
+		yaourt -Rs "${toremove[@]}"
 	fi
 }
 restartnetctl() {
-	sudo netctl restart "$(sudo netctl list | grep \* | sed $'s/* //')"
+	sudo netctl restart "$(netctl list | grep \* | sed $'s/* //')"
 }
+
+#------------------#
+#   MISCELANEOUS   #
+#------------------#
+# ls colors
+eval $(dircolors -b /home/dylan/.dircolors)
+# give info about where to install packages containing commands that aren't currently installed
+source /usr/share/doc/pkgfile/command-not-found.zsh
+

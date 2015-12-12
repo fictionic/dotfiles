@@ -9,7 +9,7 @@ xset -dpms; xset s off
 
 # start up all them daemons
 xbindkeys
-syndaemon -d -i .5 -t -K
+syndaemon -d -i .4 -K
 
 # launch the ol' wm
 exec i3
