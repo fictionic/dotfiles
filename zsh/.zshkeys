@@ -1,0 +1,32 @@
+# make HOME work as it should
+bindkey -v '[7~' vi-beginning-of-line
+bindkey -a '[7~' vi-beginning-of-line
+# make END work as it should
+bindkey -v '[8~' vi-end-of-line
+bindkey -a '[8~' vi-end-of-line
+# make DEL work as it should
+bindkey -v '[3~' delete-char
+bindkey -a '[3~' delete-char
+# make Ctrl+DEL work as it should
+bindkey -v '[3;5~' delete-word
+bindkey -a '[3;5~' delete-word
+# make BKSP work as it should
+bindkey -v '' backward-delete-char
+# (don't want this to delete stuff in command mode though!)
+# make Ctrl+BKSP work as it should
+bindkey -v '' backward-delete-word
+bindkey -a '' backward-delete-word
+# make Ctrl+Left move one word backwards
+bindkey -v 'Od' vi-backward-word
+bindkey -a 'Od' vi-backward-word
+# make Ctrl+Right move one word backwards
+bindkey -v 'Oc' vi-forward-word
+bindkey -a 'Oc' vi-forward-word
+# make Underscore work properly
+bindkey -a '_' vi-beginning-of-line
+# other stuff...
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey -v "^[[A" up-line-or-beginning-search # Up
+bindkey -v "^[[B" down-line-or-beginning-search # Down
+

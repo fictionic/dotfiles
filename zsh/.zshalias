@@ -1,0 +1,41 @@
+# let sudo take aliases as arguments
+alias sudo='sudo '
+
+# make "help" work as expected
+unalias run-help
+alias help=run-help
+
+# make ls use colors, and be easier to access
+alias ls='ls --color=auto'
+alias ll='ls --color=auto -l'
+alias la='ls --color=auto -a'
+alias l='ls --color=auto'
+alias s='ls --color=auto'
+
+# misc...
+alias 'sudo vim'='sudo -e'
+alias pgrep='ps -ef | head -1; ps -ef | grep'
+alias ranger='ranger 2>/dev/null'
+alias pingg='ping google.com'
+alias upd='pacaur -Syu --devel'
+alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
+alias info='info --vi-keys '
+
+# FUNCTIONS
+pacclean() {
+	toremove=($(pacaur -Qqdt))
+	if [[ ${#toremove[@]} == 0 ]]; then
+		echo "Package database clean."
+	else
+		pacaur -Rs "${toremove[@]}"
+	fi
+}
+restartnetctl() {
+	sudo netctl restart "$(netctl list | grep \* | sed $'s/* //')"
+}
+resetusb() {
+	sudo modprobe -r cdc_ether;
+	sudo modprobe -r usbnet;
+	sudo modprobe usbnet;
+	sudo modprobe cdc_ether;
+}
