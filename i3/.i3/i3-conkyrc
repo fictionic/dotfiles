@@ -105,9 +105,9 @@ TEXT
 			${endif}
 	},
 	{
-		"full_text" : "  ${execi 1 amixer get Master | tail -1 | perl -pe 's/.*\[(.{2,3}%)\].*/$1/'} ",
+		"full_text" : "  ${execi 1 amixer sget Master | awk -F"[][]" '/Left: / { print $2 }' } ",
 		"color" :
-			${if_match "${execi 1 amixer get Master | tail -1 | grep -o off}"== "off"}
+			${if_match "${execi 1 amixer sget Master | awk -F"[][]" '/Left: / { print $4 }' }"=="off" }
 				"\#ff6060"
 			${else}
 				"\#e890f8"

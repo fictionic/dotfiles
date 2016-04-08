@@ -1,7 +1,11 @@
-set nocp "has to be first line
+" best if this is the first line
+set nocp
 
-"---VUNDLE STUFF---"
-filetype off "required by vundle
+"------------------"
+"   VUNDLE STUFF   "
+"------------------"
+filetype off
+filetype plugin indent on
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -14,99 +18,141 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'lervag/vimtex'
+Plugin 'google/vim-searchindex' " display index of search result using / or ?
+Plugin 'vim-airline/vim-airline'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'scrooloose/syntastic'
 
 call vundle#end()
-filetype plugin indent on "required by vundle
 
-"---NON-VUNDLE STUFF---"
-"----------------------"
+"-------------"
+"   GENERAL   "
+"-------------"
 syntax on
-colorscheme SlateDarkBlue
+colorscheme SlateDarkBlue " my own custom modification of SlateDark
+
+"-------------"
+"   OPTIONS   "
+"-------------"
 set noswapfile
+set noesckeys
+set showcmd
+
 set backspace=indent,eol,start
-set mouse=a
+
 set tabstop=4
 set noexpandtab
 set shiftwidth=0
+
 set autoindent
 set cindent
 set smartindent
-set number
+
 set ruler
+set number
+set relativenumber
+
 set incsearch "moves cursor to first instance of matched pattern while typing pattern
 
 set timeoutlen=200
 
-"---MAPPINGS/ALIASES---"
+"-------------------------------"
+"   MAPPINGS/ALIASES/COMMANDS   "
+"-------------------------------"
 
+let mapleader=" "
 let localmapleader="\\"
 
+" easier saving/quitting
+" ----
 command! W w
 command! Q q
-command! WQ wq
-command! Wq wq
+command WQ wq
+command Wq wq
+map <leader>w :w<CR>
+map <leader>wq :wq<CR>
+map <Space><Space> :w<CR>
+map! <Space><Space> <Esc><Space><Space>
+map <Space><Space> <Esc><Space><Space>
 
-nnoremap ,o o<Esc>
-nnoremap ,O O<Esc>
+" open multiple files in tabs, horizontal windows, or vertical windows
+" ----
+command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
+command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
+command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
+function! s:ETW(what, ...)
+  for f1 in a:000
+    let files = glob(f1)
+    if files == ''
+      execute a:what . ' ' . escape(f1, '\ "')
+    else
+      for f2 in split(files, "\n")
+        execute a:what . ' ' . escape(f2, '\ "')
+      endfor
+    endif
+  endfor
+endfunction
 
+" >> SWITCH BETWEEN TABS << "
+map <Tab> :tabnext<CR>:
+map <S-Tab> :tabprevious<CR>:
+" >> MOVE TABS AROUND << "
+map <C-l> :tabm +1<CR>:
+map <C-h> :tabm -1<CR>:
+
+" >> MOVEMENT << "
+" make h,l move between lines when at the end/beginning
+noremap h <BS>
+nnoremap l <Space>
+" except for l when insert mode!
+inoremap l <Esc>
+" and prevent space from moving to next line when at end!
+nnoremap <Space> l
+" arrow keys in insert mode
+imap <C-k> <C-c>ka
+imap <C-j> <C-c>ja
+imap <C-l> <C-c>la
+imap <C-h> <C-c>ha
+" remap _ to ^, since ^ is hard to reach and _ is dumb
+noremap _ ^
+" enable mouse, but only for scrolling
+set mouse=n
+noremap <LeftMouse> <Nop>
+noremap! <LeftMouse> <Nop>
+noremap <RightMouse> <Nop>
+noremap! <RightMouse> <Nop>
+" shift+click+drag for selecting manually
+
+" >> GENERAL EDITING << "
+" ----
 " make Y work like it should
 noremap Y y$
 " use U instead of Ctrl+R for redo
 nnoremap U <C-R>
-" don't use M
-nnoremap M <Nop>
-" don't use K
-nmap K <Nop>
-" don't use Q!!!
-map Q <Nop>
-" unmap Ctrl+U, cuz xterm is dumb
-map  <Nop>
-map!  <Nop>
-" make cb and db work like they ought to (i.e. make them delete the character
-" under the cursor)
+" use Ctrl+u for undo-line
+nnoremap <C-u> U
+" make cb and db work like they ought to (i.e. make them delete the character under the cursor)
 noremap cb vbc
 noremap db vbd
 " make <Enter><Enter> split a line at the cursor
 nnoremap <CR><CR> i<CR><ESC>
+" create new line above/below without entering insert mode
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
+" indent current line multiple times
+noremap << @='<<'<CR>
+noremap >> @='>>'<CR>
 
-" map  to backspace, like it is in the terminal
+" BACKSPACE/DELETE STUFF "
+" ----
+" map to backspace, like it is in the terminal
 noremap  
 noremap!  
-" make Ctrl+Backspace delete a word backwards in all modes
-noremap  vbd
-noremap!  <Esc>vbc
+" make Ctrl+Backspace delete a word backwards
+noremap!  <C-w>
 " make Ctrl+Delete delete a word forwards in all modes
-map [3;5~ dw
 map! [3;5~ <Esc>cw
-" make Ctrl+Left move one word backwards in all modes
-" map Od b
-" map! Od <Esc>bi
-" make Ctrl+Right move one word forwards in all modes
-" map Oc w
-" map! Oc <Esc>lwi
-" ^^^ these make Alt+O have a pause when using in insert mode
 
-" tab stuff
-map <Tab> :tabnext<CR>
-map <S-Tab> :tabprevious<CR>
-
-" make HOME work as it should
-"map [H ^
-"map! [H blah
-" make END work as it should
-"map [H $
-"map! [H <C-C>$a
-
-" old stuff... in case I want/need to use noesckeys for some reason
-"set noesckeys
-"inoremap <C-[>OA <Up>
-"inoremap <C-[>OC <Right>
-"inoremap <C-[>OB <Down>
-"inoremap <C-[>OD <Left>
-"imap <C-[>OH <S-Tab>^i
-"nmap <C-[>OH ^
-"imap <C-[>OF <S-Tab>$a
-"nmap <C-[>OF $
-"maping the delete key
-"imap <C-[>[3~ <S-Tab>lxi
-"nmap <C-[>[3~ x
+" >> UNMAPPINGS << "
+nmap K <Nop>
+map Q <Nop>

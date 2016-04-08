@@ -39,7 +39,7 @@
 
 # MPC HOTKEYS
 "mpc toggle"
-	Alt + space
+	Control+Alt + space
 "mpc stop"
 	Control+shift + Next
 "mpc play"
@@ -48,9 +48,9 @@
 	Control+Shift + period
 "mpc prev"
 	Control+Shift + comma
-"mpc volume +5"
+"mpc volume +3"
 	Control+Alt + Up
-"mpc volume -5"
+"mpc volume -3"
 	Control+Alt + Down
 "mpc seek +00:00:05"
 	Control+Alt + Right
@@ -75,9 +75,18 @@
 	Control + Shift + XF86MonBrightnessUp
 "xbacklight-exact -e -dec 1"
 	Control + Shift + XF86MonBrightnessDown
-# DPMS control
-"dpms-toggle.sh"
+# gamma adjustment
+"xgamma -gamma 2.0"
+	Alt + XF86MonBrightnessUp
+"xgamma -gamma 1.5"
+	Alt + Shift + XF86MonBrightnessUp
+"xgamma -gamma 1.0"
+	Alt + XF86MonBrightnessDown
+# screen timeout control
+"xautolock -toggle"
 	Control + Alt + d
+"sh -c 'pkill xautolock; setsid xautolock -locker screen-dimmer.sh -time 1 -corners +--- -cornerdelay 1 -cornerredelay 5 -detectsleep'"
+	Control + Alt + Shift + d
 
 # VOLUME KEYS
 "pulseaudio-ctl up"
@@ -86,6 +95,13 @@
 	XF86AudioLowerVolume
 "pulseaudio-ctl mute"
 	XF86AudioMute
+
+"toggle-touchpad.sh"
+	XF86Display
+
+# SCREENSHOT
+"/home/dylan/scripts/screenshot.sh"
+	Alt + Print
 
 ##################################
 # End of xbindkeys configuration #

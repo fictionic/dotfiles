@@ -189,6 +189,15 @@ def_key "space"
   scroll_down
 
 def_key "enter"
+  enter_directory
+
+def_key "enter"
+  toggle_output
+
+def_key "enter"
+  run_action
+
+def_key "enter"
   play_item
 
 def_key "d"
@@ -441,13 +450,7 @@ def_key "A"
   add_selected_items
 
 def_key "c"
-  clear_playlist
-
-def_key "c"
   clear_main_playlist
-
-def_key "C"
-  crop_playlist
 
 def_key "C"
   crop_main_playlist

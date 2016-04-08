@@ -9,6 +9,7 @@ clickable_url = true
 search_wrap = true
 transparency = 0.0
 pseudo_transparency = false
+scrollback_lines = 100000
 
 cursor_blink = system
 cursor_shape = block

@@ -1,45 +1,19 @@
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _complete _ignored
-zstyle ':completion:*' max-errors 2
-zstyle ':completion:*' prompt 'Suggestions:'
-zstyle :compinstall filename '/home/dylan/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# Lines configured by zsh-newuser-install
+#-----------#
+#  GENERAL  #
+#-----------#
 HISTFILE=~/.zshhist
 HISTSIZE=1000
 SAVEHIST=1000
-setopt appendhistory nomatch
-unsetopt autocd beep extendedglob notify
-bindkey -v
-# End of lines configured by zsh-newuser-install
 
-#-----------------#
-#  SET VARIABLES  #
-#-----------------#
-# first, add ~/scripts and ~/bin to PATH
-# If user ID is greater than or equal to 1000 & if ~/$dir exists and is a directory & if ~/$dir is not already in your $PATH
-# then export ~/$dir to your $PATH.
-# finally, manually add some other variables, like the default console text editor
-for dir in bin scripts; do
-	if [[ $UID -ge 1000 && -d $HOME/$dir && -z $(echo $PATH | grep -o $HOME/$dir) ]]
-	then
-		export PATH=$HOME/$dir:${PATH}
-	fi
-done
-export XDG_CONFIG_HOME=/home/dylan/.config
-export XDG_DATA_HOME=/home/dylan/.local/share
-export SHELL=zsh
-export VISUAL=vim
-export EDITOR=vim
-export TERMCMD="termite"
-export PAGER="less -R"
-#
-##: colors in less :##
+setopt appendhistory nomatch completealiases HIST_IGNORE_DUPS
+unsetopt autocd beep extendedglob notify
+
+#----------#
+#  COLORS  #
+#----------#
+#	SHELL COLORS  #
+autoload -U colors && colors
+# 	LESS COLORS   #
 #	blink
 export LESS_TERMCAP_mb=$(tput blink)
 #	bold		--> bold, white
@@ -64,10 +38,36 @@ export LESS_TERMCAP_ZV=$(tput rsubm)
 export LESS_TERMCAP_ZO=$(tput ssupm)
 export LESS_TERMCAP_ZW=$(tput rsupm)
 
+# SET PROMPT
+source ~/.zshprompt
+
+# set vi-style line editing
+bindkey -v
+export KEYTIMEOUT=1
+
 #--------------#
-#  SET PROMPT  #
+#  COMPLETION  #
 #--------------#
-PROMPT="%n@%M:%~%(!.#.$) "
+zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' prompt 'Suggestions:'
+zstyle ':completion:*' menu select
+zstyle :compinstall filename '/home/dylan/.zshrc'
+autoload -Uz compinit
+compinit
+
+#-----------------#
+#  SET VARIABLES  #
+#-----------------#
+# add ~/scripts to PATH
+export PATH='/usr/bin:/usr/local/bin:/home/dylan/scripts:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl'
+export XDG_CONFIG_HOME=/home/dylan/.config
+export XDG_DATA_HOME=/home/dylan/.local/share
+export SHELL=zsh
+export VISUAL=vim
+export EDITOR=vim
+export TERMCMD="termite"
+export PAGER="less -R"
 
 #-----------------#
 #   KEYBINDINGS   #
@@ -98,9 +98,7 @@ bindkey -v 'Oc' vi-forward-word
 bindkey -a 'Oc' vi-forward-word
 # make Underscore work properly
 bindkey -a '_' vi-beginning-of-line
-# make scrolling up and down only scroll through commands that match the currently typed command
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
+# other stuff...
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey -v "^[[A" up-line-or-beginning-search # Up
@@ -109,7 +107,6 @@ bindkey -v "^[[B" down-line-or-beginning-search # Down
 #-----------------#
 #     ALIASES     #
 #-----------------#
-
 # let sudo take aliases as arguments
 alias sudo='sudo '
 
@@ -128,25 +125,30 @@ alias l='ls --color=auto'
 alias s='ls --color=auto'
 
 # misc...
-
 alias 'sudo vim'='sudo -e'
 alias xr='xrdb /home/dylan/.Xresources'
 alias pgrep='ps -ef | head -1; ps -ef | grep'
 alias ranger='ranger 2>/dev/null'
 alias pingg='ping google.com'
-alias upd='yaourt -Syu --devel --aur'
+alias upd='pacaur -Syu --devel'
 alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
 alias info='info --vi-keys '
 pacclean() {
-	toremove=($(yaourt -Qqdt))
+	toremove=($(pacaur -Qqdt))
 	if [[ ${#toremove[@]} == 0 ]]; then
 		echo "Package database clean."
 	else
-		yaourt -Rs "${toremove[@]}"
+		pacaur -Rs "${toremove[@]}"
 	fi
 }
 restartnetctl() {
 	sudo netctl restart "$(netctl list | grep \* | sed $'s/* //')"
+}
+resetusb() {
+	sudo modprobe -r cdc_ether;
+	sudo modprobe -r usbnet;
+	sudo modprobe usbnet;
+	sudo modprobe cdc_ether;
 }
 
 #------------------#
@@ -156,4 +158,6 @@ restartnetctl() {
 eval $(dircolors -b /home/dylan/.dircolors)
 # give info about where to install packages containing commands that aren't currently installed
 source /usr/share/doc/pkgfile/command-not-found.zsh
-
+# make scrolling up and down only scroll through commands that match the currently typed command
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search

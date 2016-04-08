@@ -21,7 +21,7 @@ hi ModeMsg guifg=goldenrod cterm=none ctermfg=4
 hi MoreMsg guifg=SeaGreen ctermfg=darkgreen
 hi NonText guifg=RoyalBlue guibg=grey15 cterm=bold ctermfg=blue
 hi Question guifg=springgreen ctermfg=green
-hi Search guibg=peru guifg=wheat cterm=none ctermfg=grey ctermbg=blue
+hi Search guibg=peru guifg=wheat cterm=none ctermfg=black ctermbg=blue
 hi SpecialKey guifg=yellowgreen ctermfg=darkgreen
 hi StatusLine guibg=#c2bfa5 guifg=black gui=none cterm=bold,reverse
 hi StatusLineNC guibg=#c2bfa5 guifg=grey40 gui=none cterm=reverse
@@ -55,3 +55,4 @@ hi DiffText cterm=bold ctermbg=1
 hi Underlined cterm=underline ctermfg=5
 hi Error guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
 hi SpellErrors cterm=bold ctermfg=7 ctermbg=1 gui=undercurl,bold
+hi MatchParen term=reverse ctermbg=0 guibg=DarkCyan
