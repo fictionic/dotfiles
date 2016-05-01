@@ -5,10 +5,6 @@ SAVEHIST=1000
 setopt appendhistory nomatch completealiases HIST_IGNORE_DUPS
 unsetopt autocd beep extendedglob notify
 
-# set vi-style line editing
-bindkey -v
-export KEYTIMEOUT=1
-
 # SET PROMPT
 source ~/.zshprompt
 
@@ -20,6 +16,9 @@ source ~/.zshcompletion
 
 # SET KEYBINDINGS
 source ~/.zshkeys
+
+# SET ALIASES
+source ~/.zshalias
 
 #-----------------------------#
 #  SET ENVIRONMENT VARIABLES  #

@@ -1,52 +1,38 @@
+# set vi-style line editing
 bindkey -v
+# set keytimeout
+export KEYTIMEOUT=1
+
 
 # enable command substitution in prompt
 setopt promptsubst
 
 (){ # local scope
 
-  local left right invisible leftcontent
+	# we start in insert mode
+	mode_color=green
 
-  # User name.
-  left+='%B%F{black}%K{green} %n '
-  # Current working directory.
-  left+='%b%k%F{yellow} %~ '
-
-  # Version control branch.
-  right='%f${vcs_info_msg_0_:+${vcs_info_msg_0_//[%]/%%} }'
-  # Virtualenv.
-  export VIRTUAL_ENV_DISABLE_PROMP=1
-  right+='${VIRTUAL_ENV:+venv }'
-
-  # Editing mode. $ZLE_MODE shouldn't contain %, no need to escape
-  ZLE_MODE="-- INSERT --"
-  right+='%F{blue} $ZLE_MODE'
-
-  # closing
-  right+=$' %k%f%b'
-
-  # Combine left and right prompt with spacing in between.
-  invisible='%([BSUbfksu]|([FBK]|){*})'
-
-  leftcontent=${(S)left//$~invisible}
-  rightcontent=${(S)right//$~invisible}
-
-  PS1="$left\${(l,COLUMNS-\${#\${(%):-$leftcontent$rightcontent}},)}$right%{"$'\n%}$ '
+	# user name with bg color determined by editing mode
+	username='%B%F{black}%K{$mode_color} %n %b%k%f'
+	# current working directory
+	cwd='%F{yellow} %~ %f'
+	# bold dollar sign on new line
+	newline=$'\n%B$%b '
+	# put it all together
+	PS1=$username$cwd$newline
 }
-
-autoload vcs_info
-precmd() vcs_info
 
 update-mode() {
-  case $KEYMAP in
-    (main)
-      case $ZLE_STATE in
-        (*insert*) ZLE_MODE="-- INSERT --";;
-      esac;;
-	 #			 "-- INSERT --"
-    (*) ZLE_MODE="   vicmd    "
-  esac
-  [[ $ZLE_MODE = $oldmode ]] || zle reset-prompt
+	case $KEYMAP in
+		(main)
+			mode_color=green
+			;;
+		(vicmd)
+			mode_color=blue
+			;;
+	esac
+	zle reset-prompt
 }
 
+# replace default keymap function with custom one
 zle -N zle-keymap-select update-mode

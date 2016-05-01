@@ -6,7 +6,7 @@ unalias run-help
 alias help=run-help
 
 # make ls use colors, and be easier to access
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -N -F'
 alias ll='ls --color=auto -l'
 alias la='ls --color=auto -a'
 alias l='ls --color=auto'

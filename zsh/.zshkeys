@@ -24,9 +24,11 @@ bindkey -v 'Oc' vi-forward-word
 bindkey -a 'Oc' vi-forward-word
 # make Underscore work properly
 bindkey -a '_' vi-beginning-of-line
-# other stuff...
+# use up/down arrow keys to search through cmd history
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey -v "^[[A" up-line-or-beginning-search # Up
 bindkey -v "^[[B" down-line-or-beginning-search # Down
-
+# prevent S and cc from deleting a line of history
+bindkey -v 'S' vi-change-whole-line
+bindkey -v 'cc' vi-change-whole-line
