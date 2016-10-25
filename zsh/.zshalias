@@ -6,11 +6,11 @@ unalias run-help
 alias help=run-help
 
 # make ls use colors, and be easier to access
-alias ls='ls --color=auto -N -F'
-alias ll='ls --color=auto -l'
-alias la='ls --color=auto -a'
-alias l='ls --color=auto'
-alias s='ls --color=auto'
+alias ls='ls --group-directories-first --color=auto -N'
+alias ll='ls -l'
+alias la='ls -a'
+alias l='ls'
+alias s='ls'
 
 # misc...
 alias 'sudo vim'='sudo -e'
@@ -20,6 +20,9 @@ alias pingg='ping google.com'
 alias upd='pacaur -Syu --devel'
 alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
 alias info='info --vi-keys '
+alias ragner=ranger
+alias vimrc='vim /home/dylan/.vimrc'
+alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
 
 # FUNCTIONS
 pacclean() {
@@ -38,4 +41,13 @@ resetusb() {
 	sudo modprobe -r usbnet;
 	sudo modprobe usbnet;
 	sudo modprobe cdc_ether;
+}
+# use vim ex commands in a UNIX pipe
+vp() {
+    vim - -u NONE -es '+1' "+$*" '+%print' '+:qa!' | tail -n +2
+}
+
+# use vim normal mode commands in a UNIX pipe
+vn() {
+    vim - -u NONE -es '+1' "+normal $*" '+%print' '+:qa!' | tail -n +2
 }

@@ -114,7 +114,7 @@ TEXT
 			${endif}
 	},
 	{
-		"full_text" : "   ${time %d %b %Y} ",
+		"full_text" : "   ${time %a %d %b %Y} ",
 		"color" : "\#f2f0ec"
 	},
 	{

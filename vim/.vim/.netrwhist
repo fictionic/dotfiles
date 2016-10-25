@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/dylan/dotfiles'
-let g:netrw_dirhist_2='/home/dylan/dotfiles/zsh'
-let g:netrw_dirhist_3='/home/dylan/dotfiles'
-let g:netrw_dirhist_4='/etc/netctl'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/dylan/dotfiles/vim/.vim/bundle'
+let g:netrw_dirhist_2='/home/dylan/dotfiles/vim/.vim/bundle/vimtex'
+let g:netrw_dirhist_3='/home/dylan/code/mine/demloplus'
+let g:netrw_dirhist_4='/etc/xdg/pacaur'
+let g:netrw_dirhist_5='/home/dylan/documents/school/2013-2017 Carleton College/2016-2017 (College Senior)/CS231 Computer Security/password lab'
+let g:netrw_dirhist_6='/home/dylan/.config/systemd/user'
