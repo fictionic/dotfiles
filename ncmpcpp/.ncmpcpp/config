@@ -319,7 +319,7 @@ centered_cursor = no
 # be used to build 'empty' part of progressbar.
 #
 #progressbar_look = =>—
-progressbar_look = ▀▀▀ 
+progressbar_look = ▄▄▄ 
 #progressbar_look = █] 
 
 progressbar_color = "black"

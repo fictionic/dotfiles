@@ -14,14 +14,13 @@ scrollback_lines = 100000
 cursor_blink = system
 cursor_shape = block
 
-
 [colors]
 foreground = #d6e6eb
 background = #445768
 cursor = #00aa00
 # black
 color0 = #000000
-color8 = #555753
+color8 = #333733
 # red
 color1 = #ff7474
 color9 = #ff00ff

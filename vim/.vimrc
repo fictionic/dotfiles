@@ -151,8 +151,6 @@ onoremap } V}
 noremap Y y$
 " use U instead of Ctrl+R for redo
 nnoremap U <C-R>
-" use Ctrl+u for undo-line
-nnoremap <C-u> U
 " make cb and db work like they ought to (i.e. make them delete the character under the cursor)
 " noremap cb vbc
 " noremap db vbd
