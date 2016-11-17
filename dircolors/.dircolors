@@ -71,8 +71,8 @@ TERM xterm-termite
 # 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
-#NORMAL 00 # no color code at all
-#FILE 00 # regular file: use no color at all
+NORMAL 00 # no color code at all
+FILE 00 # regular file: use no color at all
 RESET 0 # reset to "normal" color
 DIR 01;34 # directory
 LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
@@ -80,14 +80,14 @@ LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
 MULTIHARDLINK 00 # regular file with more than one link
 FIFO 01;33 # pipe
 SOCK 01;35 # socket
-DOOR 01;35 # door
+# DOOR 01;35 # door (linux doesn't have these)
 BLK 40;33;01 # block device driver
-CHR 40;33;01 # character device driver
+CHR 40;32;01 # character device driver
 ORPHAN 40;31;01 # symlink to nonexistent file, or non-stat'able file ...
 MISSING 00 # ... and the files they point to
-SETUID 37;41 # file that is setuid (u+s)
+SETUID 30;42 # file that is setuid (u+s)
 SETGID 30;43 # file that is setgid (g+s)
-CAPABILITY 30;41 # file with capability
+CAPABILITY 30;47 # file with capability
 STICKY_OTHER_WRITABLE 0;40 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 32 # dir that is other-writable (o+w) and not sticky
 STICKY 40 # dir with the sticky bit set (+t) and not other-writable
@@ -104,7 +104,7 @@ EXEC 01;32
 #.bat 01;32
 # Or if you want to colorize scripts even if they do not have the
 # executable bit actually set.
-#.sh 01;32
+# .sh 01;32
 #.csh 01;32
  # archives or compressed (bright red)
 .tar 01;31
@@ -149,54 +149,54 @@ EXEC 01;32
 .rz 01;31
 .cab 01;31
 # image formats
-.jpg 01;35
-.jpeg 01;35
-.gif 01;35
-.bmp 01;35
-.pbm 01;35
-.pgm 01;35
-.ppm 01;35
-.tga 01;35
-.xbm 01;35
-.xpm 01;35
-.tif 01;35
-.tiff 01;35
-.png 01;35
-.svg 01;35
-.svgz 01;35
-.mng 01;35
-.pcx 01;35
-.mov 01;35
-.mpg 01;35
-.mpeg 01;35
-.m2v 01;35
-.mkv 01;35
-.webm 01;35
-.ogm 01;35
-.mp4 01;35
-.m4v 01;35
-.mp4v 01;35
-.vob 01;35
-.qt 01;35
-.nuv 01;35
-.wmv 01;35
-.asf 01;35
-.rm 01;35
-.rmvb 01;35
-.flc 01;35
-.avi 01;35
-.fli 01;35
-.flv 01;35
-.gl 01;35
-.dl 01;35
-.xcf 01;35
-.xwd 01;35
-.yuv 01;35
-.cgm 01;35
-.emf 01;35
+.jpg 00;33
+.jpeg 00;33
+.gif 00;33
+.bmp 00;33
+.pbm 00;33
+.pgm 00;33
+.ppm 00;33
+.tga 00;33
+.xbm 00;33
+.xpm 00;33
+.tif 00;33
+.tiff 00;33
+.png 00;33
+.svg 00;33
+.svgz 00;33
+.mng 00;33
+.pcx 00;33
+.mov 00;33
+.mpg 00;33
+.mpeg 00;33
+.m2v 00;33
+.mkv 00;33
+.webm 00;33
+.ogm 00;33
+.mp4 00;33
+.m4v 00;33
+.mp4v 00;33
+.vob 00;33
+.qt 00;33
+.nuv 00;33
+.wmv 00;33
+.asf 00;33
+.rm 00;33
+.rmvb 00;33
+.flc 00;33
+.avi 00;33
+.fli 00;33
+.flv 00;33
+.gl 00;33
+.dl 00;33
+.xcf 00;33
+.xwd 00;33
+.yuv 00;33
+.cgm 00;33
+.emf 00;33
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.ogv 01;35
-.ogx 01;35
+.ogv 00;33
+.ogx 00;33
 # audio formats
 .aac 00;36
 .au 00;36
@@ -215,3 +215,14 @@ EXEC 01;32
 .opus 00;36
 .spx 00;36
 .xspf 00;36
+# video formats
+.mp4 01;34
+.webm 01;34
+.mkv 01;34
+.avi 01;34
+.wmv 01;34
+.vob 01;34
+.flv 01;34
+# document formats
+.pdf 00;35
+.mobi 00;35

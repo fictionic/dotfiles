@@ -1,6 +1,5 @@
 [options]
 font = Cousine 14
-#font = Inconsolata 14
 scroll_on_output = false
 mouse_autohide = false
 allow_bold = true
@@ -15,15 +14,17 @@ cursor_blink = system
 cursor_shape = block
 
 [colors]
+## UI ##
 foreground = #d6e6eb
 background = #445768
 cursor = #00aa00
+## PRIMARY COLORS ##
 # black
 color0 = #000000
 color8 = #333733
 # red
 color1 = #ff7474
-color9 = #ff00ff
+color9 = #ff6666
 # green
 color2 = #76b674
 color10 = #4dd23d
@@ -34,7 +35,7 @@ color11 = #fce14f
 color4 = #5dbaff
 color12 = #629bff
 # magenta
-color5 = #a0bba0
+color5 = #c685b1
 color13 = #d06fd0
 # cyan
 color6 = #9fc9d2
@@ -42,3 +43,5 @@ color14 = #7fe2f7
 # white
 color7 = #c4c4c4
 color15 = #eeeeec
+## OTHER COLORS ##
+# (16-255)
