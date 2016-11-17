@@ -166,6 +166,14 @@ nnoremap / /\v
 vnoremap / /\v
 nnoremap :g/ :g/\v
 nnoremap :g// :g//
+" easy access to "0 register when yanking
+nnoremap <leader>p "0p
+nnoremap <leader>P "0P
+" easy access to "_ register when deleting/cutting
+noremap <leader>d "_d
+nnoremap <leader>D "_D
+noremap <leader>c "_c
+nnoremap <leader>C "_C
 
 " >> BACKSPACE/DELETE STUFF << "
 " ----
@@ -193,10 +201,6 @@ Plug 'junegunn/vim-plug'
 Plug 'flazz/vim-colorschemes'
 Plug 'lervag/vimtex'
 Plug 'google/vim-searchindex' " display index of search result using / or ?
-" Plug 'vim-airline/vim-airline'
-" set laststatus=2 " display airline status bar even when there's only one window
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'scrooloose/syntastic'
 Plug 'godlygeek/tabular' " provides :Tabularize command
 Plug 'tpope/vim-commentary' " adds comment/uncomment operator (gc)
 Plug 'justinmk/vim-ipmotion' " improves { and } motions
@@ -206,8 +210,9 @@ Plug 'wellle/targets.vim' " adds tons of text objects
 Plug 'kana/vim-textobj-indent' " adds text object for lines with matching indent (ii and ai)
 Plug 'glts/vim-textobj-comment' " adds comment text objects (ac and ic)
 Plug 'justinmk/vim-sneak' " adds 'sneak' motion: like f, but with two characters
-Plug 'hynek/vim-python-pep8-indent' "python style
-
+Plug 'hynek/vim-python-pep8-indent' " python indentation
+Plug 'editorconfig/editorconfig-vim' " editorconfig
+Plug 'tpope/vim-fugitive' " TIM POPE'S GIT PLUGIN
 
 call plug#end()
 
