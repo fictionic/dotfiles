@@ -32,7 +32,7 @@ mpd_connection_timeout = 5
 
 # Needed for tag editor and file operations to work.
 #
-mpd_music_dir = ~/mpd-library
+mpd_music_dir = ~/audio/library/hi-res
 
 mpd_crossfade_time = 5
 
@@ -111,7 +111,7 @@ visualizer_look = ●▮
 # is different.
 #
 
-system_encoding = ""
+# system_encoding = ""
 
 #### delays #####
 
@@ -179,7 +179,7 @@ message_delay_time = 1
 
 song_list_format = {$8%f$9}$R{$3(%l)$9}
 
-song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
+song_status_format = {{%a{ "%b"{ [%y]}} - }{%t}}|{%f}
 
 song_library_format = {{{%d.}%n. }{%t}}|{%f}$R%l
 
@@ -191,7 +191,7 @@ song_library_format = {{{%d.}%n. }{%t}}|{%f}$R%l
 # and "noop".
 #
 
-browser_sort_mode = name
+browser_sort_mode = format
 
 browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 
@@ -212,7 +212,7 @@ browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 # with reversed colors.
 #
 
-alternative_header_first_line_format = "$b{$7%a}{$8$/b//{(%y)}$b$3%b}$8$/b::$b$4%t$/b"
+alternative_header_first_line_format = "$b{$7%a}{$8$/b//{[%y]}$b$3%b}$8$/b::$b$4%t$/b"
 
 alternative_header_second_line_format = "$5%c$9{ - $6%C}"
 
