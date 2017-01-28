@@ -1,7 +1,9 @@
-###################################################
-# this is example configuration file, copy it to ##
-# ~/.ncmpcpp/config and set up your preferences  ##
-###################################################
+#############################################################
+# This is the example configuration file. Copy it to       ##
+# $HOME/.ncmpcpp/config or $XDG_CONFIG_HOME/ncmpcpp/config ##
+# and set up your preferences.                             ##
+#############################################################
+
 
 #### directories ######
 #
@@ -20,7 +22,7 @@ ncmpcpp_directory = ~/.ncmpcpp
 # (eg. ncmpc) also use that location.
 #
 
-lyrics_directory = ~/.lyrics
+lyrics_directory = ~/.ncmpcpp/lyrics
 
 #### connection settings #####
 
@@ -95,6 +97,12 @@ visualizer_sync_interval = 10
 visualizer_type = spectrum
 
 visualizer_look = ●▮
+
+visualizer_color = blue, cyan, green, yellow, magenta, red
+
+# Alternative subset of 256 colors for terminals that support it.
+#
+# visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
 
 #### system encoding #####
 #
@@ -173,6 +181,23 @@ message_delay_time = 1
 # - 7 - cyan
 # - 8 - white
 # - 9 - end of current color
+# - b - bold text
+# - u - underline text
+# - r - reverse colors
+# - a - use alternative character set
+#
+# If you don't want to use a non-color attribute anymore, just put it
+# again, but this time insert character '/' between '$' and attribute
+# character, e.g. {$b%t$/b}|{$r%f$/r} will display bolded title tag
+# or filename with reversed colors.
+#
+# If you want to use 256 colors and/or background colors in formats
+# (the naming scheme is described below in section about color
+# definitions), it can be done with the syntax $(COLOR), e.g. to set
+# the artist tag to one of the non-standard colors and make it have
+# yellow background, you need to write $(197_yellow)%a$(end). Note
+# that for standard colors this is interchangable with attributes
+# listed above.
 #
 # Note: colors can be nested.
 #
@@ -183,42 +208,10 @@ song_status_format = {{%a{ "%b"{ [%y]}} - }{%t}}|{%f}
 
 song_library_format = {{{%d.}%n. }{%t}}|{%f}$R%l
 
-#
-# Note: Below variables are used for sorting songs in browser.
-# The sort mode determines how songs are sorted, and can be used
-# in combination with a sort format to specify a custom sorting format.
-# Available values for browser_sort_mode are "name", "mtime", "format"
-# and "noop".
-#
-
-browser_sort_mode = format
-
-browser_sort_format = {%a - }{%t}|{%f} {(%l)}
-
-#
-# Note: Below variables are for alternative version of user's interface.
-# Their syntax supports all tags and colors listed above plus some extra
-# markers used for text attributes. They are followed by character '$'.
-# After that you can put:
-#
-# - b - bold text
-# - u - underline text
-# - r - reverse colors
-# - a - use alternative character set
-#
-# If you don't want to use an attribute anymore, just put it again, but
-# this time insert character '/' between '$' and attribute character,
-# e.g. {$b%t$/b}|{$r%f$/r} will display bolded title tag or filename
-# with reversed colors.
-#
 
 alternative_header_first_line_format = "$b{$7%a}{$8$/b//{[%y]}$b$3%b}$8$/b::$b$4%t$/b"
 
 alternative_header_second_line_format = "$5%c$9{ - $6%C}"
-
-#
-# Note: below variables also support text attributes listed above.
-#
 
 now_playing_prefix = $b
 
@@ -232,9 +225,21 @@ selected_item_suffix = $9
 
 modified_item_prefix = $3> $9
 
-# Note: colors are not supported for below variable.
+#
+# Note: attributes are not supported for the following variables.
 #
 song_window_title_format = {%a - }{%t}|{%f}
+#
+# Note: Below variables are used for sorting songs in browser.
+# The sort mode determines how songs are sorted, and can be used
+# in combination with a sort format to specify a custom sorting format.
+# Available values for browser_sort_mode are "name", "mtime", "format"
+# and "noop".
+#
+
+browser_sort_mode = format
+
+browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 
 #### columns settings #####
 #
@@ -280,9 +285,6 @@ song_columns_list_format = (2f)[white]{dE: } (3f)[white]{n:#} (40)[yellow]{t|f:T
 # Note: Custom command that will be executed each
 # time song changes. Useful for notifications etc.
 #
-# Attention: It doesn't support song format anymore.
-# Use `ncmpcpp --now-playing SONG_FORMAT` instead.
-#
 execute_on_song_change = ""
 
 playlist_show_remaining_time = no
@@ -318,9 +320,7 @@ centered_cursor = no
 # Note: You can specify third character which will
 # be used to build 'empty' part of progressbar.
 #
-#progressbar_look = =>—
 progressbar_look = ▄▄▄ 
-#progressbar_look = █] 
 
 progressbar_color = "black"
 
@@ -369,7 +369,7 @@ fetch_lyrics_for_current_song_in_background = no
 
 store_lyrics_in_song_dir = no
 
-generate_win32_compatible_filenames = yes
+generate_win32_compatible_filenames = no
 
 allow_for_physical_item_deletion = no
 
@@ -405,6 +405,16 @@ screen_switcher_mode = playlist, media_library
 # by choosing screen from the list above.
 #
 startup_screen = playlist
+
+#
+# Note: You can define startup slave screen
+# by choosing screen from the list above or
+# an empty value for no slave screen.
+#
+# startup_slave_screen = media_library
+startup_slave_screen = ""
+
+startup_slave_screen_focus = no
 
 #
 # Default width of locked screen (in %).
@@ -475,6 +485,24 @@ external_editor = vim
 use_console_editor = yes
 
 #### colors definitions #####
+#
+# It is possible to set a background color by setting a color
+# value "<foreground>_<background>", e.g. red_black will set
+# foregound color to red and background color to black.
+#
+# In addition, for terminals that support 256 colors it
+# is possible to set one of them by using a number in range
+# [1, 256] instead of color name, e.g. numerical value
+# corresponding to red_black is 2_1. To find out if the
+# terminal supports 256 colors, run ncmpcpp and check out
+# the bottom of the help screen for list of available colors
+# and their numerical values.
+#
+# Note: due to technical limitations of ncurses, if 256 colors
+# are used, it is possible to either use only the colors with
+# default background color, or all pairs from 1_1 up to 254_127,
+# depending on the ncurses version used.
+#
 
 colors_enabled = "yes"
 
@@ -501,8 +529,6 @@ statusbar_color = "green"
 alternative_ui_separator_color = "blue"
 
 active_column_color = "cyan"
-
-visualizer_color = "white"
 
 window_border_color = "green"
 

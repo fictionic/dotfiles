@@ -1,12 +1,11 @@
+# this file is sourced when zsh is interactive
+
 HISTFILE=~/.zshhist
 HISTSIZE=1000
 SAVEHIST=1000
 
-setopt appendhistory nomatch nullglob completealiases HIST_IGNORE_DUPS
+setopt appendhistory completealiases HIST_IGNORE_DUPS
 unsetopt autocd beep extendedglob notify
-
-# SET ENVIRONMENT
-source ~/.zshenv
 
 # SET PROMPT
 source ~/.zshprompt

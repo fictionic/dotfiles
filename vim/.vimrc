@@ -29,6 +29,10 @@ set mouse=n
 " allow backspace to travel back lines
 set backspace=indent,eol,start
 
+" no limit for line length
+set textwidth=0
+" TODO: prevent /usr/share/vim/vim80/ftplugin/vim.vim from setting this to 78
+
 " tabs are four spaces wide
 set tabstop=4
 " use tab character, not spaces
@@ -47,8 +51,8 @@ set number
 
 " moves cursor to first instance of matched pattern while typing pattern
 set incsearch
-" highlight search matches
-" set hlsearch
+" don't highlight search matches
+set nohlsearch
 
 " tab brings up suggestions menu in command mode
 set wildmenu
@@ -64,7 +68,7 @@ set undodir=~/.vim/undo
 set smartcase
 
 " timeout for mappings
-set timeoutlen=200
+set timeoutlen=500
 
 "-------------"
 "   AUTOCMDS  "
@@ -72,6 +76,11 @@ set timeoutlen=200
 
 " automatically reload vimrc whenever it's changed
 au! BufWritePost .vimrc source %
+
+" set spell on iff we're editing text
+set nospell
+autocmd FileType markdown setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 "-------------------------------"
 "   MAPPINGS/ALIASES/COMMANDS   "
@@ -83,21 +92,22 @@ let localmapleader="\\"
 " easier access to command mode
 map <Space> :
 
-" easier saving/quitting
-command! W w
-command! Q q
-command! WQ wq
-command! Wq wq
+" easier reading/writing/quitting
+map <leader>e :e 
+map <leader>E :e!<CR>
+map <leader>w :w<CR>
+map <leader>W :w!
 map <leader>q :q<CR>
+map <leader>Q :q!<CR>
 map <Space><Space> :w<CR>
+noremap <Space><Space> <Esc><Space><Space>
 map! <Space><Space> <Esc><Space><Space>
-map <Space><Space> <Esc><Space><Space>
 
 " reload vimrc inside vim
 nnoremap <leader>r :so $MYVIMRC<CR>
 
 " remove search highlighting when exiting command mode
-cnoremap <silent> <CR> <CR>:nohlsearch<CR>
+" cnoremap <silent> <CR> <CR>:nohlsearch<CR>
 
 " open multiple files in tabs, horizontal windows, or vertical windows
 command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
@@ -140,10 +150,12 @@ nnoremap <Space>~ g~
 " make h,l move between lines when at the end/beginning
 noremap h <BS>
 nnoremap l <Space>
+" except Alt-l
+inoremap l l
 " remap _ to ^, since ^ is hard to reach and the default action of _ is dumb
 noremap _ ^
 " make end-of-paragraph motion line-wise in operator-pending mode
-onoremap } V}
+" onoremap } V}
 
 " >> NORMAL MODE COMMANDS << "
 " ----
@@ -166,7 +178,7 @@ nnoremap / /\v
 vnoremap / /\v
 nnoremap :g/ :g/\v
 nnoremap :g// :g//
-" easy access to "0 register when yanking
+" easy access to "0 register when pasting
 nnoremap <leader>p "0p
 nnoremap <leader>P "0P
 " easy access to "_ register when deleting/cutting
@@ -174,6 +186,9 @@ noremap <leader>d "_d
 nnoremap <leader>D "_D
 noremap <leader>c "_c
 nnoremap <leader>C "_C
+" don't save deleted text when using s or S
+nnoremap s "_s
+nnoremap S "_S
 
 " >> BACKSPACE/DELETE STUFF << "
 " ----
@@ -198,29 +213,49 @@ packadd! matchit
 call plug#begin()
 
 Plug 'junegunn/vim-plug'
-Plug 'flazz/vim-colorschemes'
-Plug 'lervag/vimtex'
-Plug 'google/vim-searchindex' " display index of search result using / or ?
+" commands / operators
 Plug 'godlygeek/tabular' " provides :Tabularize command
-Plug 'tpope/vim-commentary' " adds comment/uncomment operator (gc)
+	" Plug 'tpope/vim-commentary' " adds comment/uncomment operator (gc)
+Plug 'justinmk/vim-sneak' " adds 'sneak' motion: like f, but with two characters
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround' " easily deal with delimiters 
+"Plug 'vim-unimpaired' " many pairs of operators/commands (need to look this one up more first)
+" motions
 Plug 'justinmk/vim-ipmotion' " improves { and } motions
+" text objects
+Plug 'wellle/targets.vim' " adds tons of text objects
 Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
 Plug 'kana/vim-textobj-entire' " adds 'entire file' text objects (ae and ie)
-Plug 'wellle/targets.vim' " adds tons of text objects
 Plug 'kana/vim-textobj-indent' " adds text object for lines with matching indent (ii and ai)
 Plug 'glts/vim-textobj-comment' " adds comment text objects (ac and ic)
-Plug 'justinmk/vim-sneak' " adds 'sneak' motion: like f, but with two characters
-Plug 'hynek/vim-python-pep8-indent' " python indentation
+Plug 'thinca/vim-textobj-between' " if/af
+Plug 'reedes/vim-textobj-sentence' " improved sentence detection (also comes with motions)
+" misc
+Plug 'flazz/vim-colorschemes'
+Plug 'lervag/vimtex' " for latex
 Plug 'editorconfig/editorconfig-vim' " editorconfig
+Plug 'hynek/vim-python-pep8-indent' " python indentation
 Plug 'tpope/vim-fugitive' " TIM POPE'S GIT PLUGIN
+Plug 'google/vim-searchindex' " display index of search result using / or ?
+Plug 'ciaranm/detectindent' " intelligently detect indentation settings
+
 
 call plug#end()
 
-" >> PLUGIN-RELATED MAPPINGS << "
-" remap default sneak mappings
+" >> PLUGIN-RELATED SETTINGS << "
+" targets.vim
+omap iq i"
+omap aq a"
+" vimtex
+" vim-sneak
 nmap <leader>s <Plug>Sneak_s
 xmap <leader>s <Plug>Sneak_s
 omap <leader>s <Plug>Sneak_s
 nmap <leader>S <Plug>Sneak_S
 xmap <leader>S <Plug>Sneak_S
 omap <leader>S <Plug>Sneak_S
+" vim-textobj-indent
+omap Ai aI
+vmap Ai aI
+omap Ii iI
+vmap Ii iI

@@ -34,6 +34,7 @@ Xft.rgba:	rgb
 URxvt*termName:	rxvt-unicode
 URxvt*perl-lib:	/usr/lib/urxvy/perl
 URxvt*perl-ext-common:	unichr
+URxvt*letterspace:	-1
 ! font
 !URxvt*font:	xft:Inconsolata:size=14
 !^this one is nice, but Cousine has a dot in the zero rather than a slash...

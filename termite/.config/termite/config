@@ -1,3 +1,4 @@
+# vim: syntax=config
 [options]
 font = Cousine 14
 scroll_on_output = false
@@ -33,9 +34,9 @@ color3 = #dcb818
 color11 = #fce14f
 # blue
 color4 = #5dbaff
-color12 = #629bff
+color12 = #5c92f2
 # magenta
-color5 = #c685b1
+color5 = #ce90ba
 color13 = #d06fd0
 # cyan
 color6 = #9fc9d2

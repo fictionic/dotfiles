@@ -1,28 +1,91 @@
+# CONFIGURE EXPANDABLE ALIASES
+typeset -a ealiases
+ealiases=()
+function ealias() {
+	alias $1
+	ealiases+=(${1%%\=*})
+}
+function expand-ealias() {
+	if [[ $LBUFFER =~ "(^|[;|&])\s*(${(j:|:)ealiases})\$" ]]; then
+		zle _expand_alias
+		zle expand-word
+	fi
+	zle magic-space
+}
+zle -N expand-ealias
+bindkey -M viins ' '    expand-ealias
+bindkey -M viins '^ '   magic-space # control-space to bypass completion
+bindkey -M isearch " "  magic-space # normal space during searches
+
+# SET ALIASES
+
 # let sudo take aliases as arguments
 alias sudo='sudo '
+# dunno why I have this
+alias 'sudo vim'='sudo -e'
+
+# update system
+alias upd='pacaur -Syu --devel --needed'
+
+# list all packages by reverse intall date
+alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
+
+# ping google
+alias pingg='ping google.com'
+
+# switch to hdmi output
+alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
+
+# easy access to vimrc
+alias vimrc='vim /home/dylan/.vimrc'
 
 # make "help" work as expected
 unalias run-help
 alias help=run-help
 
-# make ls use colors, and be easier to access
+# make ls use colors, and get easy access to common arguments
 alias ls='ls --group-directories-first --color=auto -N'
-alias ll='ls -l'
-alias la='ls -a'
-alias l='ls'
-alias s='ls'
+alias ll='ls -l '
+alias la='ls -a '
 
-# misc...
-alias 'sudo vim'='sudo -e'
-alias pgrep='ps -ef | head -1; ps -ef | grep'
+# discard dumb error output from ranger
 alias ranger='ranger 2>/dev/null'
-alias pingg='ping google.com'
-alias upd='pacaur -Syu --devel'
-alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
-alias info='info --vi-keys '
+
+# avoid typos
 alias ragner=ranger
-alias vimrc='vim /home/dylan/.vimrc'
-alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
+alias l='ls '
+alias s='ls '
+
+# better pgrep
+alias pgrep='ps -ef | head -1; ps -ef | grep'
+
+# use ag instead of ack
+alias ack='ag'
+
+# use vim keybindings in info
+alias info='info --vi-keys '
+
+# load math.h in bc
+alias bc='bc -l'
+
+# git stuff
+ealias gs='git status'
+ealias ga='git add '
+ealias gb='git branch '
+ealias gc='git commit -m'
+ealias gca='git commit -am'
+ealias gl='git lol'
+ealias gp='git push '
+ealias gP='git pull '
+ealias gd='git diff '
+ealias gr='git reset '
+ealias gh='git checkout '
+
+# get dynamic range of currently playing song
+alias dr='dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" 2>&1 | tail -3'
+
+# back up home folder
+ealias backup='sudo rsync -aAXHv --exclude={"/.Trash-1000","/dylan/.cache/*","/dylan/.config/chromium/*"} --delete-delay /home/ /media/homebackup'
 
 # FUNCTIONS
 pacclean() {
@@ -33,15 +96,18 @@ pacclean() {
 		pacaur -Rs "${toremove[@]}"
 	fi
 }
+
 restartnetctl() {
 	sudo netctl restart "$(netctl list | grep \* | sed $'s/* //')"
 }
+
 resetusb() {
 	sudo modprobe -r cdc_ether;
 	sudo modprobe -r usbnet;
 	sudo modprobe usbnet;
 	sudo modprobe cdc_ether;
 }
+
 # use vim ex commands in a UNIX pipe
 vp() {
     vim - -u NONE -es '+1' "+$*" '+%print' '+:qa!' | tail -n +2
@@ -50,4 +116,24 @@ vp() {
 # use vim normal mode commands in a UNIX pipe
 vn() {
     vim - -u NONE -es '+1' "+normal $*" '+%print' '+:qa!' | tail -n +2
+}
+
+# easily compute human-readable filesize
+size() {
+	numfmt --to=iec-i --suffix=B --format="%.3f" "$(stat -c %s $1)"
+}
+
+# see whether core/linux[-lts] has been upgraded since booting
+needtorestart() {
+	running="$(uname -a 2>&1 | awk '{sub(/-lts/, "", $3); print $3}')"
+	pacman="$(pacman -Q linux-lts | awk '{print $2}')"
+	if [[ $running == $pacman ]]; then
+		echo Nope, all good.
+	else
+		echo Need to restart!
+	fi
+}
+
+patchrifle() {
+	sudo patch "/usr/lib/python3.6/site-packages/ranger/ext/rifle.py" "/home/dylan/.config/ranger/rifle_patch"
 }

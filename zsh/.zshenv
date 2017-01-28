@@ -1,5 +1,6 @@
-# add ~/scripts to PATH
-export PATH='/usr/local/bin:/usr/bin:/home/dylan/scripts:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl'
+# (this file is sourced by every zsh instance)
+
+setopt nullglob RE_MATCH_PCRE
 
 export XDG_CONFIG_HOME=/home/dylan/.config
 export XDG_DATA_HOME=/home/dylan/.local/share
@@ -12,4 +13,3 @@ export PAGER="less -R"
 export MANPAGER="/usr/bin/vimpager"
 # ssh-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-

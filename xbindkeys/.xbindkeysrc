@@ -76,15 +76,10 @@
 "light -U -r 1"
 	Control + Shift + XF86MonBrightnessDown
 # gamma adjustment
-"systemctl --user stop redshift-gtk; xgamma -gamma 2.0"
+"systemctl --user stop redshift-gtk; xgamma -gamma 1.5"
 	Alt + XF86MonBrightnessUp
 "systemctl --user start redshift-gtk; xgamma -gamma 1.0"
 	Alt + XF86MonBrightnessDown
-# screen timeout control
-"xautolock -toggle"
-	Control + Alt + d
-"pkill xautolock; setsid xautolock -locker screen-dimmer.sh -time 1 -corners +--- -cornerdelay 1 -cornerredelay 5 -detectsleep"
-	Control + Alt + Shift + d
 
 # VOLUME KEYS
 "pulseaudio-ctl up"
@@ -102,6 +97,9 @@
 	Alt + Print
 "/home/dylan/scripts/screenshot.sh screen"
 	Alt + Shift + Print
+
+"/home/dylan/scripts/action.sh"
+	Alt + Shift + Esc
 
 ##################################
 # End of xbindkeys configuration #

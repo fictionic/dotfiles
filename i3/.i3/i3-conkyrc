@@ -15,32 +15,35 @@ cpu_avg_samples 2
 TEXT
 [
 	${if_mpd_playing}
-	{
-		"full_text" :
-			${if_match "${mpd_status}"== "Playing"}
-				" "
-			${else}
-				" "
-			${endif},
-		"color" : "\#f2f0ec",
-		"separator" : false
-	},
-	{
-		"full_text" : "${mpd_artist}::${mpd_title} ",
-		"short_text" : "${mpd_title}",
-		"color" : "\#f2f0ec"
-	},
+		{
+			"full_text" :
+				${if_match "${mpd_status}"== "Playing"}
+					" "
+				${else}
+					" "
+				${endif},
+			"color" : "\#f2f0ec",
+			"separator" : false
+		},
+		{
+			"full_text" : "${mpd_artist}::${mpd_title} ",
+			"short_text" : "${mpd_title}",
+			"color" : "\#f2f0ec"
+		},
 	${endif}
+
 	{
 		"full_text" : " / ${fs_free /} (${fs_free_perc /}%) ",
 		"color" : "\#f2f0ec"
 	},
+
 	{
 		"full_text" : "   CPU ${cpu cpu0}% ",
 		"min_width" : 110,
 		"align" : "center",
 		"color" : "\#f2f0ec"
 	},
+
 	{
 		"full_text" : "   RAM ${mem} (${memperc}%) ",
 		"color" :
@@ -50,20 +53,21 @@ TEXT
 				"\#f2777a"
 			${endif}
 	},
+
 	{
-		"full_text" : "   ${execi 300 checkupdates | wc -l}/${execi 300 pacman -Q | wc -l} ",
+		"full_text" : "   ${texeci 60 checkupdates | wc -l}/${texeci 60 pacman -Q | wc -l} ",
 		"color" : "\#f2f0ec"
 	},
+
 	{
-		"full_text" : "   ${exec cat /sys/class/backlight/intel_backlight/brightness} (${exec printf %.0f $(echo "scale=2;$(cat /sys/class/backlight/intel_backlight/brightness)/$(cat /sys/class/backlight/intel_backlight/max_brightness)*100;scale=0" | bc)}%)${exec dpms-toggle.sh conky}",
+		"full_text" : "   ${exec light -r} (${exec printf %.0f $(light)}%)",
 		"color" : "\#d8d800"
 	},
 
 	{
-		
 		"full_text" :
-			${if_match "${exec ip link | grep enp0s20u | sed 's/.*state \(..\).*/\1/'}"=="UP"}
-				${if_match "${exec netctl status ethernet | head -3 | tail -1 | sed 's/.*Active: \(.*\) since.*/\1/'}"=="active (exited)"}
+			${if_up eth0}
+				${if_match "${exec connmanctl state | awk '/State/ { print $3 }'}"=="online"}
 					"  eth ",
 				${else}
 					"  ... ",
@@ -77,6 +81,7 @@ TEXT
 			${endif}
 		"color" : "\#55eeee"
 	},
+
 	{
 		"full_text" : "  ",
 		"separator" : false,
@@ -87,6 +92,7 @@ TEXT
 				"\#fef0ec"
 			${endif}
 	},
+
 	{
 		"full_text" : "${battery_percent}% ",
 		"color" :
@@ -104,6 +110,7 @@ TEXT
 				${endif}
 			${endif}
 	},
+
 	{
 		"full_text" : "  ${execi 1 amixer sget Master | awk -F"[][]" '/Left: / { print $2 }' } ",
 		"color" :
@@ -113,12 +120,15 @@ TEXT
 				"\#e890f8"
 			${endif}
 	},
+
 	{
 		"full_text" : "   ${time %a %d %b %Y} ",
 		"color" : "\#f2f0ec"
 	},
+
 	{
 		"full_text" : "   ${time %I:%M %P %Z} ",
 		"color" : "\#f2f0ec"
 	}
+
 ],
