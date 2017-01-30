@@ -102,10 +102,14 @@ TEXT
 				${if_match ${battery_percent}<20}
 					"\#eeb030"
 				${else}
-					${if_match ${battery_percent}<50}
+					${if_match ${battery_percent}<40}
 						"\#dddd33"
 					${else}
-						"\#00dd00"
+						${if_match ${battery_percent}<50}
+							"\#afed6d"
+						${else}
+							"\#00dd00"
+						${endif}
 					${endif}
 				${endif}
 			${endif}

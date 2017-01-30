@@ -25,7 +25,7 @@ alias sudo='sudo '
 alias 'sudo vim'='sudo -e'
 
 # update system
-alias upd='pacaur -Syu --devel --needed'
+alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages..."; pacclean'
 
 # list all packages by reverse intall date
 alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
