@@ -82,18 +82,26 @@ hi Underlined cterm=underline ctermfg=5
 " CursorIM - like Cursor, but used when in IME mode |CursorIM|
 " CursorColumn - the screen column that the cursor is in when 'cursorcolumn' is set
 " CursorLine - the screen line that the cursor is in when 'cursorline' is set
-" DiffAdd - directory names (and other special names in listings)
+" Directory - directory names (and other special names in listings)
 hi Directory ctermfg=darkcyan
+
+" DIFF STUFF "
+
 " DiffAdd - diff mode: Added line |diff.txt|
-hi DiffAdd ctermfg=2
-hi DiffAdded ctermfg=2
+hi DiffAdd ctermbg=0 cterm=none
+" DiffAdded - ???
+hi DiffAdded ctermfg=green ctermbg=1
 " DiffChange -  diff mode: Changed line |diff.txt|
-hi DiffChange ctermfg=2
-" DiffDelete - diff mode: Deleted line |diff.txt|
-hi DiffDelete ctermfg=1
-hi DiffRemoved ctermfg=1
+hi DiffChange ctermfg=none ctermbg=none
 " DiffText - diff mode: Changed text within a changed line |diff.txt|
-hi DiffText cterm=bold
+hi DiffText ctermfg=darkblue ctermbg=0
+" DiffDelete - diff mode: Deleted line |diff.txt|
+hi DiffDelete ctermfg=1 ctermbg=0
+" DiffRemoved - ???
+hi DiffRemoved ctermfg=0 ctermbg=1
+
+" OTHER "
+
 " EndOfBuffer - filler lines (~) after the last line in the buffer.  By default, this is highlighted like |hl-NonText|.
 " ErrorMsg - error messages on the command line
 hi ErrorMsg cterm=bold cterm=bold ctermfg=7 ctermbg=1
