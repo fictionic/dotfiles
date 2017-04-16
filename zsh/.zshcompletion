@@ -1,3 +1,4 @@
+fpath=($HOME/.config/zsh $fpath)
 zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' max-errors 2
 zstyle ':completion:*' prompt 'Suggestions:'
@@ -5,4 +6,3 @@ zstyle ':completion:*' menu select
 zstyle :compinstall filename '/home/dylan/.zshrc'
 autoload -Uz compinit
 compinit
-

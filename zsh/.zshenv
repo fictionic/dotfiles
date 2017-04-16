@@ -8,7 +8,8 @@ export SHELL=zsh
 export EDITOR="vim"
 export VISUAL=$EDITOR
 export TERMCMD="termite"
-export PAGER="less -R"
+export PAGER="vimpager"
+export SYSTEMD_PAGER="less"
 # set vim as manpager
 export MANPAGER="/usr/bin/vimpager"
 # ssh-agent stuff

@@ -17,44 +17,26 @@ bindkey -M viins ' '    expand-ealias
 bindkey -M viins '^ '   magic-space # control-space to bypass completion
 bindkey -M isearch " "  magic-space # normal space during searches
 
-# SET ALIASES
+###############
+# SET ALIASES #
+###############
+
+#####
+# (1) adjustments
 
 # let sudo take aliases as arguments
 alias sudo='sudo '
 # dunno why I have this
 alias 'sudo vim'='sudo -e'
 
-# update system
-alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages..."; pacclean'
-
-# list all packages by reverse intall date
-alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
-
-# ping google
-alias pingg='ping google.com'
-
-# switch to hdmi output
-alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
-
-# easy access to vimrc
-alias vimrc='vim /home/dylan/.vimrc'
+# make ls use colors, and get easy access to common arguments
+alias ls='ls -Nv --group-directories-first --color=auto'
+alias ll='ls -l '
+alias la='ls -a '
 
 # make "help" work as expected
 unalias run-help
 alias help=run-help
-
-# make ls use colors, and get easy access to common arguments
-alias ls='ls --group-directories-first --color=auto -N'
-alias ll='ls -l '
-alias la='ls -a '
-
-# discard dumb error output from ranger
-alias ranger='ranger 2>/dev/null'
-
-# avoid typos
-alias ragner=ranger
-alias l='ls '
-alias s='ls '
 
 # better pgrep
 alias pgrep='ps -ef | head -1; ps -ef | grep'
@@ -68,18 +50,32 @@ alias info='info --vi-keys '
 # load math.h in bc
 alias bc='bc -l'
 
-# git stuff
-ealias gs='git status'
-ealias ga='git add '
-ealias gb='git branch '
-ealias gc='git commit -m'
-ealias gca='git commit -am'
-ealias gl='git lol'
-ealias gp='git push '
-ealias gP='git pull '
-ealias gd='git diff '
-ealias gr='git reset '
-ealias gh='git checkout '
+# discard dumb error output from ranger
+alias ranger='ranger 2>/dev/null'
+
+#####
+# (2) abbreviations
+
+# open a file
+alias open=rifle
+
+# connman
+ealias cm=connmanctl
+
+# update system
+alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages..."; pacclean'
+
+# ping google
+alias pingg='ping google.com'
+
+# list all packages by reverse intall date
+alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
+
+# switch to hdmi output
+alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
+
+# easy access to vimrc
+alias vimrc='vim /home/dylan/.vimrc'
 
 # get dynamic range of currently playing song
 alias dr='dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" 2>&1 | tail -3'
@@ -87,7 +83,42 @@ alias dr='dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" 2>&1 
 # back up home folder
 ealias backup='sudo rsync -aAXHv --exclude={"/.Trash-1000","/dylan/.cache/*","/dylan/.config/chromium/*"} --delete-delay /home/ /media/homebackup'
 
-# FUNCTIONS
+# avoid typos
+alias ragner=ranger
+alias l='ls '
+alias s='ls '
+
+# git stuff
+ealias gs='git status'
+ealias ga='git add'
+ealias gb='git branch'
+ealias gc='git commit -m'
+ealias gca='git commit -am'
+ealias gl='GIT_PAGER="less" git lol'
+ealias gp='git push'
+ealias gP='git pull'
+ealias gd='git diff'
+ealias gr='git reset'
+ealias gh='git checkout'
+
+# traverse forward through git branch history
+ghf() {
+	to="$*"
+	if [[ "$to" == "" ]]; then
+		to=master
+	fi
+	git checkout $(git rev-list --topo-order HEAD.."$to" | tail -1)
+}
+
+# traverse backward through git branch history
+ghb() {
+	git checkout 'HEAD~'
+}
+
+#####
+# (3) standalone functionality
+
+# remove orphan packages
 pacclean() {
 	toremove=($(pacaur -Qqdt))
 	if [[ ${#toremove[@]} == 0 ]]; then
@@ -95,17 +126,6 @@ pacclean() {
 	else
 		pacaur -Rs "${toremove[@]}"
 	fi
-}
-
-restartnetctl() {
-	sudo netctl restart "$(netctl list | grep \* | sed $'s/* //')"
-}
-
-resetusb() {
-	sudo modprobe -r cdc_ether;
-	sudo modprobe -r usbnet;
-	sudo modprobe usbnet;
-	sudo modprobe cdc_ether;
 }
 
 # use vim ex commands in a UNIX pipe
@@ -118,22 +138,43 @@ vn() {
     vim - -u NONE -es '+1' "+normal $*" '+%print' '+:qa!' | tail -n +2
 }
 
-# easily compute human-readable filesize
+# compute human-readable filesize of a given file
 size() {
 	numfmt --to=iec-i --suffix=B --format="%.3f" "$(stat -c %s $1)"
 }
 
-# see whether core/linux[-lts] has been upgraded since booting
-needtorestart() {
-	running="$(uname -a 2>&1 | awk '{sub(/-lts/, "", $3); print $3}')"
-	pacman="$(pacman -Q linux-lts | awk '{print $2}')"
-	if [[ $running == $pacman ]]; then
-		echo Nope, all good.
-	else
-		echo Need to restart!
-	fi
-}
-
+# apply my patch to the rifle python code
 patchrifle() {
 	sudo patch "/usr/lib/python3.6/site-packages/ranger/ext/rifle.py" "/home/dylan/.config/ranger/rifle_patch"
+}
+
+# filter out non-curse words from stdin
+curses() {
+	words=( $(</usr/share/dict/curses) )
+	re='('
+	for word in "${words[@]}"; do
+		re="${re}${word}|";
+	done
+	re="${re:0:-1})"
+	ag -w "${re}" "$@"
+}
+
+# connect to a wifi network by ssid with connman
+cmc() {
+	ssid=$1
+	results_str="$(connmanctl services | grep "$ssid")"
+	local IFS=$'\n'
+	results=( ${=results_str} )
+	if [[ ${#results} == 0 ]]; then
+		echo "No such network; aborting. Try scanning.";
+		return
+	elif [[ ${#results} > 1 ]]; then
+		for result in "${results[@]}"; do
+			print $result;
+		done
+		echo "Too many results; aborting.";
+		return
+	fi
+	name=$( echo "${results[1]}" | awk '{print $(NF)}')
+	connmanctl connect "$name"
 }

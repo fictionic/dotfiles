@@ -13,7 +13,7 @@ source ~/.zshprompt
 # SET COLORS
 source ~/.zshcolors
 
-# ENABLE COMPLETION
+# CONFIGURE COMPLETION
 source ~/.zshcompletion
 
 # SET KEYBINDINGS
@@ -36,5 +36,15 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
+# set up fzf zsh integration
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
 # set up 'z' command
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+# # ZPLUG
+# source /usr/share/zsh/scripts/zplug/init.zsh
+# zplug "changyuheng/fz" # fzf combined with z
+# zplug load
+# (zplug slows down startup quite noticably)
