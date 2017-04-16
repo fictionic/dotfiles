@@ -467,13 +467,7 @@ def_key "a"
   add_selected_items
 
 def_key "c"
-  clear_playlist
-
-def_key "c"
   clear_main_playlist
-
-def_key "C"
-  crop_playlist
 
 def_key "C"
   crop_main_playlist
