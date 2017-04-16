@@ -26,8 +26,8 @@ TEXT
 			"separator" : false
 		},
 		{
-			"full_text" : "${mpd_artist}::${mpd_title} ",
-			"short_text" : "${mpd_title}",
+			"full_text" : "${exec mpc current -f %artist%::%title% | sed 's/"/\\"/g'} ",
+			"short_text" : "${exec mpc current -f %title% | sed 's/"/\\"/g'} " ,
 			"color" : "\#f2f0ec"
 		},
 	${endif}
@@ -55,8 +55,12 @@ TEXT
 	},
 
 	{
-		"full_text" : "   ${texeci 60 checkupdates | wc -l}/${texeci 60 pacman -Q | wc -l} ",
-		"color" : "\#f2f0ec"
+		"full_text" : "   ${texeci 60 checkupdates | wc -l}/${texeci 60 pacman -Q | wc -l}",
+		${if_match ${texeci 60 needtorestart.sh; echo $?} == 1}
+			"color" : "\#f4ad42"
+		${else}
+			"color" : "\#f2f0ec"
+		${endif}
 	},
 
 	{
@@ -76,7 +80,7 @@ TEXT
 				${if_up wlp2s0}
 					"${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})",
 				${else}
-					"no network",
+					"offline",
 				${endif}
 			${endif}
 		"color" : "\#55eeee"
