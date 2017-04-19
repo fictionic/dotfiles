@@ -202,27 +202,30 @@ message_delay_time = 1
 # Note: colors can be nested.
 #
 
-song_list_format = {$8%f$9}$R{$3(%l)$9}
+# song format in playlist viewer/editor
+song_list_format = {$7%a$9}{$0//$3%b$9}{$0::$4{%t}|{%f}} $R{%l}
 
+# song format in statusbar
 song_status_format = {{%a{ "%b"{ [%y]}} - }{%t}}|{%f}
 
+# song format in library
 song_library_format = {{{%d.}%n. }{%t}}|{%f}$R%l
-
 
 alternative_header_first_line_format = "$b{$7%a}{$8$/b//{[%y]}$b$3%b}$8$/b::$b$4%t$/b"
 
 alternative_header_second_line_format = "$5%c$9{ - $6%C}"
 
+# now playing song is bold
 now_playing_prefix = $b
-
 now_playing_suffix = $/b
 
-browser_playlist_prefix = "$2playlist$9 "
+browser_playlist_prefix = "$2(playlist)$9 "
 
-selected_item_prefix = $6
-
+# selected items are blue
+selected_item_prefix = $5
 selected_item_suffix = $9
 
+# modified items have magenta '>' before them
 modified_item_prefix = $3> $9
 
 #
@@ -277,7 +280,7 @@ browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 #   not available.
 #
 
-song_columns_list_format = (2f)[white]{dE: } (3f)[white]{n:#} (40)[yellow]{t|f:Title} (30)[green]{b} (25)[cyan]{a|A:Artist} (7f)[white]{lr}
+song_columns_list_format = (2f)[white]{dE: } (3f)[white]{nE:#} (40)[yellow]{t|f:Title} (30)[green]{b} (25)[cyan]{a|A:Artist} (7f)[white]{lr}
 
 #### various settings #####
 
@@ -298,7 +301,7 @@ playlist_separate_albums = no
 #
 playlist_display_mode = columns
 
-browser_display_mode = classic
+browser_display_mode = columns
 
 search_engine_display_mode = classic
 
