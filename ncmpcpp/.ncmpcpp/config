@@ -280,7 +280,7 @@ browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 #   not available.
 #
 
-song_columns_list_format = (2f)[white]{dE: } (3f)[white]{nE:#} (40)[yellow]{t|f:Title} (30)[green]{b} (25)[cyan]{a|A:Artist} (7f)[white]{lr}
+song_columns_list_format = (3f)[white]{dE: } (3f)[white]{nE:#} (40)[yellow]{t|f:Title} (30)[green]{b} (25)[cyan]{a|A:Artist} (7f)[white]{lr}
 
 #### various settings #####
 
@@ -455,7 +455,7 @@ block_search_constraints_change_if_items_found = yes
 
 mouse_support = yes
 
-mouse_list_scroll_whole_page = yes
+mouse_list_scroll_whole_page = no
 
 empty_tag_marker = <none>
 
