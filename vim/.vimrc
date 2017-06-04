@@ -72,6 +72,15 @@ set smartcase
 " timeout for mappings
 set timeoutlen=500
 
+" use omnicomplete
+set omnifunc=syntaxcomplete#Complete
+
+" don't go to first column with gg or G
+set nostartofline
+
+" put a line under the cursor to make it more visuble
+set cursorline
+
 "-------------"
 "   AUTOCMDS  "
 "-------------"
@@ -183,11 +192,6 @@ nnoremap <CR><CR> i<CR><ESC>
 " indent current line multiple times, rather then <C-Del>
 noremap <silent><< @='<<'<CR>
 noremap <silent>>> @='>>'<CR>
-" use verymagic searching by default
-nnoremap / /\v
-vnoremap / /\v
-nnoremap :g/ :g/\v
-nnoremap :g// :g//
 " easy access to "0 register when pasting
 nnoremap <leader>p "0p
 nnoremap <leader>P "0P
@@ -196,6 +200,8 @@ map <leader>d "_d
 nnoremap <leader>D "_D
 map <leader>c "_c
 nnoremap <leader>C "_C
+nnoremap <leader>x "_x
+nnoremap <leader>X "_X
 " don't save deleted text when using s or S
 nnoremap s "_s
 nnoremap S "_S
