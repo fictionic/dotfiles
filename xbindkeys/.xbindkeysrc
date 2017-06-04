@@ -77,6 +77,8 @@
 	Control + Shift + XF86MonBrightnessDown
 # gamma adjustment
 "systemctl --user stop redshift-gtk; xgamma -gamma 1.5"
+	Alt + Shift + XF86MonBrightnessUp
+"systemctl --user stop redshift-gtk; xgamma -gamma 1.2"
 	Alt + XF86MonBrightnessUp
 "systemctl --user start redshift-gtk; xgamma -gamma 1.0"
 	Alt + XF86MonBrightnessDown
