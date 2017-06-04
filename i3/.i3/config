@@ -167,7 +167,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	font pango:Cousine Bold 11
+	font pango:Cousine, Font Awesome bold 11
 	status_command $HOME/.i3/i3bar-conky-launcher
 }
 

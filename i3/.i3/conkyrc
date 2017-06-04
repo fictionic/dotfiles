@@ -33,6 +33,10 @@ conky.text = [[
 			"short_text" : "${exec mpc current -f %title% | sed 's/"/\\"/g'} " ,
 			"color" : "\#f2f0ec"
 		},
+		{
+			"full_text" : "[${texeci 5 dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" | awk '/DR +=/{print $3}'}]",
+			"color" : "\#f2f0ec"
+		},
 	${endif}
 
 	{
@@ -73,7 +77,7 @@ conky.text = [[
 
 	{
 		"full_text" :
-			${if_up eth0}
+			${if_match "${exec connmanctl services | awk '/Wired/ { print $2 }'}"=="Wired"}
 				${if_match "${exec connmanctl state | awk '/State/ { print $3 }'}"=="online"}
 					"  eth ",
 				${else}
