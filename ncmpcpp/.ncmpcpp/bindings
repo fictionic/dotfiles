@@ -1,7 +1,8 @@
-##########################################################
-## this is example bindings configuration file, copy it ##
-## to ~/.ncmpcpp/bindings and set up your preferences   ##
-##########################################################
+##############################################################
+## This is the example bindings file. Copy it to            ##
+## ~/.ncmpcpp/bindings or $XDG_CONFIG_HOME/ncmpcpp/bindings ##
+## and set up your preferences                              ##
+##############################################################
 ##
 ##### General rules #####
 ##
@@ -147,7 +148,7 @@
 ##
 ##  - set_volume
 ##
-#
+
 def_key "mouse"
   mouse_event
 
@@ -184,21 +185,21 @@ def_key "}"
   scroll_down_artist
 
 def_key "page_up"
-  page_up
+  dummy
 
 def_key "K"
   page_up
 
 def_key "page_down"
-  page_down
+  dummy
 
 def_key "J"
   page_down
 
 def_key "home"
-  move_home
+  dummy
 
-def_key "end"
+def_key "G"
   move_end
 
 def_key "insert"
@@ -397,20 +398,18 @@ def_key "ctrl-s"
 def_key "ctrl-r"
   reverse_playlist
 
+def_key "ctrl-f"
+  apply_filter
+
 def_key "ctrl-_"
   select_found_items
 
 def_key "/"
+  push_character "ctrl-u"
   find
 
 def_key "/"
   find_item_forward
-
-def_key "?"
-  find
-
-def_key "?"
-  find_item_backward
 
 def_key ";"
   next_found_item
@@ -493,8 +492,8 @@ def_key "S"
 def_key "o"
   jump_to_playing_song
 
-def_key "G"
-  move_end
+def_key "O"
+  jump_to_playlist_editor
 
 def_key "~"
   jump_to_media_library
