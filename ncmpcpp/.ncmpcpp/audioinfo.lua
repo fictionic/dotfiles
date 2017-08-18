@@ -38,6 +38,7 @@ local function get_info(file)
 		},
 		['audio'] = {
 			{'Bit depth', 'bit depth'},
+			{'Sampling rate', 'sample rate'},
 			{'Channel(s)', 'channels'},
 			{'Channel positions', 'channel positions'},
 			{'Replay gain', 'ReplayGain'},
@@ -155,51 +156,11 @@ if arg then
 		print(album_art_file)
 	end
 else
-	file = '/home/dylan/audio/library/hi-res/' .. io.popen("mpc -f %file% current"):read("*line")
-
-	conky_has_album_art = function()
-		return tostring(album_art_file ~= '')
-	end
-
 	conky_display_info = function() 
+		file = '/home/dylan/audio/library/hi-res/' .. io.popen("mpc -f %file% current"):read("*line")
 		info = get_info(file)
-		output_table_order = {
-			{'TAGS', output_table_master.tags},
-			{'AUDIO', output_table_master.audio},
-			{'FILE', output_table_master.file}
-		}
-		-- desired output width in characters
-		total_width = 52
-		-- longest field name to be displayed
-		left_width = 17 -- 'channel positions' is the longest field name
-		separator = ": "
-		-- room for displaying values
-		right_width = total_width - left_width - separator:len()
-		-- print a section of output
-		function display_table(output_table)
-			ret = ''
-			for _, pair in ipairs(output_table) do
-				name = pair[1]
-				value = pair[2]
-				-- shorten the file path
-				if name == "file path" then
-					value = value:gsub("/home/dylan/audio/library/hi-res/", "")
-				end
-				ret = ret .. name .. ": " .. value .. '\n'
-			end
-			return ret
-		end
-		-- print all sections
-		ret = ''
-		for _, pair in ipairs(output_table_order) do
-			name = pair[1]
-			output_table = pair[2]
-			ret = ret .. name .. '\n'
-			ret = ret .. display_table(output_table) .. '\n\n'
-		end
-		return ret
+		return display_output(info)
 	end
-
 	conky_test = function()
 		return "blah ${scroll wait 33 10 1 /home/dylan/audio/library/hi-res/music/non-torrents/65daysofstatic/[2004-09-20] The Fall of Math/1.07. This Cat Is a Landmine.flac}"
 	end

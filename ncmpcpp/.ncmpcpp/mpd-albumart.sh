@@ -23,5 +23,5 @@ if [[ -z "$img" ]]; then
 	rm "/tmp/mpd-cover.jpg" 2>&1 >/dev/null
 else
 	# symlink to /tmp
-	cp -L -s "$img" "/tmp/mpd-cover.jpg" 2>&1 >/dev/null
+	cp -L -f -s "$img" "/tmp/mpd-cover.jpg" 2>&1 >/dev/null
 fi
