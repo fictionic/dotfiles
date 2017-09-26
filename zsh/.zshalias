@@ -17,6 +17,11 @@ bindkey -M viins ' '    expand-ealias
 bindkey -M viins '^ '   magic-space # control-space to bypass completion
 bindkey -M isearch " "  magic-space # normal space during searches
 
+# CONFIGURE FZF BINDINGS
+# unmap <A-C>, map <C-G> instead
+bindkey -r fzf-cd-widget '\ec' 
+bindkey '^G' fzf-cd-widget
+
 ###############
 # SET ALIASES #
 ###############
