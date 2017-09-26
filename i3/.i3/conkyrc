@@ -30,13 +30,13 @@ conky.text = [[
 		},
 		{
 			"full_text" : "${exec mpc current -f %artist%::%title% | sed 's/"/\\"/g'} ",
-			"short_text" : "${exec mpc current -f %title% | sed 's/"/\\"/g'} " ,
+			"short_text" : "${exec mpc current -f %title% | sed 's/"/\\"/g'} ",
 			"color" : "\#f2f0ec"
 		},
-		{
-			"full_text" : "[${texeci 5 dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" | awk '/DR +=/{print $3}'}]",
-			"color" : "\#f2f0ec"
-		},
+		# { TODO: make a systemd unit for this that runs after MPD and writes the DR to a file in /var
+		# 	"full_text" : "[${texeci 5 dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" | awk '/DR +=/{print $3}'}]",
+		# 	"color" : "\#f2f0ec"
+		# },
 	${endif}
 
 	{
@@ -62,7 +62,12 @@ conky.text = [[
 	},
 
 	{
-		"full_text" : "   ${texeci 60 checkupdates | wc -l}/${texeci 60 pacman -Q | wc -l}",
+		"full_text" : 
+			${if_match "${exec connmanctl state | awk '/State/ { print $3 }'}"=="online"}
+				"   ${texeci 60 checkupdates | wc -l}/${exec pacman -Q | wc -l}",
+			${else}
+				"   ?/${exec pacman -Q | wc -l}",
+			${endif}
 		${if_match ${texeci 60 needtorestart.sh; echo $?}==1}
 			"color" : "\#f4ad42"
 		${else}
@@ -127,9 +132,9 @@ conky.text = [[
 	},
 
 	{
-		"full_text" : "  ${execi 1 amixer sget Master | awk -F"[][]" '/Left: / { print $2 }' } ",
+		"full_text" : "  ${exec amixer sget Master | awk -F"[][]" '/Left: / { print $2 }' } ",
 		"color" :
-			${if_match "${execi 1 amixer sget Master | awk -F"[][]" '/Left: / { print $4 }' }"=="off" }
+			${if_match "${exec amixer sget Master | awk -F"[][]" '/Left: / { print $4 }' }"=="off" }
 				"\#ff6060"
 			${else}
 				"\#e890f8"
