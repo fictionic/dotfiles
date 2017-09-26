@@ -56,6 +56,9 @@ alias ranger='ranger 2>/dev/null'
 #####
 # (2) abbreviations
 
+# transmission-remote
+alias to=transmission-remote
+
 # open a file
 alias open=rifle
 
@@ -82,6 +85,9 @@ alias dr='dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" 2>&1 
 
 # back up home folder
 ealias backup='sudo rsync -aAXHv --exclude={"/.Trash-1000","/dylan/.cache/*","/dylan/.config/chromium/*"} --delete-delay /home/ /media/homebackup'
+
+# demlo
+ealias dl='demlo'
 
 # avoid typos
 alias ragner=ranger
