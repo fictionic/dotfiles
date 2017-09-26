@@ -46,7 +46,7 @@
 	Control+Shift + p
 "mpc next"
 	Control+Shift + period
-"mpc prev"
+"mpc cdprev"
 	Control+Shift + comma
 "mpc volume +3"
 	Control+Alt + Up
