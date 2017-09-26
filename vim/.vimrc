@@ -5,7 +5,9 @@
 " turn on filetype recognition in general, and for plugins, and for indent style
 filetype plugin indent on
 " don't use any other indentation utilities by default
-set nocindent noautoindent nosmartindent
+set nocindent nosmartindent
+" except autoindent...?
+set autoindent 
 
 " enable syntax highlighting
 syntax on
@@ -15,6 +17,10 @@ colorscheme SlateDarkBlue
 
 " disable swap files
 set noswapfile
+
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
 
 " automatically re-read modified buffers if no changes have been made inside of vim
 set autoread
@@ -58,13 +64,27 @@ set nohlsearch
 
 " tab brings up suggestions menu in command mode
 set wildmenu
+" first tab press expands command to longest possible name,
+" remaining tab presses cycle through completions in the wildmenu
+set wildmode=longest,full
+" ignore non-text files in filename completion
+set wildignore+=*.a,*.o
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+set wildignore+=.DS_Store,.git,.hg,.svn
+set wildignore+=*~,*.swp,*.tmp
+
+" split in logical directions
+set splitbelow
+set splitright
 
 " unnamed register is X clipboard
 set clipboard=unnamedplus
 
 " remember undo tree after closing file
-set undofile
-set undodir=~/.vim/undo
+if has("persistent_undo")
+	set undodir=~/.vim/undo
+	set undofile
+endif
 
 " smart case-sensitivity in regex searches
 set smartcase
@@ -75,18 +95,12 @@ set timeoutlen=500
 " use omnicomplete
 set omnifunc=syntaxcomplete#Complete
 
-" don't go to first column with gg or G
+" don't go to first column with gg or G (good for visual-block)
 set nostartofline
-
-" put a line under the cursor to make it more visuble
-set cursorline
 
 "-------------"
 "   AUTOCMDS  "
 "-------------"
-
-" automatically reload vimrc whenever it's changed
-au! BufWritePost .vimrc source %
 
 " set spell on iff we're editing text
 set nospell
@@ -111,7 +125,8 @@ map <leader>e :e
 map <leader>E :e!<CR>
 map <leader>w :w<CR>
 map <leader>W :w!
-map <leader>q :q<CR>
+map <leader>q :bd<CR>
+map <leader>bd :bd<CR>
 map <leader>Q :q!<CR>
 map <Space><Space> :w<CR>
 noremap <Space><Space> <Esc><Space><Space>
@@ -124,26 +139,9 @@ nnoremap <leader>r :so $MYVIMRC<CR>
 " remove search highlighting when exiting command mode
 " cnoremap <silent> <CR> <CR>:nohlsearch<CR>
 
-" open multiple files in tabs, horizontal windows, or vertical windows
-command! -complete=file -nargs=+ Etabs call s:ETW('tabnew', <f-args>)
-command! -complete=file -nargs=+ Ewindows call s:ETW('new', <f-args>)
-command! -complete=file -nargs=+ Evwindows call s:ETW('vnew', <f-args>)
-function! s:ETW(what, ...)
-	for f1 in a:000
-		let files = glob(f1)
-		if files == ''
-			execute a:what . ' ' . escape(f1, '\ "')
-		else
-			for f2 in split(files, "\n")
-				execute a:what . ' ' . escape(f2, '\ "')
-			endfor
-		endif
-	endfor
-endfunction
-
-" switch between tabs
-noremap <leader><Tab> gt
-noremap <leader><S-Tab> gT
+" switch between buffers
+noremap <leader><Tab> :bnext<CR>
+noremap <leader><S-Tab> :bprevious<CR>
 " move tabs around
 map <silent><C-l> :tabm +1<CR>
 map <silent><C-h> :tabm -1<CR>
@@ -182,7 +180,7 @@ nnoremap ' `
 noremap Y y$
 " use U instead of Ctrl+R for redo
 nnoremap U <C-R>
-" make cb and db work like they ought to (i.e. make them delete the character under the cursor)
+" " make cb and db work like they ought to (i.e. make them delete the character under the cursor)
 " noremap cb vbc
 " noremap db vbd
 " clear a single line remaining in normal mode
@@ -212,74 +210,14 @@ nnoremap S "_S
 noremap!  
 " make Ctrl+Backspace delete a word backwards
 noremap!  <C-w>
-" make Ctrl+Delete delete a word forwards in all modes
-map! [3;5~ <Esc>cw
 
 " >> UNMAPPINGS << "
 map K <Nop>
 map Q <Nop>
 
-"-------------"
-"   PLUGINS   "
-"-------------"
+if &diff
+	nmap <leader>u :diffupdate<CR>
+endif
 
-" add package 'matchit' -- enhanced % behavior
-packadd! matchit
-
-call plug#begin()
-
-Plug 'junegunn/vim-plug'
-" commands / operators
-Plug 'godlygeek/tabular' " provides :Tabularize command
-	" Plug 'tpope/vim-commentary' " adds comment/uncomment operator (gc)
-Plug 'justinmk/vim-sneak' " adds 'sneak' motion: like f, but with two characters
-Plug 'tomtom/tcomment_vim' " comment operators (more powerful than tpope/commentary, I think)
-Plug 'tpope/vim-surround' " easily deal with delimiters 
-"Plug 'tpope/vim-unimpaired' " many pairs of operators/commands (need to look this one up more first)
-" motions
-Plug 'justinmk/vim-ipmotion' " improves { and } motions
-" text objects
-Plug 'wellle/targets.vim' " adds tons of text objects
-Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
-Plug 'kana/vim-textobj-entire' " adds 'entire file' text objects (ae and ie)
-Plug 'kana/vim-textobj-indent' " adds text object for lines with matching indent (ii and ai)
-Plug 'glts/vim-textobj-comment' " adds comment text objects (ac and ic)
-Plug 'reedes/vim-textobj-sentence' " improved sentence detection (also comes with motions)
-Plug 'rbonvall/vim-textobj-latex' " text objects for latex
-	" TODO: make it so these mappings aren't overwriten by targets/vimtex when latex is detected
-" misc
-"Plug 'tpope/vim-sensible' " sensible defaults
-Plug 'tpope/vim-repeat' " let supported plugins use .
-Plug 'flazz/vim-colorschemes'
-Plug 'lervag/vimtex' " for latex
-Plug 'editorconfig/editorconfig-vim' " editorconfig
-"Plug 'hynek/vim-python-pep8-indent' " python indentation
-Plug 'tpope/vim-fugitive' " TIM POPE'S GIT PLUGIN
-Plug 'google/vim-searchindex' " display index of search result using / or ?
-Plug 'ciaranm/detectindent' " intelligently detect indentation settings
-Plug 'mileszs/ack.vim' " for ack/ag ... doesn't work??
-Plug 'ervandew/supertab' " insert mode tab completion
-
-call plug#end()
-
-" >> PLUGIN-RELATED SETTINGS << "
-" targets.vim
-omap iq i"
-omap aq a"
-omap inq in"
-omap anq an"
-omap ilq il"
-omap alq al"
-" vimtex
-" vim-sneak
-nmap <leader>s <Plug>Sneak_s
-xmap <leader>s <Plug>Sneak_s
-omap <leader>s <Plug>Sneak_s
-nmap <leader>S <Plug>Sneak_S
-xmap <leader>S <Plug>Sneak_S
-omap <leader>S <Plug>Sneak_S
-" vim-textobj-indent
-omap Ai aI
-vmap Ai aI
-omap Ii iI
-vmap Ii iI
+" PLUGINS
+source ~/.vimplugins

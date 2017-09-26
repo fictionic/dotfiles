@@ -1,0 +1,74 @@
+" vim: filetype=vim
+"-------------"
+"   PLUGINS   "
+"-------------"
+
+" add package 'matchit' -- enhanced % behavior
+packadd! matchit
+
+call plug#begin()
+
+Plug 'junegunn/vim-plug'
+" -- commands / operators
+Plug 'godlygeek/tabular' " provides :Tabularize command
+" Plug 'tpope/vim-commentary' " adds comment/uncomment operator (gc)
+Plug 'tomtom/tcomment_vim' " comment operators (more powerful than tpope/commentary, I think)
+Plug 'justinmk/vim-sneak' " adds 'sneak' motion: like f, but with two characters
+Plug 'tpope/vim-surround' " easily deal with delimiters (ds, cs, ys)
+"Plug 'tpope/vim-unimpaired' " many pairs of operators/commands (need to look this one up more first)
+" -- motions
+Plug 'justinmk/vim-ipmotion' " improves { and } motions
+" -- text objects
+Plug 'wellle/targets.vim' " adds tons of text objects
+Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
+Plug 'kana/vim-textobj-entire' " adds 'entire file' text objects (ae and ie)
+Plug 'kana/vim-textobj-indent' " adds text object for lines with matching indent (ii and ai)
+Plug 'glts/vim-textobj-comment' " adds comment text objects (ac and ic)
+Plug 'reedes/vim-textobj-sentence' " improved sentence detection (also comes with motions)
+Plug 'rbonvall/vim-textobj-latex' " text objects for latex
+	" TODO: make it so these mappings aren't overwriten by targets/vimtex when latex is detected
+" -- misc
+"Plug 'tpope/vim-sensible' " sensible defaults
+Plug 'tpope/vim-repeat' " let supported plugins use .
+Plug 'flazz/vim-colorschemes'
+Plug 'lervag/vimtex' " for latex
+Plug 'editorconfig/editorconfig-vim' " editorconfig
+"Plug 'hynek/vim-python-pep8-indent' " python indentation
+Plug 'tpope/vim-fugitive' " TIM POPE'S GIT PLUGIN
+Plug 'google/vim-searchindex' " display index of search result using / or ?
+Plug 'ciaranm/detectindent' " intelligently detect indentation settings
+Plug 'ervandew/supertab' " insert mode tab completion
+Plug 'w0rp/ale' " asynchronous lint engine
+Plug 'wincent/ferret' " asynchronous ack/ag
+Plug 'guywald1/vim-prismo' " pretty comment section titles
+Plug 'vim-airline/vim-airline' " statusline
+Plug 'mbbill/undotree' " undo tree visualizer
+
+call plug#end()
+
+" >> PLUGIN-RELATED SETTINGS << "
+" targets.vim
+omap iq i"
+omap aq a"
+omap inq in"
+omap anq an"
+omap ilq il"
+omap alq al"
+" vimtex
+" vim-sneak
+nmap <leader>s <Plug>Sneak_s
+xmap <leader>s <Plug>Sneak_s
+omap <leader>s <Plug>Sneak_s
+nmap <leader>S <Plug>Sneak_S
+xmap <leader>S <Plug>Sneak_S
+omap <leader>S <Plug>Sneak_S
+" vim-textobj-indent
+omap Ai aI
+vmap Ai aI
+omap Ii iI
+vmap Ii iI
+" vim-airline
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
