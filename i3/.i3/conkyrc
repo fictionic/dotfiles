@@ -63,7 +63,7 @@ conky.text = [[
 
 	{
 		"full_text" : 
-			${if_match "${exec connmanctl state | awk '/State/ { print $3 }'}"=="online"}
+			${if_match "${exec netctl-current.sh >/dev/null; echo $?}"=="0"}
 				"   ${texeci 60 checkupdates | wc -l}/${exec pacman -Q | wc -l}",
 			${else}
 				"   ?/${exec pacman -Q | wc -l}",
@@ -82,8 +82,8 @@ conky.text = [[
 
 	{
 		"full_text" :
-			${if_match "${exec connmanctl services | awk '/Wired/ { print $2 }'}"=="Wired"}
-				${if_match "${exec connmanctl state | awk '/State/ { print $3 }'}"=="online"}
+			${if_match "${exec netctl is-active ethernet}"=="active"}
+				${if_match "${exec netctl-current.sh >/dev/null; echo $?}"=="0"}
 					"  eth ",
 				${else}
 					"  ... ",
