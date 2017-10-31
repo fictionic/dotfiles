@@ -1,1 +1,1 @@
--o '%(upload_date)s %(title)s%(ext)s'
+-o '%(upload_date)s %(title)s.%(ext)s'
