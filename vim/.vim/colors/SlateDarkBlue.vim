@@ -1,6 +1,6 @@
 "%% SiSU Vim color file
 " MODIFIED BY DYLAN FORBES
-" SlateDark Maintainer: Rudra Banerjee <bnrj.rudra@yahoo.com> 
+" SlateDark Maintainer: Rudra Banerjee <bnrj.rudra@yahoo.com>
 " Originally inspired from Slate by Ralph Amissah
 set background=dark
 highlight clear
@@ -89,16 +89,16 @@ hi Directory ctermfg=darkcyan
 
 " DiffAdd - diff mode: Added line |diff.txt|
 hi DiffAdd ctermbg=0 cterm=none
-" DiffAdded - ???
-hi DiffAdded ctermfg=green ctermbg=1
-" DiffChange -  diff mode: Changed line |diff.txt|
+" DiffAdded - (seems to be actually used)
+hi DiffAdded ctermbg=0 ctermfg=2 cterm=none
+" DiffChange - diff mode: Changed line |diff.txt|
 hi DiffChange ctermfg=none ctermbg=none
 " DiffText - diff mode: Changed text within a changed line |diff.txt|
 hi DiffText ctermfg=darkblue ctermbg=0
 " DiffDelete - diff mode: Deleted line |diff.txt|
 hi DiffDelete ctermfg=1 ctermbg=0
-" DiffRemoved - ???
-hi DiffRemoved ctermfg=0 ctermbg=1
+" DiffRemoved - (seems to be actually used)
+hi DiffRemoved ctermfg=1 ctermbg=0
 
 " OTHER "
 
@@ -162,4 +162,3 @@ hi WildMenu ctermfg=0 ctermbg=3
 " Menu - Current font, background and foreground colors of the menus. Also used for the toolbar. Applicable highlight arguments: font, guibg, guifg.
 " Scrollbar - Current background and foreground of the main window's scrollbars. Applicable highlight arguments: guibg, guifg.
 " Tooltip - Current font, background and foreground of the tooltips.  Applicable highlight arguments: font, guibg, guifg.
-
