@@ -7,7 +7,7 @@ filetype plugin indent on
 " don't use any other indentation utilities by default
 set nocindent nosmartindent
 " except autoindent...?
-set autoindent 
+set autoindent
 
 " enable syntax highlighting
 syntax on
@@ -25,8 +25,9 @@ set hidden
 " automatically re-read modified buffers if no changes have been made inside of vim
 set autoread
 
-" disable escape keys, so there's no delay when using Alt+<key> in insert mode
-set noesckeys
+" enable escape keys, because why not
+" (no more delay with <A-S-O> cuz ttimeoutlen=0)
+set esckeys
 
 " show currently pending operators
 set showcmd
@@ -43,7 +44,7 @@ set textwidth=0
 
 " tabs are four spaces wide
 set tabstop=4 softtabstop=4
-" use tab character, not spaces
+" use hard tabs by default
 set noexpandtab
 " prevent extra tabs from being introduced on >> and cindent
 set shiftwidth=0
@@ -57,11 +58,6 @@ set relativenumber
 " show current line number
 set number
 
-" moves cursor to first instance of matched pattern while typing pattern
-set incsearch
-" don't highlight search matches
-set nohlsearch
-
 " tab brings up suggestions menu in command mode
 set wildmenu
 " first tab press expands command to longest possible name,
@@ -69,6 +65,7 @@ set wildmenu
 set wildmode=longest,full
 " ignore non-text files in filename completion
 set wildignore+=*.a,*.o
+set wildignore+=*.class,*.jar,*.pyc
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
 set wildignore+=.DS_Store,.git,.hg,.svn
 set wildignore+=*~,*.swp,*.tmp
@@ -82,15 +79,31 @@ set clipboard=unnamedplus
 
 " remember undo tree after closing file
 if has("persistent_undo")
-	set undodir=~/.vim/undo
-	set undofile
+  set undodir=~/.vim/undo
+  set undofile
 endif
 
+" don't spellcheck by default
+set nospell
+" wrap text
+set wrap
+
 " smart case-sensitivity in regex searches
+set ignorecase
 set smartcase
+" but not when doing completion
+au InsertEnter * set noignorecase
+au InsertLeave * set ignorecase
+" and not for * or # commands
+nnoremap <silent>  * :let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchforward=1<CR>n
+nnoremap <silent>  # :let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchforward=0<CR>n
+nnoremap <silent> g* :let @/='\C'   . expand('<cword>')       <CR>:let v:searchforward=1<CR>n
+nnoremap <silent> g# :let @/='\C'   . expand('<cword>')       <CR>:let v:searchforward=0<CR>n
 
 " timeout for mappings
 set timeoutlen=500
+" timeout for keycodes
+set ttimeoutlen=0
 
 " use omnicomplete
 set omnifunc=syntaxcomplete#Complete
@@ -98,24 +111,39 @@ set omnifunc=syntaxcomplete#Complete
 " don't go to first column with gg or G (good for visual-block)
 set nostartofline
 
+" use ripgrep instead of grep/ack/ag
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+endif
+
 "-------------"
 "   AUTOCMDS  "
 "-------------"
 
-" set spell on iff we're editing text
-set nospell
-autocmd FileType markdown setlocal spell
-autocmd BufRead,BufNewFile *.md setlocal spell
+" settings for markdown
+autocmd FileType markdown setlocal spell nowrap
+autocmd BufRead,BufNewFile *.md setlocal spell nowrap
 
 " use spaces in python, and keep indentation level
 autocmd FileType python set expandtab autoindent
+" use autopep8 as equalprg for python
+if executable('autopep8')
+  fun! SetEqualPrg()
+      if &ft =~ 'python'
+        set equalprg=autopep8\ -
+      else
+        set equalprg=
+      endif
+  endfun
+  autocmd FileType * call SetEqualPrg()
+endif
 
 "-------------------------------"
 "   MAPPINGS/ALIASES/COMMANDS   "
 "-------------------------------"
 
 let mapleader=" "
-let localmapleader="\\"
+let maplocalleader="<Enter>"
 
 " easier access to command mode
 map <Space> :
@@ -125,7 +153,7 @@ map <leader>e :e
 map <leader>E :e!<CR>
 map <leader>w :w<CR>
 map <leader>W :w!
-map <leader>q :bd<CR>
+"map <leader>q :q<CR>
 map <leader>bd :bd<CR>
 map <leader>Q :q!<CR>
 map <Space><Space> :w<CR>
@@ -136,39 +164,33 @@ imap <Space><Space> <Esc><Space><Space>
 " reload vimrc inside vim
 nnoremap <leader>r :so $MYVIMRC<CR>
 
-" remove search highlighting when exiting command mode
-" cnoremap <silent> <CR> <CR>:nohlsearch<CR>
-
 " switch between buffers
-noremap <leader><Tab> :bnext<CR>
-noremap <leader><S-Tab> :bprevious<CR>
-" move tabs around
-map <silent><C-l> :tabm +1<CR>
-map <silent><C-h> :tabm -1<CR>
+nnoremap <BS> <C-^>
 
 " >> LEADER KEY MAPPINGS << "
 " ----
 " remove search highlighting and remove any cmdline messages
-map <leader>l :nohl<CR>:<BS>
+map <silent> <leader>l :nohl<CR>
 " create new line above/below without entering insert mode
-nnoremap <leader>o o<Esc>
-nnoremap <leader>O O<Esc>
+"nnoremap <leader>o o<Esc>
+"nnoremap <leader>O O<Esc>
 " generate tags file
 map <leader>c :!ctags -R<CR>
 " easier access to tilde operator
 nnoremap <leader>~ g~
+" update diff
+if &diff
+  nmap <leader>u :diffupdate<CR>
+endif
+
 
 " >> MOTIONS << "
 " ----
-" make h,l move between lines when at the end/beginning
-noremap h <BS>
-nnoremap l <Space>
-" except Alt-l
-inoremap l l
 " remap _ to ^, since ^ is hard to reach and the default action of _ is dumb
 noremap _ ^
-" make end-of-paragraph motion line-wise in operator-pending mode
+" make end-of-paragraph motion line-wise in operator-pending mode and visual mode
 onoremap } V}
+vnoremap } V}
 " make jump-to-beginning-of-displayed-line work properly
 nnoremap g_ g^
 " use exact mark jumps
@@ -214,10 +236,7 @@ noremap!  <C-w>
 " >> UNMAPPINGS << "
 map K <Nop>
 map Q <Nop>
-
-if &diff
-	nmap <leader>u :diffupdate<CR>
-endif
+map <Enter> <Nop>
 
 " PLUGINS
 source ~/.vimplugins
