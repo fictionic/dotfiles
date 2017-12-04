@@ -79,10 +79,13 @@ alias vimrc='vim /home/dylan/.vimrc'
 alias vimplugins='vim /home/dylan/.vimplugins'
 
 # get dynamic range of currently playing song
-alias dr='dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" 2>&1 | tail -3'
-
-# back up home folder
-ealias backup='sudo rsync -aAXHv --exclude={"/.Trash-1000","/dylan/.cache/*","/dylan/.config/chromium/*"} --delete-delay /home/ /media/homebackup'
+dr() {
+	dr14_tmeter -f "$1" 2>/dev/null | tail -3
+}
+alias drmpd='dr ~/audio/library/hi-res/"$(mpc -f %file% current)"'
+# get standard loudness of a track or album
+ealias bs='bs1770gain '
+alias bsmpd='bs1770gain "$(mpd-current.sh)" | awk '\''/integrated/ { print $2; exit }'\'
 
 # demlo
 ealias dl='demlo'
