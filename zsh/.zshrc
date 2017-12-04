@@ -5,7 +5,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 setopt appendhistory completealiases HIST_IGNORE_DUPS RC_QUOTES
-unsetopt autocd beep extendedglob notify
+unsetopt autocd beep extendedglob notify FLOW_CONTROL
 
 # SET PROMPT
 source ~/.zshprompt
