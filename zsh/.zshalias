@@ -205,23 +205,3 @@ curses() {
 	re="${re:0:-1})"
 	ag -w "${re}" "$@"
 }
-
-# connect to a wifi network by ssid with connman
-cmc() {
-	ssid=$1
-	results_str="$(connmanctl services | grep "$ssid")"
-	local IFS=$'\n'
-	results=( ${=results_str} )
-	if [[ ${#results} == 0 ]]; then
-		echo "No such network; aborting. Try scanning.";
-		return
-	elif [[ ${#results} > 1 ]]; then
-		for result in "${results[@]}"; do
-			print $result;
-		done
-		echo "Too many results; aborting.";
-		return
-	fi
-	name=$( echo "${results[1]}" | awk '{print $(NF)}')
-	connmanctl connect "$name"
-}
