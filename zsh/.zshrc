@@ -27,11 +27,7 @@ autoload -U run-help
 autoload run-help-git
 autoload run-help-svn
 
-#------------------#
-#   MISCELANEOUS   #
-#------------------#
-# give info about where to install packages containing commands that aren't currently installed
-source /usr/share/doc/pkgfile/command-not-found.zsh
+# -----------------------------   MISCELANEOUS   ------------------------------
 
 # make scrolling up and down only scroll through commands that match the currently typed command
 autoload -U up-line-or-beginning-search

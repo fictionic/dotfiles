@@ -121,8 +121,48 @@ ghb() {
 	git checkout 'HEAD~'
 }
 
-#####
-# (3) standalone functionality
+# query packages
+ealias pqi="pacman -Qi"
+
+# cd to directory of current mpd song
+alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
+
+# ------------------------ (3) STANDALONE FUNCTIONALITY -----------------------
+
+# expanded cd -- go to directory or parent directory of file, depending
+cdf() {
+	if [[ "#$" == 0 ]]; then
+		exit
+	fi
+	if [[ -d "$1" ]]; then
+		cd "$1"
+	else
+		cd "$(dirname "$1")"
+	fi
+}
+
+# find which package provides an executable
+has() {
+	local pkgs already cmd="$1"
+	# first check if we already have it
+	already="$(pacman -Qo "$cmd" 2>/dev/null)"
+	if [[ -n "$already" ]]; then
+		printf "$already\n"
+		return 0
+	fi
+	# then check what nonlocal packages provide it
+	pkgs=(${(f)"$(pkgfile -b -v -- "$cmd" 2>/dev/null)"})
+	if [[ -n "$pkgs" ]]; then
+		printf '%s may be found in the following packages:\n' "$cmd"
+		printf '  %s\n' $pkgs[@]
+		return 0
+	fi
+	printf "$0"': no package provides this binary: %s\n' "$cmd" 1>&2
+	return 127
+}
+
+# find which package owns a file
+alias owns='pacman -Qo '
 
 # remove orphan packages
 pacclean() {
