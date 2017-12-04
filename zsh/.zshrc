@@ -44,6 +44,12 @@ bindkey -r '^T'; bindkey '^F' fzf-file-widget
 # set up 'z' command
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
+# set up 'fuck' command
+eval $(thefuck --alias)
+alias dammit=fuck
+alias shit=fuck
+alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
+
 # # ZPLUG
 # source /usr/share/zsh/scripts/zplug/init.zsh
 # zplug "changyuheng/fz" # fzf combined with z
