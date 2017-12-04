@@ -41,8 +41,9 @@ alias help=run-help
 # better pgrep
 alias pgrep='ps -ef | head -1; ps -ef | grep'
 
-# use ag instead of ack
-alias ack='ag'
+# use rg instead of ack/the_silver_searcher
+alias ack='rg'
+alias ag='rg'
 
 # use vim keybindings in info
 alias info='info --vi-keys '
