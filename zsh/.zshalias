@@ -69,13 +69,14 @@ alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages...";
 alias pingg='ping google.com'
 
 # list all packages by reverse intall date
-alias paclist="expac -Q --timefmt='%F %T' '%w %l %n' | grep 'explicit ' | sort -n | awk "\''{print $4}'\'
+alias paclist="expac --timefmt='%F %T' '%l %w %n' | grep explicit | cut -d ' ' -f 1-2,4- | sort -n"
 
-# switch to hdmi output
+# enable hdmi output
 alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
 
-# easy access to vimrc
+# easy access to vimrc and vimplugins
 alias vimrc='vim /home/dylan/.vimrc'
+alias vimplugins='vim /home/dylan/.vimplugins'
 
 # get dynamic range of currently playing song
 alias dr='dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" 2>&1 | tail -3'
@@ -85,6 +86,10 @@ ealias backup='sudo rsync -aAXHv --exclude={"/.Trash-1000","/dylan/.cache/*","/d
 
 # demlo
 ealias dl='demlo'
+
+# demloplus add symlink
+ealias das='demloplus add symlink '
+
 
 # avoid typos
 alias ragner=ranger
@@ -103,6 +108,7 @@ ealias gP='git pull'
 ealias gd='git diff'
 ealias gr='git reset'
 ealias gh='git checkout'
+ealias gm='git merge'
 
 # traverse forward through git branch history
 ghf() {
@@ -173,12 +179,12 @@ pacclean() {
 
 # use vim ex commands in a UNIX pipe
 vp() {
-    vim - -u NONE -es '+1' "+$*" '+%print' '+:qa!' | tail -n +2
+	vim - -u NONE -es '+1' "+$*" '+%print' '+:qa!' | tail -n +2
 }
 
 # use vim normal mode commands in a UNIX pipe
 vn() {
-    vim - -u NONE -es '+1' "+normal $*" '+%print' '+:qa!' | tail -n +2
+	vim - -u NONE -es '+1' "+normal $*" '+%print' '+:qa!' | tail -n +2
 }
 
 # compute human-readable filesize of a given file
