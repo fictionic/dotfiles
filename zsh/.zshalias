@@ -51,11 +51,7 @@ alias info='info --vi-keys '
 # load math.h in bc
 alias bc='bc -l'
 
-# discard dumb error output from ranger
-alias ranger='ranger 2>/dev/null'
-
-#####
-# (2) abbreviations
+# ----------------------------- (2) ABBREVIATIONS -----------------------------
 
 # transmission-remote
 alias to=transmission-remote
