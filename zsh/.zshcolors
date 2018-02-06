@@ -28,4 +28,4 @@ export LESS_TERMCAP_ZO=$(tput ssupm)
 export LESS_TERMCAP_ZW=$(tput rsupm)
 
 # LS COLORS
-eval $(dircolors -b /home/dylan/.dircolors)
+eval $(gdircolors -b /Users/dylanforbes/.dircolors)
