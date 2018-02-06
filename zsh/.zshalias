@@ -30,7 +30,7 @@ alias sudo='sudo '
 alias 'sudo vim'='sudo -e'
 
 # make ls use colors, and get easy access to common arguments
-alias ls='ls -NFv --group-directories-first --color=auto'
+# alias ls='ls -Fv --group-directories-first --color=auto'
 alias ll='ls -l '
 alias la='ls -a '
 
