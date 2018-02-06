@@ -75,7 +75,7 @@ set splitbelow
 set splitright
 
 " unnamed register is X clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " remember undo tree after closing file
 if has("persistent_undo")
