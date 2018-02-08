@@ -1,0 +1,4 @@
+include "%L"
+
+<Multi_key> <(> <q> : "⌜" U231C # TOP LEFT CORNER
+<Multi_key> <(> <q> : "⌝" U231D # TOP RIGHT CORNER

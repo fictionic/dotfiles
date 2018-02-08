@@ -1,10 +1,5 @@
-# fix the backslash/bar key
-xmodmap -e "keycode 94 = backslash bar"
-
-# map caps lock to control
-xmodmap -e "keycode 66 = Control_L"
-xmodmap -e "clear Lock"
-xmodmap -e "add Control = Control_L"
+# keyboard stuff
+xmodmap ~/.Xmodmap
 
 # load all them xresources
 xrdb -load /home/dylan/.Xresources

@@ -1,0 +1,11 @@
+! fix the backslash/bar key
+keycode 94 = backslash bar
+
+! set compose key = shift + right alt
+keycode 108 = Alt_R Multi_key Alt_R Meta_R
+
+! map capslock to control_l, shift+caps to caps
+clear lock
+clear control
+add control = Caps_Lock Control_L Control_R
+keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
