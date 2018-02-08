@@ -9,69 +9,27 @@ packadd! matchit
 call plug#begin()
 
 Plug 'junegunn/vim-plug'
-" ------------------------------- BIGGISH THINGS ------------------------------
-Plug 'vim-airline/vim-airline' " statusline
-Plug 'w0rp/ale' " asynchronous lint engine
-Plug 'junegunn/fzf.vim' " fzf integration
-Plug 'tpope/vim-fugitive' " tim pope's git plugin
-Plug 'mbbill/undotree' " undo tree visualizer
-" --------------------------- FOR SPECIFIC LANGUAGES --------------------------
-Plug 'lervag/vimtex' " for latex
-" ---------------------------- COMMANDS / OPERATORS ---------------------------
-Plug 'tomtom/tcomment_vim' " comment operators (more powerful than tpope/vim-commentary, I think)
-Plug 'godlygeek/tabular' " provides :Tabularize command
-Plug 'tpope/vim-surround' " easily deal with delimiters (ds, cs, ys)
-Plug 'tpope/vim-unimpaired' " many pairs of operators/commands
-Plug 'tpope/vim-abolish' " Abolish, Subvert, and Coerce
-Plug 'guywald1/vim-prismo' " pretty comment section titles
-Plug 'tpope/vim-characterize' " better info from `ga` command
-Plug 'tpope/vim-speeddating' " smarter <C-A>/<C-X> for dates/times
-Plug 'christoomey/vim-titlecase' " gt = titlecase operator
-" ---------------------------------- MOTIONS ----------------------------------
-Plug 'justinmk/vim-sneak' " like f, but with two characters
-Plug 'justinmk/vim-ipmotion' " improves { and } motions
-Plug 'chaoren/vim-wordmotion' " enhanced word movements (snake_case, camelCase, acronyms, etc)
-Plug 'haya14busa/incsearch.vim' " better than builtin incsearch
-Plug 'danielroseman/pygd-vim' " improved gd motion
-" -------------------------------- TEXT OBJECTS -------------------------------
-Plug 'wellle/targets.vim' " adds tons of text objects
-Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
-Plug 'kana/vim-textobj-entire' " adds 'entire file' text objects (ae and ie)
-Plug 'kana/vim-textobj-indent' " adds text object for lines with matching indent (ii and ai)
-Plug 'glts/vim-textobj-comment' " adds comment text objects (ac and ic)
-Plug 'reedes/vim-textobj-sentence' " improved sentence detection (also comes with motions)
-Plug 'rbonvall/vim-textobj-latex' " text objects for latex
-" TODO: make it so ^these mappings aren't overwriten by targets/vimtex when latex is detected
-" ------------------------------ SMALLISH THINGS ------------------------------
-"Plug 'tpope/vim-sensible' " sensible defaults
-Plug 'tpope/vim-repeat' " let supported plugins use .
-Plug 'editorconfig/editorconfig-vim' " editorconfig
-Plug 'google/vim-searchindex' " display index of search result using / or ?
-Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation settings
-Plug 'ervandew/supertab' " insert mode tab completion
-Plug 'AssailantLF/vim-active-numbers' " only show line numbers in the active window
-Plug 'Valloric/MatchTagAlways' " match xml tag pairs
-Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
-call plug#end()
-
-" -------------------------- PLUGIN-RELATED SETTINGS --------------------------
-
-" vim-plug
 nmap <leader>pi :PlugInstall<CR>
 nmap <leader>pu :PlugUpdate<CR>
 nmap <leader>pc :PlugClean<CR>
 
-" undotree
-nnoremap <silent> <leader>ut :UndotreeToggle<CR>
+" ------------------------------- BIGGISH THINGS ------------------------------
 
-" vim-prismo
-nmap <leader>pr :Prismo<CR>
-let g:prismo_dash = '-' " the character to pad the title (dash by default)
-let g:prismo_ruler = 80 " the rightmost edge to span your title
-let g:prismo_toupper = 1 " whether to transform the title to uppercase
+Plug 'vim-airline/vim-airline' " statusline
+" " Enable the list of buffers
+" let g:airline#extensions#tabline#enabled = 1
+" " Show just the filename
+" let g:airline#extensions#tabline#fnamemod = ':t'
 
-" ALE
+Plug 'w0rp/ale' " asynchronous lint engine
+" disable javac b/c ale can't figure out classpaths
+let g:ale_linters = {
+\	'java': []
+\}
+nmap <leader>at :ALEToggle<CR>
 nmap <leader>an :ALENext<CR>
+nmap <leader>aN :ALEPrevious<CR>
+nmap <leader>ar :ALEReset<CR>
 " ignore these 'errors' in flake8
 let g:ale_python_flake8_args="--ignore="
 let g:ale_python_flake8_args.="E226," " missing whitespace around arithmetic operator
@@ -82,23 +40,73 @@ let g:ale_python_flake8_args.="E306," " expected 1 blank line before a nested de
 let g:ale_python_flake8_args.="E401," " multiple imports on one line
 let g:ale_python_flake8_args.="E501" " line too long (>79 characters)
 
-" vim-titlecase
+Plug 'junegunn/fzf.vim' " fzf integration
+nnoremap <C-p> :Files<CR>
+nnoremap <C-j> :Buffers<CR>
+
+Plug 'tpope/vim-fugitive' " tim pope's git plugin
+
+Plug 'mbbill/undotree' " undo tree visualizer
+nnoremap <silent> <leader>ut :UndotreeToggle<CR>
+
+Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
+
+" Plug 'ajh17/VimCompletesMe' " completion
+Plug '/home/dylan/code/mine/VimCompletesMe'
+let g:vcm_direction = 'p'
+
+" --------------------------- FOR SPECIFIC LANGUAGES --------------------------
+
+Plug 'lervag/vimtex' " for latex
+
+Plug 'davidhalter/jedi-vim' " omnicomplete for python
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#auto_initialization = 0
+let g:jedi#goto_command = ""
+let g:jedi#goto_assignments_command = ""
+
+" ---------------------------- COMMANDS / OPERATORS ---------------------------
+
+Plug 'tpope/vim-repeat' " let supported plugins use .
+
+Plug 'nhooyr/UnconditionalPaste' " more controlled paste operations
+
+Plug 'tomtom/tcomment_vim' " comment operators (more powerful than tpope/vim-commentary, I think)
+
+Plug 'godlygeek/tabular' " provides :Tabularize command
+
+Plug 'tpope/vim-surround' " easily deal with delimiters (ds, cs, ys)
+nmap dsq ds"
+nmap dsQ ds'
+nmap csq cs"
+nmap csQ cs'
+
+Plug 'tpope/vim-unimpaired' " many pairs of operators/commands
+
+Plug 'tpope/vim-abolish' " Abolish, Subvert, and Coerce
+
+Plug 'guywald1/vim-prismo' " pretty comment section titles
+nmap <leader>pr :Prismo<CR>
+let g:prismo_dash = '-' " the character to pad the title (dash by default)
+let g:prismo_ruler = 80 " the rightmost edge to span your title
+let g:prismo_toupper = 1 " whether to transform the title to uppercase
+
+Plug 'tpope/vim-characterize' " better info from `ga` command
+
+Plug 'tpope/vim-speeddating' " smarter <C-A>/<C-X> for dates/times
+
+Plug 'christoomey/vim-titlecase' " gt = titlecase operator
 let g:titlecase_map_keys = 0
 nmap gt <Plug>Titlecase
 vmap gt <Plug>Titlecase
 nmap gtt <Plug>TitlecaseLine
 nmap gtgt <Plug>TitlecaseLine
 
-" targets.vim
-let g:targets_quotes = '"q ''Q `'
+Plug 'AndrewRadev/splitjoin.vim' " gS/gJ = split/join langauge constructs
 
-" vim-surround
-nmap dsq ds"
-nmap dsQ ds'
-nmap csq cs"
-nmap csQ cs'
+" ---------------------------------- MOTIONS ----------------------------------
 
-" vim-sneak
+Plug 'justinmk/vim-sneak' " like f, but with two characters
 nmap <leader>s <Plug>Sneak_s
 xmap <leader>s <Plug>Sneak_s
 omap <leader>s <Plug>Sneak_s
@@ -106,25 +114,12 @@ nmap <leader>S <Plug>Sneak_S
 xmap <leader>S <Plug>Sneak_S
 omap <leader>S <Plug>Sneak_S
 
-" vim-textobj-indent
-omap Ai aI
-vmap Ai aI
-omap Ii iI
-vmap Ii iI
+Plug 'justinmk/vim-ipmotion' " improves { and } motions
 
-" vim-wordmotion
+Plug 'chaoren/vim-wordmotion' " enhanced word movements (snake_case, camelCase, acronyms, etc)
 let g:wordmotion_prefix = "\\"
 
-" vim-airline
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-" fzf
-nnoremap <C-p> :Files<CR>
-
-" incsearch.vim
+Plug 'haya14busa/incsearch.vim' " better than builtin incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -141,5 +136,45 @@ let g:incsearch#do_not_save_error_message_history = 1
 let g:incsearch#separate_highlight = 1
 highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 
-" MatchTagAlways
+Plug 'danielroseman/pygd-vim' " improved gd motion for python
+
+" -------------------------------- TEXT OBJECTS -------------------------------
+
+Plug 'wellle/targets.vim' " adds tons of text objects
+let g:targets_quotes = '"q ''Q `'
+
+Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
+
+Plug 'kana/vim-textobj-entire' " adds 'entire file' text objects (ae and ie)
+
+Plug 'kana/vim-textobj-indent' " adds text object for lines with matching indent (ii and ai)
+omap Ai aI
+vmap Ai aI
+omap Ii iI
+vmap Ii iI
+
+Plug 'glts/vim-textobj-comment' " adds comment text objects (ac and ic)
+
+Plug 'reedes/vim-textobj-sentence' " improved sentence detection (also comes with motions)
+
+Plug 'rbonvall/vim-textobj-latex' " text objects for latex
+" TODO: make it so ^these mappings aren't overwriten by targets/vimtex when latex is detected
+
+" ------------------------------ SMALLISH THINGS ------------------------------
+
+"Plug 'tpope/vim-sensible' " sensible defaults
+
+Plug 'editorconfig/editorconfig-vim' " editorconfig
+
+Plug 'google/vim-searchindex' " display index of search result using / or ?
+
+Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation settings
+
+" Plug 'AssailantLF/vim-active-numbers' " only show line numbers in the active window
+
+Plug 'Valloric/MatchTagAlways' " match xml tag pairs
 nnoremap <leader>% :MtaJumpToOtherTag<CR>
+
+Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
+
+call plug#end()
