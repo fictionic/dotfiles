@@ -30,7 +30,7 @@ alias sudo='sudo '
 alias 'sudo vim'='sudo -e'
 
 # make ls use colors, and get easy access to common arguments
-# alias ls='ls -Fv --group-directories-first --color=auto'
+alias ls='gls -Fv --group-directories-first --color=auto'
 alias ll='ls -l '
 alias la='ls -a '
 
@@ -205,3 +205,11 @@ curses() {
 	re="${re:0:-1})"
 	ag -w "${re}" "$@"
 }
+
+### redfin stuff
+# psql aliases
+alias sfperf='psql -U redfin_readwrite -h sfperf-query-1.redfintest.com stingray_sfperf'
+alias newschema='psql -U postgres -h ns-query-1.redfintest.com stingray_new_schema'
+alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingray_release'
+alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
+alias prod='psql -U user.name -h analytics-2.redfintest.com stingray_prod'
