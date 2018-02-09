@@ -12,12 +12,12 @@ nnoremap <space>l :nohl<CR>
 set ignorecase
 set smartcase
 
-unmap w
-unmap b
-unmap f
-unmap e
-unmap y
-unmap n
+" unmap w
+" unmap b
+" unmap f
+" unmap e
+" unmap y
+" unmap n
 unmap N
 nnoremap gk k
 nnoremap gl l

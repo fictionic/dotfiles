@@ -244,3 +244,11 @@ git-go-widget() {
 }
 zle -N git-go-widget
 bindkey '\eg' git-go-widget
+
+### redfin stuff
+# psql aliases
+alias sfperf='psql -U redfin_readwrite -h sfperf-query-1.redfintest.com stingray_sfperf'
+alias newschema='psql -U postgres -h ns-query-1.redfintest.com stingray_new_schema'
+alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingray_release'
+alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
+alias prod='psql -U user.name -h analytics-2.redfintest.com stingray_prod'
