@@ -3,7 +3,6 @@ bindkey -v
 # set keytimeout
 export KEYTIMEOUT=1
 
-
 # enable command substitution in prompt
 setopt promptsubst
 
