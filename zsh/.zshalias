@@ -41,6 +41,8 @@ alias help=run-help
 # better pgrep
 alias pgrep='ps -ef | head -1; ps -ef | grep'
 
+# smart-case by default in ripgrep
+alias rg='rg -S'
 # use rg instead of ack/the_silver_searcher
 alias ack='rg'
 alias ag='rg'
@@ -127,8 +129,10 @@ ghb() {
 	git checkout 'HEAD~'
 }
 
-# query packages
+# pacman -Q shortcuts
 ealias pqi="pacman -Qi"
+ealias pqo="pacman -Qo"
+ealias pql="pacman -Ql"
 
 # cd to directory of current mpd song
 alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
@@ -192,18 +196,34 @@ vn() {
 
 # compute human-readable filesize of a given file
 size() {
-	numfmt --to=iec-i --suffix=B --format="%.3f" "$(stat -c %s $1)"
+	if [[ -a "$1" ]]; then
+		if [[ -d "$1" ]]; then
+			du -h -d0 "$1" | cut -d'	' -f1
+		else
+			numfmt --to=iec-i --suffix=B --format="%.3f" "$(stat -c %s $1)"
+		fi
+	else
+		echo "size: cannot stat '$1': No such file or directory"
+	fi
 }
 
 # filter out non-curse words from stdin
 curses() {
 	words=( $(</usr/share/dict/curses) )
-	re='('
-	for word in "${words[@]}"; do
-		re="${re}${word}|";
+	re="(${words[1]}";
+	for i in {2.."${#words}"}; do
+		re="${re}|${words[$i]}"
 	done
-	re="${re:0:-1})"
-	ag -w "${re}" "$@"
+	re="$re)"
+	rg -w "${re}" "$@"
+}
+
+# compute the checksum of the raw audio stream of a file
+audiochecksum() {
+	tmpfile="$(mktemp --suffix=.raw)"
+	ffmpeg -y 2>/dev/null -i "$1" -f wav "$tmpfile"
+	md5sum -b "$tmpfile" | cut -d ' ' -f 1
+	rm "$tmpfile"
 }
 
 ### redfin stuff

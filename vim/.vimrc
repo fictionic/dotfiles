@@ -38,6 +38,9 @@ set mouse=n
 " allow backspace to travel back lines
 set backspace=indent,eol,start
 
+" don't recognize octal number formats for C-A/X (tracknumbers mess this up)
+set nrformats-=octal
+
 " no limit for line length
 set textwidth=0
 " TODO: prevent /usr/share/vim/vim80/ftplugin/vim.vim from setting this to 78
@@ -105,8 +108,10 @@ set timeoutlen=500
 " timeout for keycodes
 set ttimeoutlen=0
 
-" use omnicomplete
+" use builtin syntax-based omnicomplete by default
 set omnifunc=syntaxcomplete#Complete
+" except for in java cuz it sucks hardcore
+autocmd FileType java setlocal omnifunc=
 
 " don't go to first column with gg or G (good for visual-block)
 set nostartofline
@@ -116,13 +121,23 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
 endif
 
+" match parens inside double quotes
+set cpoptions+=%
+
+" smarter joining inside comments
+if v:version > 703 || v:version == 703 && has('patch541')
+  set formatoptions+=j
+endif
+
+" don't redraw the screen after each macro step
+set lazyredraw
+
 "-------------"
 "   AUTOCMDS  "
 "-------------"
 
 " settings for markdown
-autocmd FileType markdown setlocal spell nowrap
-autocmd BufRead,BufNewFile *.md setlocal spell nowrap
+autocmd FileType markdown setlocal spell
 
 " use spaces in python, and keep indentation level
 autocmd FileType python set expandtab autoindent
@@ -143,22 +158,21 @@ endif
 "-------------------------------"
 
 let mapleader=" "
-let maplocalleader="<Enter>"
+let maplocalleader="<return>"
 
 " easier access to command mode
-map <Space> :
+nmap <return> :
 
 " easier reading/writing/quitting
-map <leader>e :e 
-map <leader>E :e!<CR>
-map <leader>w :w<CR>
-map <leader>W :w!
+nmap <leader>e :e 
+nmap <leader>E :e!<CR>
+nmap <leader>w :w<CR>
+nmap <leader>W :w!
 "map <leader>q :q<CR>
-map <leader>bd :bd<CR>
-map <leader>Q :q!<CR>
-map <Space><Space> :w<CR>
-noremap <Space><Space> <Esc><Space><Space>
-map! <Space><Space> <Esc><Space><Space>
+nmap <leader>bd :bw<CR>
+nmap <leader>Q :q!<CR>
+nmap <Space><Space> :w<CR>
+nnoremap <Space><Space> <Esc><Space><Space>
 imap <Space><Space> <Esc><Space><Space>
 
 " reload vimrc inside vim
@@ -170,12 +184,7 @@ nnoremap <BS> <C-^>
 " >> LEADER KEY MAPPINGS << "
 " ----
 " remove search highlighting and remove any cmdline messages
-map <silent> <leader>l :nohl<CR>
-" create new line above/below without entering insert mode
-"nnoremap <leader>o o<Esc>
-"nnoremap <leader>O O<Esc>
-" generate tags file
-map <leader>c :!ctags -R<CR>
+nmap <silent> <leader>l :nohl<CR>
 " easier access to tilde operator
 nnoremap <leader>~ g~
 " update diff
@@ -195,16 +204,22 @@ vnoremap } V}
 nnoremap g_ g^
 " use exact mark jumps
 nnoremap ' `
+" make n and N always go the same direction
+" also center matches vertically
+nnoremap <expr> n  'Nn'[v:searchforward] . 'zz'
+nnoremap <expr> N  'nN'[v:searchforward] . 'zz'
 
 " >> NORMAL MODE COMMANDS << "
 " ----
 " make Y work like it should
-noremap Y y$
+nnoremap Y y$
 " use U instead of Ctrl+R for redo
 nnoremap U <C-R>
 " " make cb and db work like they ought to (i.e. make them delete the character under the cursor)
 " noremap cb vbc
 " noremap db vbd
+" copy whole line without newline
+nnoremap yY my0y$`y
 " clear a single line remaining in normal mode
 nnoremap dD 0D
 " make <Enter><Enter> split a line at the cursor
@@ -216,10 +231,10 @@ noremap <silent>>> @='>>'<CR>
 nnoremap <leader>p "0p
 nnoremap <leader>P "0P
 " easy access to "_ register when deleting/cutting
-map <leader>d "_d
-nnoremap <leader>D "_D
-map <leader>c "_c
-nnoremap <leader>C "_C
+nmap <leader>d "_d
+nmap <leader>D "_D
+nmap <leader>c "_c
+nmap <leader>C "_C
 nnoremap <leader>x "_x
 nnoremap <leader>X "_X
 " don't save deleted text when using s or S
@@ -234,9 +249,9 @@ noremap!  
 noremap!  <C-w>
 
 " >> UNMAPPINGS << "
-map K <Nop>
-map Q <Nop>
-map <Enter> <Nop>
+nnoremap K <Nop>
+nnoremap Q <Nop>
+nnoremap <return> <Nop>
 
 " PLUGINS
 source ~/.vimplugins

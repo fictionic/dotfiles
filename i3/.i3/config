@@ -53,7 +53,7 @@ bindsym $mod+Return exec termite -d "`xcwd`"
 bindsym Control+$mod+Return exec urxvtc -cd "`pwd`"
 
 # launch ranger file manager in new terminal window
-bindsym $mod+Shift+Return exec termite -d "`xcwd`" -e "sh -c 'ranger 2>/dev/null'"
+bindsym $mod+Shift+Return exec termite -d "`xcwd`" -e ranger
 bindsym Control+$mod+Shift+Return exec urxvtc -cd "`pwd`" -e ranger
 
 # kill focused window

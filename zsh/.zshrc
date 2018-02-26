@@ -4,6 +4,9 @@ HISTFILE=~/.zshhist
 HISTSIZE=1000
 SAVEHIST=1000
 
+# disable flow control
+stty -ixon -ixoff
+
 setopt appendhistory completealiases HIST_IGNORE_DUPS RC_QUOTES
 unsetopt autocd beep extendedglob notify FLOW_CONTROL
 
@@ -35,6 +38,8 @@ autoload -U down-line-or-beginning-search
 
 # set up 'z' command
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+# don't automatically resolve symlinks
+export _Z_NO_RESOLVE_SYMLINKS=1
 
 # set up 'fuck' command
 eval $(thefuck --alias)
