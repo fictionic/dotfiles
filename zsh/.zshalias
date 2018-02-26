@@ -75,8 +75,8 @@ alias paclist="expac --timefmt='%F %T' '%l %w %n' | grep explicit | cut -d ' ' -
 alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
 
 # easy access to vimrc and vimplugins
-alias vimrc='vim /home/dylan/.vimrc'
-alias vimplugins='vim /home/dylan/.vimplugins'
+alias vimrc='vim $HOME/.vimrc'
+alias vimplugins='vim $HOME/.vimplugins'
 
 # get dynamic range of currently playing song
 dr() {
@@ -212,4 +212,4 @@ alias sfperf='psql -U redfin_readwrite -h sfperf-query-1.redfintest.com stingray
 alias newschema='psql -U postgres -h ns-query-1.redfintest.com stingray_new_schema'
 alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingray_release'
 alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
-alias prod='psql -U user.name -h analytics-2.redfintest.com stingray_prod'
+alias prod='psql -U dylan.forbes -h analytics-2.redfintest.com stingray_prod'
