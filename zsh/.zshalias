@@ -95,7 +95,6 @@ ealias dl='demlo'
 # demloplus add symlink
 ealias das='demloplus add symlink '
 
-
 # avoid typos
 alias ragner=ranger
 alias l='ls '
@@ -138,6 +137,11 @@ ealias pql="pacman -Ql"
 alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
 
 # ------------------------ (3) STANDALONE FUNCTIONALITY -----------------------
+
+# find using ripgrep
+rgf() {
+	rg --files | rg "$1"
+}
 
 # expanded cd -- go to directory or parent directory of file, depending
 cdf() {
