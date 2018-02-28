@@ -140,7 +140,7 @@ alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
 
 # find using ripgrep
 rgf() {
-	rg --files | rg "$1"
+	rg --files | rg "$@"
 }
 
 # expanded cd -- go to directory or parent directory of file, depending

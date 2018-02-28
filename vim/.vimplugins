@@ -52,19 +52,19 @@ nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 
 Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
 
-" Plug 'ajh17/VimCompletesMe' " completion
-Plug '/home/dylan/code/mine/VimCompletesMe'
-let g:vcm_direction = 'p'
+Plug 'fictionic/VimCompletesMe' " completion
+let g:vcm_direction_keyword = 'p'
+let g:vcm_direction_special = 'n'
 
 " --------------------------- FOR SPECIFIC LANGUAGES --------------------------
 
 Plug 'lervag/vimtex' " for latex
 
-Plug 'davidhalter/jedi-vim' " omnicomplete for python
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#auto_initialization = 0
-let g:jedi#goto_command = ""
-let g:jedi#goto_assignments_command = ""
+" Plug 'davidhalter/jedi-vim' " omnicomplete for python
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#auto_initialization = 0
+" let g:jedi#goto_command = ""
+" let g:jedi#goto_assignments_command = ""
 
 " ---------------------------- COMMANDS / OPERATORS ---------------------------
 
@@ -169,7 +169,7 @@ Plug 'editorconfig/editorconfig-vim' " editorconfig
 
 Plug 'google/vim-searchindex' " display index of search result using / or ?
 
-Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation settings
+" Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation settings
 
 " Plug 'AssailantLF/vim-active-numbers' " only show line numbers in the active window
 
@@ -177,5 +177,7 @@ Plug 'Valloric/MatchTagAlways' " match xml tag pairs
 nnoremap <leader>% :MtaJumpToOtherTag<CR>
 
 Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
+
+Plug 'groenewege/vim-less' " dynamic css syntax
 
 call plug#end()
