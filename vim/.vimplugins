@@ -138,6 +138,8 @@ highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 
 Plug 'danielroseman/pygd-vim' " improved gd motion for python
 
+Plug 'jeetsukumaran/vim-indentwise' " indentwise motions
+
 " -------------------------------- TEXT OBJECTS -------------------------------
 
 Plug 'wellle/targets.vim' " adds tons of text objects
