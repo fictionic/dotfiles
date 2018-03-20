@@ -59,3 +59,7 @@ alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
 # unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
+
+# redfin stuff
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"

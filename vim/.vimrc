@@ -153,6 +153,9 @@ if executable('autopep8')
   autocmd FileType * call SetEqualPrg()
 endif
 
+" for stingrayStatic
+autocmd FileType css set filetype=less
+
 "-------------------------------"
 "   MAPPINGS/ALIASES/COMMANDS   "
 "-------------------------------"

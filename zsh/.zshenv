@@ -8,14 +8,14 @@ export SHELL="zsh" # breaks pipenv without full path
 export EDITOR="vim"
 export VISUAL="$EDITOR"
 export TERMCMD="termite"
-export PAGER="less"
+export PAGER="vimpager"
 export SYSTEMD_PAGER="less"
 # set vim as manpager
 export MANPAGER="$PAGER"
 # ssh-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # when running raw fzf, use rg instead of find
-export FZF_DEFAULT_COMMAND='rg --files --follow --hidden --no-ignore --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --follow --hidden --glob "!.git/*"'
 
 ### redfin stuff
 export HOMEBREW_GITHUB_API_TOKEN="1c0076d1e621a36ec6092f202fd614e388bf5e2a"
