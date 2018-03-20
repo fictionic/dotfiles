@@ -178,6 +178,9 @@ nmap <Space><Space> :w<CR>
 nnoremap <Space><Space> <Esc><Space><Space>
 imap <Space><Space> <Esc><Space><Space>
 
+" write as root
+cmap w!! w !sudo tee > /dev/null %<CR>
+
 " reload vimrc inside vim
 nnoremap <leader>r :so $MYVIMRC<CR>
 

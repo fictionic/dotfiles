@@ -54,8 +54,9 @@ Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
 let g:gutentags_ctags_tagfile='exuberanttags'
 
 Plug 'fictionic/VimCompletesMe' " completion
-let g:vcm_direction_keyword = 'p'
-let g:vcm_direction_special = 'n'
+let g:vcm_direction = 'p'
+
+Plug 'tpope/vim-obsession' " session management
 
 " --------------------------- FOR SPECIFIC LANGUAGES --------------------------
 
@@ -139,6 +140,8 @@ let g:incsearch#separate_highlight = 1
 highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 
 Plug 'danielroseman/pygd-vim' " improved gd motion for python
+
+Plug 'jeetsukumaran/vim-indentwise' " indentwise motions
 
 " -------------------------------- TEXT OBJECTS -------------------------------
 

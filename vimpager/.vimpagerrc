@@ -1,0 +1,24 @@
+" vim:filetype=vim
+
+colorscheme SlateDarkBlue
+syntax on
+set nonumber
+set mouse=n
+set hlsearch
+
+nnoremap <space>l :nohl<CR>
+
+" smart case-sensitivity in regex searches
+set ignorecase
+set smartcase
+
+unmap w
+unmap b
+unmap f
+unmap e
+unmap y
+nnoremap gk k
+nnoremap gl l
+
+" TODO: make K map to a function that does viW, removes any suffix of (1) or
+" the like, and then runs regular K
