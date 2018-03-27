@@ -39,7 +39,7 @@ unalias run-help
 alias help=run-help
 
 # better pgrep
-alias pgrep='ps -ef | head -1; ps -ef | grep'
+alias pgrep='ps -ef | head -1; ps -ef | rg'
 
 # smart-case by default in ripgrep
 alias rg='rg -S'
@@ -60,9 +60,6 @@ alias to=transmission-remote
 
 # open a file
 alias open=rifle
-
-# connman
-ealias cm=connmanctl
 
 # update system
 alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages..."; pacclean'
@@ -228,4 +225,9 @@ audiochecksum() {
 	ffmpeg -y 2>/dev/null -i "$1" -f wav "$tmpfile"
 	md5sum -b "$tmpfile" | cut -d ' ' -f 1
 	rm "$tmpfile"
+}
+
+# vim help
+vimhelp() {
+	vim -c ":h $1 | only"
 }
