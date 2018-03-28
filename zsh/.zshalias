@@ -30,12 +30,11 @@ alias sudo='sudo '
 alias 'sudo vim'='sudo -e'
 
 # make ls use colors, and get easy access to common arguments
-alias ls='gls -Fv --group-directories-first --color=auto'
+alias ls='gls -HFv --group-directories-first --color=auto'
 alias ll='ls -l '
 alias la='ls -a '
 
 # make "help" work as expected
-unalias run-help
 alias help=run-help
 
 # better pgrep
@@ -243,3 +242,4 @@ ealias cns='corvair --nuke-soft'
 ealias cnh='corvair --nuke'
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 1>&2 | awk \'/remote:   https:/ { print $2 }\' | xargs /usr/bin/open -a "/Applications/Google Chrome.app"'
