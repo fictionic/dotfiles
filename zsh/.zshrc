@@ -36,14 +36,6 @@ autoload run-help-svn
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
-# set up fzf zsh integration
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
-# unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
-bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
-# unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
-bindkey -r '^T'; bindkey '^F' fzf-file-widget
-
 # set up 'z' command
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 # don't automatically resolve symlinks
@@ -60,3 +52,17 @@ alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
 # zplug "changyuheng/fz" # fzf combined with z
 # zplug load
 # (zplug slows down startup quite noticably)
+
+# set up fzf zsh integration
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
+bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
+export FZF_ALT_C_COMMAND='rg --files | xargs dirname | unique'
+# unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
+bindkey -r '^T'; bindkey '^F' fzf-file-widget
+# use rg for finding files with fzf
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+
+# redfin stuff
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"

@@ -30,19 +30,16 @@ alias sudo='sudo '
 alias 'sudo vim'='sudo -e'
 
 # make ls use colors, and get easy access to common arguments
-alias ls='ls -HNFv --group-directories-first --color=auto'
+alias ls='ls -HFv --group-directories-first --color=auto'
 alias ll='ls -l '
 alias la='ls -a '
 
 # make "help" work as expected
-unalias run-help
 alias help=run-help
 
 # better pgrep
 alias pgrep='ps -ef | head -1; ps -ef | rg'
 
-# smart-case by default in ripgrep
-alias rg='rg -S'
 # use rg instead of ack/the_silver_searcher
 alias ack='rg'
 alias ag='rg'
@@ -74,8 +71,8 @@ alias paclist="expac --timefmt='%F %T' '%l %w %n' | grep explicit | cut -d ' ' -
 alias hdmi='xrandr --output HDMI2 --mode 1920x1080'
 
 # easy access to vimrc and vimplugins
-alias vimrc='vim /home/dylan/.vimrc'
-alias vimplugins='vim /home/dylan/.vimplugins'
+alias vimrc='vim $HOME/.vimrc'
+alias vimplugins='vim $HOME/.vimplugins'
 
 # get dynamic range of currently playing song
 dr() {
@@ -132,6 +129,9 @@ ealias pql="pacman -Ql"
 
 # cd to directory of current mpd song
 alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
+
+# more robust uniqueness filter
+alias unique=$'awk \'!a[$0]++\''
 
 # ------------------------ (3) STANDALONE FUNCTIONALITY -----------------------
 
@@ -231,3 +231,16 @@ audiochecksum() {
 vimhelp() {
 	vim -c ":h $1 | only"
 }
+
+##### widgets
+# Alt-G to quickly change branches
+git-go-widget() {
+	echo "Checking out..."
+	git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(refname:short)' | fzf --no-sort | sed 's/^\* //' | xargs git checkout;
+	zle reset-prompt;
+}
+zle -N git-go-widget
+bindkey '\eg' git-go-widget
+
+# git stuff
+ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
