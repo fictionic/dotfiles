@@ -30,7 +30,7 @@ alias sudo='sudo '
 alias 'sudo vim'='sudo -e'
 
 # make ls use colors, and get easy access to common arguments
-alias ls='gls -HFv --group-directories-first --color=auto'
+alias ls='ls -HFv --group-directories-first --color=auto'
 alias ll='ls -l '
 alias la='ls -a '
 
@@ -40,8 +40,6 @@ alias help=run-help
 # better pgrep
 alias pgrep='ps -ef | head -1; ps -ef | grep'
 
-# smart-case by default in ripgrep
-alias rg='rg -S'
 # use rg instead of ack/the_silver_searcher
 alias ack='rg'
 alias ag='rg'
@@ -134,6 +132,9 @@ ealias pql="pacman -Ql"
 
 # cd to directory of current mpd song
 alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
+
+# more robust uniqueness filter
+alias unique=$'awk \'!a[$0]++\''
 
 # ------------------------ (3) STANDALONE FUNCTIONALITY -----------------------
 
@@ -229,6 +230,16 @@ audiochecksum() {
 	rm "$tmpfile"
 }
 
+##### widgets
+# Alt-G to quickly change branches
+git-go-widget() {
+	echo "Checking out..."
+	git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(refname:short)' | fzf --no-sort | sed 's/^\* //' | xargs git checkout;
+	zle reset-prompt;
+}
+zle -N git-go-widget
+bindkey '\eg' git-go-widget
+
 ### redfin stuff
 # psql aliases
 alias sfperf='psql -U redfin_readwrite -h sfperf-query-1.redfintest.com stingray_sfperf'
@@ -237,9 +248,11 @@ alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingr
 alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
 alias prod='psql -U dylan.forbes -h analytics-2.redfintest.com stingray_prod'
 # corvair stuff
-ealias cwl='corvair --watch --lazy'
+ealias cwl='corvair --watch --lazy -c --skip-prepublish'
 ealias cns='corvair --nuke-soft'
 ealias cnh='corvair --nuke'
+ealias cnf='bazel run js.enumgenerator:JSEnumSerializerMain ~/code/main/redfin.npm/redfin-enums/'
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 1>&2 | awk \'/remote:   https:/ { print $2 }\' | xargs /usr/bin/open -a "/Applications/Google Chrome.app"'
+alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 2>&1 | tee /dev/fd/2 | awk \'/remote:   https:/ { print $2 }\' | xargs /usr/bin/open -a "/Applications/Google Chrome.app"'
+ealias gfm='git fetch origin master:master'

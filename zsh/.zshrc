@@ -57,8 +57,11 @@ alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
+export FZF_ALT_C_COMMAND='rg --files | xargs dirname | unique'
 # unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
+# use rg for finding files with fzf
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
 # redfin stuff
 export NVM_DIR="$HOME/.nvm"
