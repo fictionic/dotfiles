@@ -100,9 +100,6 @@
 "/home/dylan/scripts/screenshot.sh screen"
 	Alt + Shift + Print
 
-"/home/dylan/scripts/action.sh"
-	Alt + Shift + Esc
-
 ##################################
 # End of xbindkeys configuration #
 ##################################
