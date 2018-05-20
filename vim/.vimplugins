@@ -20,6 +20,7 @@ Plug 'vim-airline/vim-airline' " statusline
 " let g:airline#extensions#tabline#enabled = 1
 " " Show just the filename
 " let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#branch#displayed_head_limit = 12
 
 Plug 'w0rp/ale' " asynchronous lint engine
 " disable javac b/c ale can't figure out classpaths
@@ -44,15 +45,17 @@ Plug 'junegunn/fzf.vim' " fzf integration
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-p> :Files<CR>
 nnoremap <C-j> :Buffers<CR>
+command! -bang -nargs=* Find 
+      \ call fzf#vim#grep('rg --column --line-number --no-heading --smart-case --no-follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 Plug 'tpope/vim-fugitive' " tim pope's git plugin
 
 Plug 'mbbill/undotree' " undo tree visualizer
 nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 
-Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
-let g:gutentags_file_list_command = 'rg --files --glob \!\*.java'
-let g:gutentags_ctags_tagfile='exuberanttags'
+" Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
+" let g:gutentags_file_list_command = 'rg --files --glob \!\*.java'
+" let g:gutentags_ctags_tagfile='exuberanttags'
 
 Plug 'fictionic/VimCompletesMe' " completion
 let g:vcm_direction = 'p'
@@ -68,6 +71,11 @@ Plug 'lervag/vimtex' " for latex
 " let g:jedi#auto_initialization = 0
 " let g:jedi#goto_command = ""
 " let g:jedi#goto_assignments_command = ""
+
+Plug 'groenewege/vim-less' " dynamic css syntax
+
+Plug 'mxw/vim-jsx' " for jsx
+Plug 'pangloss/vim-javascript' " for javascript (also dependency of vim-jsx)
 
 " ---------------------------- COMMANDS / OPERATORS ---------------------------
 
@@ -108,6 +116,9 @@ nmap gtgt <Plug>TitlecaseLine
 
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ = split/join langauge constructs
 
+Plug 'moll/vim-bbye' " better :bdelete/:bwipeout
+nmap <leader>bd :Bdelete<CR>
+
 " ---------------------------------- MOTIONS ----------------------------------
 
 Plug 'justinmk/vim-sneak' " like f, but with two characters
@@ -130,10 +141,6 @@ map g/ <Plug>(incsearch-stay)
 let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
 let g:incsearch#do_not_save_error_message_history = 1
 " highlight matches before curor differently than those after cursor
 " (doesn't work anymore for some reason)
@@ -147,7 +154,9 @@ Plug 'jeetsukumaran/vim-indentwise' " indentwise motions
 " -------------------------------- TEXT OBJECTS -------------------------------
 
 Plug 'wellle/targets.vim' " adds tons of text objects
+let g:targets_pairs = '()b {}B []r <>a'
 let g:targets_quotes = '"q ''Q `'
+let g:targets_argTrigger = 'g'
 
 Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
 
@@ -183,6 +192,6 @@ nnoremap <leader>% :MtaJumpToOtherTag<CR>
 
 Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
 
-Plug 'groenewege/vim-less' " dynamic css syntax
+Plug 'danro/rename.vim' " rename current file
 
 call plug#end()

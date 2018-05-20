@@ -118,7 +118,7 @@ set nostartofline
 
 " use ripgrep instead of grep/ack/ag
 if executable('rg')
-  set grepprg=rg\ --vimgrep
+  set grepprg=rg\ --vimgrep\ --color=always
 endif
 
 " match parens inside double quotes
@@ -153,8 +153,17 @@ if executable('autopep8')
   autocmd FileType * call SetEqualPrg()
 endif
 
+augroup filetype_help
+    autocmd!
+    autocmd BufWinEnter * if &l:buftype ==# 'help' | wincmd _ | nmap <buffer> q :q<CR> | endif
+augroup END
+
 " for stingrayStatic
-autocmd FileType css set filetype=less
+augroup stingrayStatic_filetypes
+  autocmd!
+  autocmd FileType css set filetype=less
+  autocmd Filetype javascript set filetype=javascript.jsx
+augroup END
 
 "-------------------------------"
 "   MAPPINGS/ALIASES/COMMANDS   "
@@ -174,8 +183,6 @@ nmap <leader>e :e
 nmap <leader>E :e!<CR>
 nmap <leader>w :w<CR>
 nmap <leader>W :w!
-"map <leader>q :q<CR>
-nmap <leader>bd :bw<CR>
 nmap <leader>Q :q!<CR>
 nmap <Space><Space> :w<CR>
 nnoremap <Space><Space> <Esc><Space><Space>
@@ -184,23 +191,19 @@ imap <Space><Space> <Esc><Space><Space>
 " write as root
 command! Wroot w !sudo tee > /dev/null %
 
-" reload vimrc inside vim
-nnoremap <leader>r :so $MYVIMRC<CR>
-
 " switch between buffers
 nnoremap <BS> <C-^>
 
-" >> LEADER KEY MAPPINGS << "
+" >> MISC LEADER KEY MAPPINGS << "
 " ----
-" remove search highlighting and remove any cmdline messages
-nmap <silent> <leader>l :nohl<CR>
+" reload vimrc inside vim
+nnoremap <leader>r :so $MYVIMRC<CR>
+" redraw screen
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " easier access to tilde operator
 nnoremap <leader>~ g~
-" update diff
-if &diff
-  nmap <leader>u :diffupdate<CR>
-endif
 
+cabbr %% <C-R>=expand('%:p:h')<CR>
 
 " >> MOTIONS << "
 " ----
