@@ -155,17 +155,11 @@ def_key "mouse"
 def_key "up"
   scroll_up
 
-def_key "k"
-  scroll_up
-
 def_key "shift-up"
   select_item
   scroll_up
 
 def_key "down"
-  scroll_down
-
-def_key "j"
   scroll_down
 
 def_key "shift-down"
@@ -185,21 +179,15 @@ def_key "}"
   scroll_down_artist
 
 def_key "page_up"
-  dummy
-
-def_key "K"
   page_up
 
 def_key "page_down"
-  dummy
-
-def_key "J"
   page_down
 
 def_key "home"
-  dummy
+  move_home
 
-def_key "G"
+def_key "end"
   move_end
 
 def_key "insert"
@@ -218,8 +206,7 @@ def_key "enter"
   play_item
 
 def_key "space"
-  select_item
-  scroll_down
+  add_item_to_playlist
 
 def_key "space"
   toggle_lyrics_update_on_song_change
@@ -227,23 +214,23 @@ def_key "space"
 def_key "space"
   toggle_visualization_type
 
-def_key "d"
+def_key "delete"
   delete_playlist_items
 
-def_key "d"
+def_key "delete"
+  delete_browser_items
+
+def_key "delete"
   delete_stored_playlist
 
 def_key "right"
   next_column
 
-def_key "l"
-  next_column
-
 def_key "right"
   slave_screen
 
-def_key "l"
-  slave_screen
+def_key "right"
+  volume_up
 
 def_key "+"
   volume_up
@@ -251,14 +238,11 @@ def_key "+"
 def_key "left"
   previous_column
 
-def_key "h"
-  previous_column
-
 def_key "left"
   master_screen
 
-def_key "h"
-  master_screen
+def_key "left"
+  volume_down
 
 def_key "-"
   volume_down
@@ -377,8 +361,11 @@ def_key "#"
 def_key "Z"
   shuffle
 
-def_key "X"
+def_key "x"
   toggle_crossfade
+
+def_key "X"
+  set_crossfade
 
 def_key "u"
   update_database
@@ -402,13 +389,18 @@ def_key "ctrl-_"
   select_found_items
 
 def_key "/"
-  push_character "ctrl-u"
   find
 
 def_key "/"
   find_item_forward
 
-def_key ";"
+def_key "?"
+  find
+
+def_key "?"
+  find_item_backward
+
+def_key "."
   next_found_item
 
 def_key ","
@@ -463,7 +455,13 @@ def_key "a"
   add_selected_items
 
 def_key "c"
+  clear_playlist
+
+def_key "c"
   clear_main_playlist
+
+def_key "C"
+  crop_playlist
 
 def_key "C"
   crop_main_playlist
@@ -480,6 +478,9 @@ def_key "n"
 def_key "n"
   move_selected_items_down
 
+def_key "M"
+  move_selected_items_to
+
 def_key "A"
   add
 
@@ -489,7 +490,10 @@ def_key "S"
 def_key "o"
   jump_to_playing_song
 
-def_key "O"
+def_key "G"
+  jump_to_browser
+
+def_key "G"
   jump_to_playlist_editor
 
 def_key "~"
@@ -514,6 +518,9 @@ def_key "L"
   toggle_lyrics_fetcher
 
 def_key "F"
+  fetch_lyrics_in_background
+
+def_key "alt-l"
   toggle_fetching_lyrics_in_background
 
 def_key "ctrl-l"
@@ -531,8 +538,6 @@ def_key "`"
 def_key "ctrl-p"
   set_selected_items_priority
 
-def_key "Q"
+def_key "q"
   quit
 
-def_key "q"
-  dummy

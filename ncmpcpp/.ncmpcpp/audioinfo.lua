@@ -1,3 +1,5 @@
+#!/usr/bin/lua
+
 --
 -- like mediainfo but only for audio and only info that *I* want to see
 --
@@ -40,14 +42,14 @@ local function get_info(file)
 			{'Bit depth', 'bit depth'},
 			{'Sampling rate', 'sample rate'},
 			{'Channel(s)', 'channels'},
-			{'Channel positions', 'channel positions'},
+			-- {'Channel positions', 'channel positions'},
 			{'Replay gain', 'ReplayGain'},
 			{'Replay gain peak', 'ReplayGain peak'},
 		},
 		['file'] = {
 			{'Complete name', 'file path'},
 			{'File size', 'file size'},
-			{'Stream size', 'stream size'},
+			-- {'Stream size', 'stream size'},
 			{'Format/Info', 'format'},
 			{'Writing library', 'codec library'},
 			{'Writing application', 'encoder'},
@@ -91,14 +93,14 @@ local function get_info(file)
 	table.insert(output_table_master.audio, {'duration', duration})
 	table.insert(output_table_master.audio, {'number of samples', number_of_samples})
 
-	-- DR14_TMETER STUFF
-	dr14_results_raw = io.popen("dr14_tmeter --quiet -f \"" .. file .. "\"", "r"):read("*all")
-	dynamic_range = dr14_results_raw:match("\nDR += (.-)\n")
-	peak_db = dr14_results_raw:match("\nPeak dB += (.-)\n")
-	rms_db = dr14_results_raw:match("\nRms dB += (.-)\n")
-	table.insert(output_table_master.audio, {'RMS dB', rms_db})
-	table.insert(output_table_master.audio, {'peak dB', peak_db})
-	table.insert(output_table_master.audio, {'dynamic range', dynamic_range})
+	-- -- DR14_TMETER STUFF
+	-- dr14_results_raw = io.popen("dr14_tmeter --quiet -f \"" .. file .. "\"", "r"):read("*all")
+	-- dynamic_range = dr14_results_raw:match("\nDR += (.-)\n")
+	-- peak_db = dr14_results_raw:match("\nPeak dB += (.-)\n")
+	-- rms_db = dr14_results_raw:match("\nRms dB += (.-)\n")
+	-- table.insert(output_table_master.audio, {'RMS dB', rms_db})
+	-- table.insert(output_table_master.audio, {'peak dB', peak_db})
+	-- table.insert(output_table_master.audio, {'dynamic range', dynamic_range})
 
 	return output_table_master
 end
@@ -117,6 +119,7 @@ local function display_output(output_table_master)
 	total_width = 52
 	-- longest field name to be displayed
 	left_width = 17 -- 'channel positions'
+	separator = ": "
 	-- room for displaying values
 	right_width = total_width - left_width - separator:len()
 	-- print a section of output
@@ -134,16 +137,16 @@ local function display_output(output_table_master)
 	for _, pair in ipairs(output_table_order) do
 		name = pair[1]
 		output_table = pair[2]
-		ret = ret .. name .. '\n'
-		ret = ret .. display_table(output_table) .. '\n\n'
+		-- ret = ret .. name .. '\n'
+		ret = ret .. display_table(output_table) .. '\n'
 	end
 	return ret
 end
 
--- get album art using mpd-albumart.sh
-function get_album_art(file)
-	return io.popen("/home/dylan/scripts/mpd-albumart.sh \"" .. file .. "\"", "r"):read("*line")
-end
+-- -- get album art using mpd-albumart.sh
+-- function get_album_art(file)
+-- 	return io.popen("/home/dylan/scripts/get-mpd-albumart.sh \"" .. file .. "\"", "r"):read("*line")
+-- end
 
 if arg then
 	file = arg[1]
@@ -160,9 +163,6 @@ else
 		file = '/home/dylan/audio/library/hi-res/' .. io.popen("mpc -f %file% current"):read("*line")
 		info = get_info(file)
 		return display_output(info)
-	end
-	conky_test = function()
-		return "blah ${scroll wait 33 10 1 /home/dylan/audio/library/hi-res/music/non-torrents/65daysofstatic/[2004-09-20] The Fall of Math/1.07. This Cat Is a Landmine.flac}"
 	end
 
 end
