@@ -12,7 +12,7 @@ case $dirname in
 		;;
 esac
 # find an image with a promising name
-img="$(find -H "$dir" -regextype posix-extended -iregex '.*/.*?(cover|folder|front)\.(jpg|png)' | head -1)"
+img="$(find -H "$dir" -regextype posix-extended -iregex '.*/(cover|folder|front|.*_f(ront)?)\.(jpg|png)' | head -1)"
 if [[ -z "$img" ]]; then
 	# look for something named after the album
 	album="$(mpc current -f %album% | sed 's@/@,@g')"

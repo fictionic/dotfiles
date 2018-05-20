@@ -1,0 +1,29 @@
+conky.config = {
+	background = false,
+	out_to_x = true,
+	out_to_console = false,
+	own_window = true,
+	own_window_title = "audioinfo",
+	own_window_colour = "445768",
+	use_xft = true,
+	font = "Cousine:size=11",
+	default_color = "white",
+	max_text_width = 0,
+	update_interval = 2,
+	music_player_interval = 2,
+	total_run_times = 0,
+	override_utf8_locale = false,
+	double_buffer = true,
+	minimum_width = 555,
+	maximum_width = 555,
+	minimum_height = 1200,
+	imlib_cache_size = 0,
+};
+
+conky.text = [[
+# lua_load = "/home/dylan/scripts/audioinfo.lua"
+${if_mpd_playing}
+# ${if_mpd_playing}${lua display_info}
+${image /tmp/mpd-cover.jpg -p 30,500 -s 500x500}
+${endif}
+]];
