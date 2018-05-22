@@ -47,12 +47,6 @@ alias dammit=fuck
 alias shit=fuck
 alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
 
-# # ZPLUG
-# source /usr/share/zsh/scripts/zplug/init.zsh
-# zplug "changyuheng/fz" # fzf combined with z
-# zplug load
-# (zplug slows down startup quite noticably)
-
 # set up fzf zsh integration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
@@ -62,7 +56,3 @@ export FZF_ALT_C_COMMAND='rg --files | xargs dirname | unique'
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
 # use rg for finding files with fzf
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-
-# redfin stuff
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
