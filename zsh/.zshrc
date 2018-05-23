@@ -48,7 +48,7 @@ alias shit=fuck
 alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
 
 # set up fzf zsh integration
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
 export FZF_ALT_C_COMMAND='rg --files | xargs dirname | unique'
