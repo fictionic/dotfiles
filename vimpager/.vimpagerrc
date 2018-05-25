@@ -17,8 +17,9 @@ unmap b
 unmap f
 unmap e
 unmap y
+unmap n
+unmap N
 nnoremap gk k
 nnoremap gl l
 
-" TODO: make K map to a function that does viW, removes any suffix of (1) or
-" the like, and then runs regular K
+set iskeyword+=-
