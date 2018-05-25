@@ -185,4 +185,6 @@ nnoremap <leader>% :MtaJumpToOtherTag<CR>
 
 Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
 
+Plug 'danro/rename.vim' " rename current file
+
 call plug#end()
