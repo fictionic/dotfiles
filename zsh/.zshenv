@@ -31,3 +31,6 @@ export MAVEN_OPTS="-Xmx2G -Xms1G -XX:ReservedCodeCacheSize=128m -XX:-MaxFDLimit"
 # for 'too many open files' issue
 ulimit -n 8000
 eval "$($HOME/code/fin/bin/fin init -)"
+
+# for java sql driver
+export CLASSPATH=/usr/local/pgsql/lib/postgresql.jar:$CLASSPATH
