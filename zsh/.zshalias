@@ -108,6 +108,8 @@ ealias gd='git diff'
 ealias gr='git reset'
 ealias gh='git checkout'
 ealias gm='git merge'
+ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
+ealias gfm='git fetch origin master:master'
 
 # traverse forward through git branch history
 ghf() {
