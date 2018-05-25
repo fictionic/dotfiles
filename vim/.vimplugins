@@ -3,9 +3,6 @@
 "   PLUGINS   "
 "-------------"
 
-" add package 'matchit' -- enhanced % behavior
-packadd! matchit
-
 call plug#begin()
 
 Plug 'junegunn/vim-plug'
@@ -180,11 +177,10 @@ Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation set
 
 " Plug 'AssailantLF/vim-active-numbers' " only show line numbers in the active window
 
-Plug 'Valloric/MatchTagAlways' " match xml tag pairs
-nnoremap <leader>% :MtaJumpToOtherTag<CR>
-
 Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
 
 Plug 'danro/rename.vim' " rename current file
+
+Plug 'andymass/vim-matchup' " best matching (%) plugin
 
 call plug#end()
