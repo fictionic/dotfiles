@@ -56,3 +56,7 @@ eval $(thefuck --alias)
 alias dammit=fuck
 alias shit=fuck
 alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
+
+# redfin stuff
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
