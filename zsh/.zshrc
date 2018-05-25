@@ -37,12 +37,13 @@ autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
 # set up fzf zsh integration
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
 # unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 
 # set up 'z' command
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
