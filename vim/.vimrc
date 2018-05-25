@@ -196,6 +196,7 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " easier access to tilde operator
 nnoremap <leader>~ g~
 
+cabbr %% <C-R>=expand('%:p:h')<CR>
 
 " >> MOTIONS << "
 " ----
