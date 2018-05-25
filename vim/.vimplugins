@@ -53,6 +53,7 @@ nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 
 Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
 let g:gutentags_file_list_command = 'rg --files'
+let g:gutentags_ctags_tagfile='exuberanttags'
 
 Plug 'fictionic/VimCompletesMe' " completion
 let g:vcm_direction = 'p'
