@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline' " statusline
 " let g:airline#extensions#tabline#enabled = 1
 " " Show just the filename
 " let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#branch#displayed_head_limit = 12
 
 Plug 'w0rp/ale' " asynchronous lint engine
 " disable javac b/c ale can't figure out classpaths
