@@ -52,8 +52,7 @@ nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
 
 Plug 'fictionic/VimCompletesMe' " completion
-let g:vcm_direction_keyword = 'p'
-let g:vcm_direction_special = 'n'
+let g:vcm_direction = 'p'
 
 " --------------------------- FOR SPECIFIC LANGUAGES --------------------------
 
