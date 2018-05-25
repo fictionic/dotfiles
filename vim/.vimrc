@@ -118,7 +118,7 @@ set nostartofline
 
 " use ripgrep instead of grep/ack/ag
 if executable('rg')
-  set grepprg=rg\ --vimgrep
+  set grepprg=rg\ --vimgrep\ --color=always
 endif
 
 " match parens inside double quotes
