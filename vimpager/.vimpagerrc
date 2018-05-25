@@ -23,3 +23,5 @@ nnoremap gk k
 nnoremap gl l
 
 set iskeyword+=-
+
+let vimpager_disable_ansiesc = 1
