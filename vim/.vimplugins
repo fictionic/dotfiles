@@ -109,6 +109,9 @@ nmap gtgt <Plug>TitlecaseLine
 
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ = split/join langauge constructs
 
+Plug 'moll/vim-bbye' " better :bdelete/:bwipeout
+nmap <leader>bd :Bdelete<CR>
+
 " ---------------------------------- MOTIONS ----------------------------------
 
 Plug 'justinmk/vim-sneak' " like f, but with two characters

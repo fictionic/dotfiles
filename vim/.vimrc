@@ -171,8 +171,6 @@ nmap <leader>e :e
 nmap <leader>E :e!<CR>
 nmap <leader>w :w<CR>
 nmap <leader>W :w!
-"map <leader>q :q<CR>
-nmap <leader>bd :bw<CR>
 nmap <leader>Q :q!<CR>
 nmap <Space><Space> :w<CR>
 nnoremap <Space><Space> <Esc><Space><Space>
