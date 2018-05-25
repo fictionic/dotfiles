@@ -143,7 +143,7 @@ let g:incsearch#do_not_save_error_message_history = 1
 let g:incsearch#separate_highlight = 1
 highlight IncSearchCursor ctermfg=0 ctermbg=9 guifg=#000000 guibg=#FF0000
 
-Plug 'danielroseman/pygd-vim' " improved gd motion for python
+" Plug 'danielroseman/pygd-vim' " improved gd motion for python
 
 Plug 'jeetsukumaran/vim-indentwise' " indentwise motions
 
