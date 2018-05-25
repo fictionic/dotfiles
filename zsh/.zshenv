@@ -18,3 +18,16 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export FZF_DEFAULT_COMMAND='rg --files --follow --hidden --no-ignore --glob "!.git/*"'
 # ripgrep config
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+
+### redfin stuff
+export HOMEBREW_GITHUB_API_TOKEN="1c0076d1e621a36ec6092f202fd614e388bf5e2a"
+export REDFIN_MAIN=$HOME/code/main
+eval "$(/Users/dylanforbes/code/fin/bin/fin init -)"
+export PATH=~/bin:/usr/local/bin:~/code/scripts:$PATH
+export CORVAIR_CONFIG="$HOME/.corvair-config.json"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export MAVEN_OPTS="-Xmx2G -Xms1G -XX:ReservedCodeCacheSize=128m -XX:-MaxFDLimit"
+
+# for 'too many open files' issue
+ulimit -n 8000
+eval "$($HOME/code/fin/bin/fin init -)"
