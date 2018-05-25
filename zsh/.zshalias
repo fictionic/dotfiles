@@ -61,9 +61,6 @@ alias to=transmission-remote
 # open a file
 alias open=rifle
 
-# connman
-ealias cm=connmanctl
-
 # update system
 alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages..."; pacclean'
 
