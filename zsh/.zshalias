@@ -229,3 +229,13 @@ audiochecksum() {
 vimhelp() {
 	vim -c ":h $1 | only"
 }
+
+##### widgets
+# Alt-G to quickly change branches
+git-go-widget() {
+	echo "Checking out..."
+	git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(refname:short)' | fzf --no-sort | sed 's/^\* //' | xargs git checkout;
+	zle reset-prompt;
+}
+zle -N git-go-widget
+bindkey '\eg' git-go-widget
