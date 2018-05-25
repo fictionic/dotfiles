@@ -163,6 +163,9 @@ let maplocalleader="<return>"
 " easier access to command mode
 nmap <return> :
 
+" typos
+command! Q q
+command! W w
 " easier reading/writing/quitting
 nmap <leader>e :e 
 nmap <leader>E :e!<CR>
