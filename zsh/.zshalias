@@ -252,7 +252,7 @@ alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingr
 alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
 alias prod='psql -U dylan.forbes -h analytics-2.redfintest.com stingray_prod'
 # corvair stuff
-ealias cwl='corvair --watch --lazy'
+ealias cwl='corvair --watch --lazy -c --skip-prepublish'
 ealias cns='corvair --nuke-soft'
 ealias cnh='corvair --nuke'
 # git stuff
