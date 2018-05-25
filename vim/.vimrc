@@ -158,6 +158,13 @@ augroup filetype_help
     autocmd BufWinEnter * if &l:buftype ==# 'help' | wincmd _ | nmap <buffer> q :q<CR> | endif
 augroup END
 
+" for stingrayStatic
+augroup stingrayStatic_filetypes
+  autocmd!
+  autocmd FileType css set filetype=less
+  autocmd Filetype javascript set filetype=javascript.jsx
+augroup END
+
 "-------------------------------"
 "   MAPPINGS/ALIASES/COMMANDS   "
 "-------------------------------"
