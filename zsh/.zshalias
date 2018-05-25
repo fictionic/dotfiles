@@ -226,3 +226,8 @@ audiochecksum() {
 	md5sum -b "$tmpfile" | cut -d ' ' -f 1
 	rm "$tmpfile"
 }
+
+# vim help
+vimhelp() {
+	vim -c ":h $1 | only"
+}
