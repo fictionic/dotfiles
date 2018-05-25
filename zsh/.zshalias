@@ -35,7 +35,6 @@ alias ll='ls -l '
 alias la='ls -a '
 
 # make "help" work as expected
-unalias run-help
 alias help=run-help
 
 # better pgrep
@@ -252,7 +251,7 @@ alias sfperf='psql -U redfin_readwrite -h sfperf-query-1.redfintest.com stingray
 alias newschema='psql -U postgres -h ns-query-1.redfintest.com stingray_new_schema'
 alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingray_release'
 alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
-alias prod='psql -U user.name -h analytics-2.redfintest.com stingray_prod'
+alias prod='psql -U dylan.forbes -h analytics-2.redfintest.com stingray_prod'
 
 redvim() {
 	cur_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -267,3 +266,10 @@ redvim() {
         vim -c "Obsess $session_file"
     fi
 }
+# corvair stuff
+ealias cwl='corvair --watch --lazy'
+ealias cns='corvair --nuke-soft'
+ealias cnh='corvair --nuke'
+# git stuff
+ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
+alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 1>&2 | awk \'/remote:   https:/ { print $2 }\' | xargs /usr/bin/open -a "/Applications/Google Chrome.app"'
