@@ -41,8 +41,6 @@ alias help=run-help
 # better pgrep
 alias pgrep='ps -ef | head -1; ps -ef | rg'
 
-# smart-case by default in ripgrep
-alias rg='rg -S'
 # use rg instead of ack/the_silver_searcher
 alias ack='rg'
 alias ag='rg'
