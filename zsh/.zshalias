@@ -133,6 +133,9 @@ ealias pql="pacman -Ql"
 # cd to directory of current mpd song
 alias cdmpd='cd "$(dirname "$(mpd-current.sh)")"'
 
+# more robust uniqueness filter
+alias unique=$'awk \'!a[$0]++\''
+
 # ------------------------ (3) STANDALONE FUNCTIONALITY -----------------------
 
 # find using ripgrep
