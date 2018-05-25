@@ -59,11 +59,11 @@ let g:vcm_direction_special = 'n'
 
 Plug 'lervag/vimtex' " for latex
 
-Plug 'davidhalter/jedi-vim' " omnicomplete for python
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#auto_initialization = 0
-let g:jedi#goto_command = ""
-let g:jedi#goto_assignments_command = ""
+" Plug 'davidhalter/jedi-vim' " omnicomplete for python
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#auto_initialization = 0
+" let g:jedi#goto_command = ""
+" let g:jedi#goto_assignments_command = ""
 
 " ---------------------------- COMMANDS / OPERATORS ---------------------------
 
