@@ -56,9 +56,3 @@ eval $(thefuck --alias)
 alias dammit=fuck
 alias shit=fuck
 alias yaourt=pacaur # cuz thefuck uses yaourt for pacman fixes
-
-# # ZPLUG
-# source /usr/share/zsh/scripts/zplug/init.zsh
-# zplug "changyuheng/fz" # fzf combined with z
-# zplug load
-# (zplug slows down startup quite noticably)
