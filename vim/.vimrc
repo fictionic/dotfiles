@@ -153,6 +153,11 @@ if executable('autopep8')
   autocmd FileType * call SetEqualPrg()
 endif
 
+augroup filetype_help
+    autocmd!
+    autocmd BufWinEnter * if &l:buftype ==# 'help' | wincmd _ | nmap <buffer> q :q<CR> | endif
+augroup END
+
 "-------------------------------"
 "   MAPPINGS/ALIASES/COMMANDS   "
 "-------------------------------"
