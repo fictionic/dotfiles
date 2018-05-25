@@ -255,6 +255,7 @@ alias prod='psql -U dylan.forbes -h analytics-2.redfintest.com stingray_prod'
 ealias cwl='corvair --watch --lazy -c --skip-prepublish'
 ealias cns='corvair --nuke-soft'
 ealias cnh='corvair --nuke'
+ealias cnf='bazel run js.enumgenerator:JSEnumSerializerMain ~/code/main/redfin.npm/redfin-enums/'
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
-alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 1>&2 | awk \'/remote:   https:/ { print $2 }\' | xargs /usr/bin/open -a "/Applications/Google Chrome.app"'
+alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 2>&1 | tee /dev/fd/2 | awk \'/remote:   https:/ { print $2 }\' | xargs /usr/bin/open -a "/Applications/Google Chrome.app"'
