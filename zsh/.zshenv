@@ -2,16 +2,16 @@
 
 setopt nullglob RE_MATCH_PCRE
 
-export XDG_CONFIG_HOME="/home/dylan/.config"
-export XDG_DATA_HOME="/home/dylan/.local/share"
-export SHELL="/usr/bin/zsh" # breaks pipenv without full path
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export SHELL="$(which zsh)" # breaks pipenv without full path
 export EDITOR="vim"
 export VISUAL="$EDITOR"
 export TERMCMD="termite"
 export PAGER="vimpager"
 export SYSTEMD_PAGER="less"
 # set vim as manpager
-export MANPAGER="/usr/bin/vimpager"
+export MANPAGER="$(which vimpager)"
 # ssh-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # when running raw fzf, use rg instead of find
