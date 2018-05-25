@@ -43,6 +43,8 @@ let g:ale_python_flake8_args.="E501" " line too long (>79 characters)
 Plug 'junegunn/fzf.vim' " fzf integration
 nnoremap <C-p> :Files<CR>
 nnoremap <C-j> :Buffers<CR>
+command! -bang -nargs=* Find 
+      \ call fzf#vim#grep('rg --column --line-number --no-heading --smart-case --no-follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 Plug 'tpope/vim-fugitive' " tim pope's git plugin
 
