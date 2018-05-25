@@ -147,7 +147,9 @@ Plug 'jeetsukumaran/vim-indentwise' " indentwise motions
 " -------------------------------- TEXT OBJECTS -------------------------------
 
 Plug 'wellle/targets.vim' " adds tons of text objects
+let g:targets_pairs = '()b {}B []r <>a'
 let g:targets_quotes = '"q ''Q `'
+let g:targets_argTrigger = 'g'
 
 Plug 'kana/vim-textobj-user' " plugin to allow one to create custom text objects
 
