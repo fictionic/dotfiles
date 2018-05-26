@@ -41,6 +41,7 @@ autoload -U down-line-or-beginning-search
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
+export FZF_ALT_C_COMMAND='rg --files | xargs dirname | unique'
 # unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
