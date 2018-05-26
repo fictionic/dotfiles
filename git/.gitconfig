@@ -1,0 +1,20 @@
+[credential]
+	helper = osxkeychain
+[user]
+	name = Dylan Forbes
+	email = dylan.forbes@redfin.com
+[merge]
+	tool = diffmerge
+[diff]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = true
+[difftool "diffmerge"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
+[mergetool]
+	keepBackup = false
+[alias]
+	lol = log --decorate --pretty=oneline --abbrev-commit
+[core]
+	excludesfile = /Users/dylanforbes/.gitignore
