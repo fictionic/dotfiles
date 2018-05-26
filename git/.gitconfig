@@ -1,0 +1,20 @@
+[user]
+	email = dylandforbes@gmail.com
+	name = Dylan Forbes
+[credential]
+	helper = cache
+[http]
+	proxy = 
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[color]
+	status = auto
+	interactive = auto
+	diff = auto
+	branch = auto
+[alias]
+	lol = log --graph --decorate --abbrev-commit --all --date=local --pretty=format:\"%C(auto)%h%d %C(blue)%an %C(green)%cd %C(red)%GG %C(reset)%s\" --date=local
+[merge "ours"]
+	driver = true
