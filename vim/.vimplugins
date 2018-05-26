@@ -68,6 +68,11 @@ Plug 'lervag/vimtex' " for latex
 " let g:jedi#goto_command = ""
 " let g:jedi#goto_assignments_command = ""
 
+Plug 'mxw/vim-jsx' " for jsx
+Plug 'vim-javascript' " dependency of above, but also nice to have
+
+Plug 'groenewege/vim-less' " for less-css
+
 " ---------------------------- COMMANDS / OPERATORS ---------------------------
 
 Plug 'tpope/vim-repeat' " let supported plugins use .
