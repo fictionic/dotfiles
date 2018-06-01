@@ -50,7 +50,7 @@ Plug 'tpope/vim-fugitive' " tim pope's git plugin
 Plug 'mbbill/undotree' " undo tree visualizer
 nnoremap <silent> <leader>ut :UndotreeToggle<CR>
 
-Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
+" Plug 'ludovicchabant/vim-gutentags' " automatic tags configuration
 let g:gutentags_file_list_command = 'rg --files --glob \!\*.java'
 let g:gutentags_ctags_tagfile='exuberanttags'
 
@@ -58,6 +58,11 @@ Plug 'fictionic/VimCompletesMe' " completion
 let g:vcm_direction = 'p'
 
 Plug 'tpope/vim-obsession' " session management
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ } " langserver client!
 
 " --------------------------- FOR SPECIFIC LANGUAGES --------------------------
 
@@ -70,7 +75,7 @@ Plug 'lervag/vimtex' " for latex
 " let g:jedi#goto_assignments_command = ""
 
 Plug 'mxw/vim-jsx' " for jsx
-Plug 'vim-javascript' " dependency of above, but also nice to have
+Plug 'pangloss/vim-javascript' " dependency of above, but also nice to have
 
 Plug 'groenewege/vim-less' " for less-css
 
@@ -191,3 +196,11 @@ Plug 'danro/rename.vim' " rename current file
 Plug 'andymass/vim-matchup' " best matching (%) plugin
 
 call plug#end()
+let g:LanguageClient_serverCommands = {}
+if executable('javascript-typescript-stdio')
+    let g:LanguageClient_serverCommands.javascript = ['tcp://127.0.0.1:2089']
+    let g:LanguageClient_serverCommands['javascript.jsx'] = ['tcp://127.0.0.1:2089']
+else
+	echo "javascript-typescript-stdio not installed!\n"
+endif
+set omnifunc=LanguageClient#complete

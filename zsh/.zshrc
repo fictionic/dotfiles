@@ -37,8 +37,7 @@ autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
 # set up fzf zsh integration
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f "/usr/local/opt/fzf/shell/key-bindings.zsh" ] && source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
 export FZF_ALT_C_COMMAND='rg --files | xargs dirname | unique'

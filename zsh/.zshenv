@@ -19,6 +19,11 @@ export FZF_DEFAULT_COMMAND='rg --files --no-follow --glob "!.git/*"'
 # ripgrep config
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
+# fzf thing
+if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+  export PATH="$PATH:/usr/local/opt/fzf/bin"
+fi
+
 ### redfin stuff
 export HOMEBREW_GITHUB_API_TOKEN="1c0076d1e621a36ec6092f202fd614e388bf5e2a"
 export REDFIN_MAIN=$HOME/code/main
