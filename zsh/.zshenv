@@ -2,8 +2,8 @@
 
 setopt nullglob RE_MATCH_PCRE
 
-export XDG_CONFIG_HOME="/Users/dylanforbes/.config"
-export XDG_DATA_HOME="/Users/dylanforbes/.local/share"
+export XDG_CONFIG_HOME="/home/dylan/.config"
+export XDG_DATA_HOME="/home/dylan/.local/share"
 export SHELL="zsh" # breaks pipenv without full path
 export EDITOR="vim"
 export VISUAL="$EDITOR"
