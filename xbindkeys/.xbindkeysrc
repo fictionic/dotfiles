@@ -61,19 +61,19 @@
 
 # SCREEN BRIGHTNESS
 # course adjustment
-"light -A 10"
+"sudo light -A 10"
 	XF86MonBrightnessUp
-"light -U 10"
+"sudo light -U 10"
 	XF86MonBrightnessDown
 # fine adjustment
-"light -A 2"
+"sudo light -A 2"
 	Shift + XF86MonBrightnessUp
-"light -U 2"
+"sudo light -U 2"
 	Shift + XF86MonBrightnessDown
 # superfine adjustment
-"light -A -r 1"
+"sudo light -A -r 1"
 	Control + Shift + XF86MonBrightnessUp
-"light -U -r 1"
+"sudo light -U -r 1"
 	Control + Shift + XF86MonBrightnessDown
 # gamma adjustment
 "systemctl --user stop redshift-gtk; xgamma -gamma 1.5"

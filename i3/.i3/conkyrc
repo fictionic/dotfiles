@@ -17,27 +17,6 @@ conky.config = {
 
 conky.text = [[
 [
-	${if_mpd_playing}
-		{
-			"full_text" :
-				${if_match "${mpd_status}"=="Playing"}
-					" "
-				${else}
-					" "
-				${endif},
-			"color" : "\#f2f0ec",
-			"separator" : false
-		},
-		{
-			"full_text" : "${exec mpc current -f %artist%::%title% | sed 's/"/\\"/g'} ",
-			"short_text" : "${exec mpc current -f %title% | sed 's/"/\\"/g'} ",
-			"color" : "\#f2f0ec"
-		},
-		# { TODO: make a systemd unit for this that runs after MPD and writes the DR to a file in /var
-		# 	"full_text" : "[${texeci 5 dr14_tmeter -f ~/audio/library/hi-res/"$(mpc -f %file% current)" | awk '/DR +=/{print $3}'}]",
-		# 	"color" : "\#f2f0ec"
-		# },
-	${endif}
 
 	{
 		"full_text" : " / ${fs_free /} (${fs_free_perc /}%) ",
@@ -76,7 +55,7 @@ conky.text = [[
 	},
 
 	{
-		"full_text" : "   ${exec light -r} (${exec printf %.0f $(light)}%)",
+		"full_text" : "   ${exec sudo light -r} (${exec printf %.0f $(sudo light)}%)",
 		"color" : "\#d8d800"
 	},
 
