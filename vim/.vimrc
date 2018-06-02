@@ -254,7 +254,6 @@ noremap!  
 noremap!  <C-w>
 
 " >> UNMAPPINGS << "
-nnoremap K <Nop>
 nnoremap Q <Nop>
 nnoremap <return> <Nop>
 
