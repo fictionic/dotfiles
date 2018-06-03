@@ -60,7 +60,7 @@ alias to=transmission-remote
 alias open=rifle
 
 # update system
-alias upd='pacaur -Syu --devel --needed; echo "Checking for orphan packages..."; pacclean'
+alias upd='pikaur -Syu --devel --needed --keepbuild; echo "Checking for orphan packages..."; pacclean'
 
 # ping google
 alias pingg='ping google.com'
@@ -180,11 +180,11 @@ alias owns='pacman -Qo '
 
 # remove orphan packages
 pacclean() {
-	toremove=($(pacaur -Qqdt))
+	toremove=($(pikaur -Qqdt))
 	if [[ ${#toremove[@]} == 0 ]]; then
 		echo "Package database clean."
 	else
-		pacaur -Rs "${toremove[@]}"
+		pikaur -Rs "${toremove[@]}"
 	fi
 }
 
