@@ -252,3 +252,17 @@ alias newschema='psql -U postgres -h ns-query-1.redfintest.com stingray_new_sche
 alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingray_release'
 alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
 alias prod='psql -U user.name -h analytics-2.redfintest.com stingray_prod'
+
+redvim() {
+	cur_branch="$(git rev-parse --abbrev-ref HEAD)"
+    if [[ $cur_branch == HEAD ]]; then
+        print "Not on a branch!"
+        exit
+    fi
+    session_file="$HOME/code/VIM/$cur_branch"
+    if [[ -f $session_file ]]; then
+        vim -S "$session_file"
+    else
+        vim -c "Obsess $session_file"
+    fi
+}
