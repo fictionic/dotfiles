@@ -188,4 +188,9 @@ Plug 'danro/rename.vim' " rename current file
 Plug 'andymass/vim-matchup' " best matching (%) plugin
 let g:matchup_matchparen_status_offscreen = 0
 
+Plug 'unblevable/quick-scope' " higlighting for f/t motions
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+highlight QuickScopePrimary cterm=underline,bold
+highlight QuickScopeSecondary cterm=underline,italic
+
 call plug#end()
