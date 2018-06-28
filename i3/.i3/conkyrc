@@ -19,7 +19,7 @@ conky.text = [[
 [
 
 	{
-		"full_text" : " / ${fs_free /} (${fs_free_perc /}%) ",
+		"full_text" : "~ ${fs_free /home} (${fs_free_perc /home}%) ",
 		"color" : "\#f2f0ec"
 	},
 
@@ -61,12 +61,8 @@ conky.text = [[
 
 	{
 		"full_text" :
-			${if_match "${exec netctl is-active ethernet}"=="active"}
-				${if_match "${exec netctl-current.sh >/dev/null; echo $?}"=="0"}
-					"  eth ",
-				${else}
-					"  ... ",
-				${endif}
+			${if_match "${exec nmcli connection show --active | grep ethernet >/dev/null; echo $?}"=="0"}
+				"  eth ",
 			${else}
 				${if_up wlp2s0}
 					"${wireless_link_qual_perc wlp2s0}% (${wireless_essid wlp2s0})",
