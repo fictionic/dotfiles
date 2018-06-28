@@ -251,7 +251,7 @@ git-go-widget() {
     zle reset-prompt;
 }
 zle -N git-go-widget
-bindkey '\eg' git-go-widget
+bindkey '^B' git-go-widget
 
 ### redfin stuff
 # psql aliases
