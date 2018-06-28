@@ -186,5 +186,6 @@ Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
 Plug 'danro/rename.vim' " rename current file
 
 Plug 'andymass/vim-matchup' " best matching (%) plugin
+let g:matchup_matchparen_status_offscreen = 0
 
 call plug#end()
