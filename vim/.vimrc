@@ -91,6 +91,14 @@ set nospell
 " wrap text
 set wrap
 
+" move cursor to current match while searching
+set incsearch nohlsearch
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch | :cmap <Tab> <C-g>| :cmap <S-Tab> <C-t>
+  autocmd CmdlineLeave /,\? :set nohlsearch | :cunmap <Tab>| :cunmap <S-Tab>
+augroup END
+
 " smart case-sensitivity in regex searches
 set ignorecase
 set smartcase
