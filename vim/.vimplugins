@@ -164,8 +164,6 @@ Plug 'rbonvall/vim-textobj-latex' " text objects for latex
 
 " ------------------------------ SMALLISH THINGS ------------------------------
 
-"Plug 'tpope/vim-sensible' " sensible defaults
-
 Plug 'editorconfig/editorconfig-vim' " editorconfig
 
 Plug 'google/vim-searchindex' " display index of search result using / or ?
