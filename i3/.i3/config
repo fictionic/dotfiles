@@ -48,8 +48,8 @@ bindsym $mod+Return exec termite
 bindsym Control+$mod+Return exec urxvtc
 
 # launch ranger file manager in new terminal window
-bindsym $mod+Shift+Return exec termite
-bindsym Control+$mod+Shift+Return exec urxvtc
+bindsym $mod+Shift+Return exec termite -e ranger
+bindsym Control+$mod+Shift+Return exec urxvtc -e ranger
 
 # kill focused window
 bindsym $mod+Shift+q kill
