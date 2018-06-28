@@ -282,3 +282,5 @@ ealias cnf='bazel run js.enumgenerator:JSEnumSerializerMain ~/code/main/redfin.n
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 2>&1 | tee /dev/fd/2 | awk \'/remote:   https:/ { print $2 }\' | xargs google-chrome 2>/dev/null'
+
+ealias cm='cd ~/code/main'
