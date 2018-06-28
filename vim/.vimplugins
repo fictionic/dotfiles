@@ -84,6 +84,10 @@ nmap csq cs"
 nmap csQ cs'
 
 Plug 'tpope/vim-unimpaired' " many pairs of operators/commands
+nmap ]p =p
+nmap ]P =P
+nmap [p =P
+nmap [P =P
 
 Plug 'tpope/vim-abolish' " Abolish, Subvert, and Coerce
 
