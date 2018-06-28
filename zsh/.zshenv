@@ -15,7 +15,7 @@ export MANPAGER="$PAGER"
 # ssh-agent stuff
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # when running raw fzf, use rg instead of find
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --glob "!.git/*" 2>/dev/null'
+export FZF_DEFAULT_COMMAND='rg --files --no-follow --glob "!.git/*"'
 # ripgrep config
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 

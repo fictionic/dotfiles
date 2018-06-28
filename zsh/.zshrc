@@ -40,7 +40,7 @@ autoload -U down-line-or-beginning-search
 [ -f /usr/share/fzf/shell/key-bindings.zsh ] && source /usr/share/fzf/shell/key-bindings.zsh
 # unbind Alt-C from fzf-cd-widget; # rebind it to Ctrl-G ("go")
 bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
-export FZF_ALT_C_COMMAND="rg --files --hidden --no-ignore --glob '!.git/*' 2>/dev/null | xargs -d '\n' dirname 2>/dev/null | unique"
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND | xargs -d '\n' dirname 2>/dev/null | unique"
 # unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
 # use rg for finding files with fzf
