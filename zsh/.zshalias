@@ -110,6 +110,7 @@ ealias gh='git checkout'
 ealias gm='git merge'
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
 ealias gfm='git fetch origin master:master'
+ealias gfsm='git fetch origin stable-master:stable-master'
 
 # traverse forward through git branch history
 ghf() {
