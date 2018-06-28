@@ -168,9 +168,7 @@ Plug 'editorconfig/editorconfig-vim' " editorconfig
 
 Plug 'google/vim-searchindex' " display index of search result using / or ?
 
-Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation settings
-
-" Plug 'AssailantLF/vim-active-numbers' " only show line numbers in the active window
+" Plug 'tpope/vim-sleuth' " intelligently and automatically detect indentation settings
 
 Plug 'tpope/vim-capslock' " software capslock (imap <C-G>c; nmap gC)
 
