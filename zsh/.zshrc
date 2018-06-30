@@ -7,7 +7,7 @@ SAVEHIST=1000
 # disable flow control
 stty -ixon -ixoff
 
-setopt appendhistory completealiases HIST_IGNORE_DUPS RC_QUOTES
+setopt appendhistory completealiases HIST_IGNORE_DUPS HIST_IGNORE_SPACE RC_QUOTES
 unsetopt autocd beep extendedglob notify FLOW_CONTROL
 
 # SET PROMPT
