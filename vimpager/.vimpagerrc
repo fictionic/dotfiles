@@ -4,7 +4,15 @@ colorscheme SlateDarkBlue
 syntax on
 set nonumber
 set mouse=n
-set hlsearch
+
+" move cursor to current match while searching
+set incsearch nohlsearch
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch | :cmap <Tab> <C-g>| :cmap <S-Tab> <C-t>
+  autocmd CmdlineLeave /,\? :set nohlsearch | :cunmap <Tab>| :cunmap <S-Tab>
+augroup END
+
 
 nnoremap <space>l :nohl<CR>
 
