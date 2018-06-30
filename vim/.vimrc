@@ -103,6 +103,9 @@ nnoremap <silent>  # :let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchf
 nnoremap <silent> g* :let @/='\C'   . expand('<cword>')       <CR>:let v:searchforward=1<CR>n
 nnoremap <silent> g# :let @/='\C'   . expand('<cword>')       <CR>:let v:searchforward=0<CR>n
 
+" wrap when searching
+set wrapscan
+
 " timeout for mappings
 set timeoutlen=500
 " timeout for keycodes
