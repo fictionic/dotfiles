@@ -89,7 +89,9 @@ nmap ]P =P
 nmap [p =P
 nmap [P =P
 
-Plug 'tpope/vim-abolish' " Abolish, Subvert, and Coerce
+" Plug 'tpope/vim-abolish' " Abolish, Subvert, and Coerce
+Plug 'arthurxavierx/vim-caser' " better version of tpope's Coerce functionality
+let g:caser_prefix = 'cr'
 
 Plug 'guywald1/vim-prismo' " pretty comment section titles
 nmap <leader>pr :Prismo<CR>
@@ -101,12 +103,12 @@ Plug 'tpope/vim-characterize' " better info from `ga` command
 
 Plug 'tpope/vim-speeddating' " smarter <C-A>/<C-X> for dates/times
 
-Plug 'christoomey/vim-titlecase' " gt = titlecase operator
-let g:titlecase_map_keys = 0
-nmap gt <Plug>Titlecase
-vmap gt <Plug>Titlecase
-nmap gtt <Plug>TitlecaseLine
-nmap gtgt <Plug>TitlecaseLine
+" Plug 'christoomey/vim-titlecase' " gt = titlecase operator
+" let g:titlecase_map_keys = 0
+" nmap gt <Plug>Titlecase
+" vmap gt <Plug>Titlecase
+" nmap gtt <Plug>TitlecaseLine
+" nmap gtgt <Plug>TitlecaseLine
 
 Plug 'AndrewRadev/splitjoin.vim' " gS/gJ = split/join langauge constructs
 
