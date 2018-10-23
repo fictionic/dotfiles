@@ -1,10 +1,11 @@
 [Unit]
 Description=Redshift display colour temperature adjustment (GUI)
 Documentation=http://jonls.dk/redshift/
-After=display-manager.service
+; After=display-manager.service
 
 [Service]
 ExecStart=/home/dylan/redshift/root/bin/redshift-gtk
+Environment=DISPLAY=:0
 Restart=always
 
 [Install]
