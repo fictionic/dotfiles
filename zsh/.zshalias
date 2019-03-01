@@ -300,6 +300,11 @@ ealias cwl='corvair --check --watch --lazy customer-pages'
 ealias cnb='corvair --nuke'
 ealias cnh='corvair --nuke-hard'
 ealias cnf='bazel run js.enumgenerator:JSEnumSerializerMain ~/code/main/redfin.npm/redfin-enums/'
+corvair_test() {
+	site="${1:-customer-pages}"
+	corvair customer-pages --test --spec "$site" 2>&1 | rg 'to equal' | tail -1 | sed 's/Object(//g; s/})/}/g; s/\([a-zA-Z0-9]\+\): /"\1": /g; s/undefined/"undefined"/g; s/''/"/g; s/.*Expected \(.*\) to equal \(.*\)\./[\1,\2]/' | jq
+}
+
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 2>&1 | tee /dev/fd/2 | awk \'/remote:   https:/ { print $2 }\' | xargs google-chrome 2>/dev/null'
