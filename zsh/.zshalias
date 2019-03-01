@@ -308,6 +308,37 @@ corvair_test() {
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias gpox=$'git push origin $(git rev-parse --abbrev-ref HEAD) 2>&1 | tee /dev/fd/2 | awk \'/remote:   https:/ { print $2 }\' | xargs google-chrome 2>/dev/null'
+ealias gap='git add -p'
+wip() {
+	last_commit_message="$(git rev-list --format=%s --max-count=1 @ | tail -1)"
+	if [[ $last_commit_message == 'wip' ]]; then
+		git commit --all --amend --no-edit --no-verify "$@"
+	else
+		git commit --all --message 'wip' --no-verify "$@"
+	fi
+}
+rename-branch() {
+	cur_branch="$(git rev-parse --abbrev-ref HEAD)"
+	if [[ $? != 0 ]]; then
+		return $?
+	fi
+	if [[ $cur_branch == HEAD ]]; then
+		print "Not on a branch!"
+		return
+	fi
+	new_branch_name="$1"
+	if [[ -z $new_branch_name ]]; then
+		print "Please supply a new branch name!"
+		return
+	fi
+	git branch -m "$new_branch_name"
+	if [[ -f "~/code/VIM/$cur_branch" ]]; then
+		mv "~/code/VIM/$cur_branch" "~/code/VIM/$new_branch_name"
+	else
+		print "Warning: No vim session to rename"
+	fi
+}
+
 
 ealias cm='cd ~/code/main'
 
