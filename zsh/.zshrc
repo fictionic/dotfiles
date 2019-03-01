@@ -43,7 +43,7 @@ bindkey -r '\ec'; bindkey '^G' fzf-cd-widget
 export FZF_ALT_C_COMMAND="fd --type d"
 # unbind Ctrl-T from fzf-cd-widget; # rebind it to Ctrl-F ("find")
 bindkey -r '^T'; bindkey '^F' fzf-file-widget
-# use rg for finding files with fzf
+# use fd for finding files with fzf
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # set up 'z' command
