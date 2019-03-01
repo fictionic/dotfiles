@@ -212,6 +212,11 @@ size() {
 	fi
 }
 
+# filter stdin to a given line efficiently
+lineno() {
+	awk "FNR == $1 { print; exit }"
+}
+
 # filter out non-curse words from stdin
 curses() {
 	words=( $(</usr/share/dict/curses) )
