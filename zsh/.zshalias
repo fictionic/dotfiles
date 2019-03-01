@@ -294,10 +294,11 @@ redvim() {
         vim -c "Obsess $session_file"
     fi
 }
+
 # corvair stuff
-ealias cwl='corvair --watch --lazy'
-ealias cns='corvair --nuke-soft'
-ealias cnh='corvair --nuke'
+ealias cwl='corvair --check --watch --lazy customer-pages'
+ealias cnb='corvair --nuke'
+ealias cnh='corvair --nuke-hard'
 ealias cnf='bazel run js.enumgenerator:JSEnumSerializerMain ~/code/main/redfin.npm/redfin-enums/'
 # git stuff
 ealias gpo='git push origin $(git rev-parse --abbrev-ref HEAD)'
