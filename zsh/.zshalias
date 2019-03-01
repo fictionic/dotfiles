@@ -280,9 +280,12 @@ alias redshift='psql -h 10.0.7.23 -d rmus_prod -p 5439 -U dylan.forbes'
 
 redvim() {
 	cur_branch="$(git rev-parse --abbrev-ref HEAD)"
+	if [[ $? != 0 ]]; then
+		return $?
+	fi
     if [[ $cur_branch == HEAD ]]; then
         print "Not on a branch!"
-        exit
+		return
     fi
     session_file="$HOME/code/VIM/$cur_branch"
     if [[ -f $session_file ]]; then
