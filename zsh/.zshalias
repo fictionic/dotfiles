@@ -276,6 +276,7 @@ alias newschema='psql -U postgres -h ns-query-1.redfintest.com stingray_new_sche
 alias release='psql -U redfin_readwrite -h release-query-1.redfintest.com stingray_release'
 alias trunk='psql -U redfin_readwrite -h trunk-query-1.redfintest.com stingray_trunk'
 alias prod='psql -U dylan.forbes -h analytics-2.redfintest.com stingray_prod'
+alias redshift='psql -h 10.0.7.23 -d rmus_prod -p 5439 -U dylan.forbes'
 
 redvim() {
 	cur_branch="$(git rev-parse --abbrev-ref HEAD)"
