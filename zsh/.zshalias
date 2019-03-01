@@ -244,19 +244,30 @@ vimhelp() {
 ##### widgets
 # Alt-G to quickly change branches
 git-go-widget() {
-    git rev-parse --is-inside-work-tree | read GIT_ERROR
-    if [[ $pipestatus[1] == 128 ]]; then
-	echo "$GIT_ERROR"
+	echo "gitgo..."
+	git rev-parse --is-inside-work-tree | read GIT_ERROR;
+	if [[ $pipestatus[1] == 128 ]]; then
+		echo "$GIT_ERROR"
+		zle reset-prompt;
+		return;
+	fi
+	if [[ "$(git rev-parse --abbrev-ref @)" == 'HEAD' ]]; then
+		echo "...not on a branch\n";
+		zle reset-prompt;
+		return;
+	fi
+	git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(refname:short)' | fzf --no-sort | sed 's/^\* //' | read BRANCH;
+	if [[ -z $BRANCH ]]; then
+		echo "...aborting\n"
+		zle reset-prompt;
+		return;
+	fi
+	echo "checking out $BRANCH..."
+	git checkout "$BRANCH"
 	zle reset-prompt;
-	return;
-    fi
-    git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(refname:short)' | fzf --no-sort | sed 's/^\* //' | read BRANCH;
-    echo "Checking out $BRANCH..."
-    git checkout "$BRANCH"
-    zle reset-prompt;
 }
 zle -N git-go-widget
-bindkey '^B' git-go-widget
+bindkey '\eg' git-go-widget
 
 ### redfin stuff
 # psql aliases
