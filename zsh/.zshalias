@@ -341,6 +341,10 @@ rename-branch() {
 
 
 ealias cm='cd ~/code/main'
+ealias cmm='cd ~/code/main_master'
+ealias cmr='cd ~/code/main_release'
+
+alias gulp='node /home/dylan/code/main/node_modules/gulp/bin/gulp.js'
 
 # saucelabs tunnel
 alias sc=$'sc -u sso-redfin-dylan.forbes -k 3ea9fee2-036c-42c6-8d6b-a60593094c90 -B \'*.redfintest.com\' -i "$(hostname)-tunnel"'
