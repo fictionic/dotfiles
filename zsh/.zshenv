@@ -12,8 +12,8 @@ export PAGER="vimpager"
 export SYSTEMD_PAGER="less"
 # set vim as manpager
 export MANPAGER="$PAGER"
-# when running raw fzf, use rg instead of find
-export FZF_DEFAULT_COMMAND='rg --files --no-follow --glob "!.git/*"'
+# when running raw fzf, use fd instead of find
+export FZF_DEFAULT_COMMAND='fd --type f'
 # ripgrep config
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
 
