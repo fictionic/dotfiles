@@ -30,3 +30,5 @@ export CORVAIR_CONFIG="$HOME/.corvair-config.json"
 export MAVEN_OPTS="-Xmx2G -Xms1G -XX:ReservedCodeCacheSize=128m -XX:-MaxFDLimit"
 export LD_LIBRARY_PATH="/usr/local/lib"
 export REDFIN_LOG_SQL=true
+
+source $HOME/.profile
