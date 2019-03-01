@@ -29,3 +29,4 @@ export CORVAIR_CONFIG="$HOME/.corvair-config.json"
 # export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export MAVEN_OPTS="-Xmx2G -Xms1G -XX:ReservedCodeCacheSize=128m -XX:-MaxFDLimit"
 export LD_LIBRARY_PATH="/usr/local/lib"
+export REDFIN_LOG_SQL=true
