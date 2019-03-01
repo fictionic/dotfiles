@@ -12,8 +12,6 @@ export PAGER="vimpager"
 export SYSTEMD_PAGER="less"
 # set vim as manpager
 export MANPAGER="$PAGER"
-# ssh-agent stuff
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 # when running raw fzf, use rg instead of find
 export FZF_DEFAULT_COMMAND='rg --files --no-follow --glob "!.git/*"'
 # ripgrep config
